@@ -1,0 +1,157 @@
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  background: #fff;
+}
+.slick-initialized .slick-slide {
+  opacity: 0.6; /* 両サイドの画像を透過 */
+}
+.slick-initialized .slick-slide.slick-active {
+  opacity: 1; /* センター画像を非透過 */
+}
+
+.slick-prev::before {
+  position: relative;
+  content: "\f060";
+  font-family: FontAwesome;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px 20px;
+  opacity: 1;
+  margin-left: -43px;
+}
+
+.slick-next::before {
+  position: relative;
+  content: "\f061";
+  font-family: FontAwesome;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px 20px;
+  opacity: 1;
+}
+
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: -15px -20px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+  .slick-prev::before {
+    position: relative;
+    content: "\f060";
+    font-family: FontAwesome;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 50px 10px;
+    opacity: 1;
+    margin-left: -20px;
+  }
+
+  .slick-next::before {
+    position: relative;
+    content: "\f061";
+    font-family: FontAwesome;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 50px 10px;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1200px) {
+  .slick-prev::before {
+    position: relative;
+    content: "\f060";
+    font-family: FontAwesome;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
+    opacity: 1;
+    margin-left: -60px;
+  }
+
+  .slick-next::before {
+    position: relative;
+    content: "\f061";
+    font-family: FontAwesome;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1225px) {
+  .none-less-1220px {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 995px) {
+  .display-less-900px {
+    display: block;
+  }
+
+  .none-less-900px {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 995px) and (max-width: 100000px) {
+  .none-more-900px {
+    display: none;
+  }
+  .display-more-900px {
+    display: block;
+  }
+}
+
+.slick-prev {
+  left: 80px;
+}
+.slick-next {
+  right: 80px;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 100;
+}
+
+.slick-prev:hover:before {
+  animation: arrow_prev 0.5s ease-out forwards;
+}
+@keyframes arrow_prev {
+  0% {
+    right: 0px;
+  }
+  50% {
+    right: 5px;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+.slick-next:hover:before {
+  animation: arrow_next 0.5s ease-out forwards;
+}
+@keyframes arrow_next {
+  0% {
+    left: 0px;
+  }
+  50% {
+    left: 5px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .slick-prev {
+    left: 30px;
+  }
+  .slick-next {
+    right: 30px;
+  }
+}

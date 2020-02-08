@@ -1,0 +1,31 @@
+import React, { FC } from "react";
+import { connect } from "react-redux";
+
+// import components
+import AdminLogin from "components/organisms/AdminLogin";
+import AdminMenu from "components/organisms/AdminMenu";
+
+// import models
+import { AppState } from "models/index";
+import * as Model from "models/adminLoginModel";
+
+interface StateProps {
+  user?: Model.User;
+}
+
+type DefaultProps = StateProps;
+
+const AdminContainer: FC<DefaultProps> = ({ user }) => {
+  // return <>{user ? <AdminMenu /> : <AdminLogin />}</>;
+  return (
+    <>
+      <AdminLogin />
+    </>
+  );
+};
+
+const mapStateToProps = (state: AppState) => ({
+  user: state.adminLogin.user
+});
+
+export default connect(mapStateToProps, null)(AdminContainer);
