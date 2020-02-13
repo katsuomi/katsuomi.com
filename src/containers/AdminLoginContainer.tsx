@@ -19,11 +19,9 @@ import { adminLogin, adminLoginCache } from "actions/adminLoginAction";
 
 // import models
 import { AppState } from "models/index";
-import * as Model from "models/adminLoginModel";
 
 interface StateProps {
   isLoading?: boolean;
-  user?: Model.User;
 }
 
 interface DispatchProps {
@@ -60,7 +58,6 @@ const Title = styled.p`
 
 const AdminLoginContainer: FC<DefaultProps> = ({
   isLoading,
-  user,
   adminLoginStart,
   adminLoginCacheStart
 }) => {
@@ -104,8 +101,7 @@ const AdminLoginContainer: FC<DefaultProps> = ({
 };
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.adminLogin.isLoading,
-  user: state.adminLogin.user
+  isLoading: state.adminLogin.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

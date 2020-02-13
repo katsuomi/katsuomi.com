@@ -1,3 +1,9 @@
+/**
+ *
+ * color
+ *
+ */
+
 // main 5 colors
 export const BLUE = "#00a0eb"; // base color
 export const RED = "#F60074";

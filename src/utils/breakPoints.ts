@@ -1,3 +1,9 @@
+/**
+ *
+ * breakPoints
+ *
+ */
+
 export const smartphoneMaxWidth = 415;
 export const iPhone5sMaxWidth = 321;
 export const tabletMinWidth = 850;

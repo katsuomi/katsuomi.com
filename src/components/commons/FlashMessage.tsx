@@ -1,3 +1,9 @@
+/**
+ *
+ * FlashMessage
+ *
+ */
+
 import React, { FC, useEffect } from "react";
 import styled from "styled-components";
 

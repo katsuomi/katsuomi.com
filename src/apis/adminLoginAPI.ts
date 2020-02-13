@@ -1,9 +1,3 @@
-/**
- *
- * adminLoginAPI
- *
- */
-
 // import utils
 import firebase from "utils/firebase";
 // import models

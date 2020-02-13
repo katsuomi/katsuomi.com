@@ -25,7 +25,7 @@ function* runAdminLogin(action: Models.AdminLoginStartAction) {
   }
 }
 
-function* runAdminLoginCache(action: Models.AdminLoginCacheStartAction) {
+function* runAdminLoginCache() {
   const handler = API.adminLoginCache;
   const { user, error } = yield call(handler);
   if (user && !error) {

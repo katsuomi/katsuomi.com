@@ -4,7 +4,7 @@
  *
  */
 
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 
 //import utils
@@ -33,8 +33,13 @@ const InputWrapper = styled.input`
   width: ${props => (props.width ? props.width : "inherit")};
 `;
 
-const Input = (props: DefaultProps) => {
-  const { placeholder, value, width, onChange, isPassword } = props;
+const Input: FC<DefaultProps> = ({
+  placeholder,
+  value,
+  width,
+  onChange,
+  isPassword
+}) => {
   return (
     <InputWrapper
       type={isPassword ? "password" : undefined}

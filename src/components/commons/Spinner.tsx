@@ -1,3 +1,9 @@
+/**
+ *
+ * Spinner
+ *
+ */
+
 import React, { FC } from "react";
 import Loader from "react-loader-spinner";
 import { Dimmer, Segment } from "semantic-ui-react";

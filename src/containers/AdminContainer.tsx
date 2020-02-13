@@ -16,12 +16,7 @@ interface StateProps {
 type DefaultProps = StateProps;
 
 const AdminContainer: FC<DefaultProps> = ({ user }) => {
-  // return <>{user ? <AdminMenu /> : <AdminLogin />}</>;
-  return (
-    <>
-      <AdminLogin />
-    </>
-  );
+  return <>{user ? <AdminMenu /> : <AdminLogin />}</>;
 };
 
 const mapStateToProps = (state: AppState) => ({

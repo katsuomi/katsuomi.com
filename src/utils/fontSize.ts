@@ -1,3 +1,9 @@
+/**
+ *
+ * fontSize
+ *
+ */
+
 export const MICRO = "0.8rem";
 export const MINI = "1.2rem";
 export const SMALL = "1.4rem";
