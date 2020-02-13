@@ -9,6 +9,9 @@ import AdminMenu from "components/organisms/AdminMenu";
 import { AppState } from "models/index";
 import * as Model from "models/adminLoginModel";
 
+// import methods
+import { isAdmin } from "methods/adminLoginMethods";
+
 interface StateProps {
   user?: Model.User;
 }
@@ -16,7 +19,7 @@ interface StateProps {
 type DefaultProps = StateProps;
 
 const AdminContainer: FC<DefaultProps> = ({ user }) => {
-  return <>{user ? <AdminMenu /> : <AdminLogin />}</>;
+  return <>{user && isAdmin(user) ? <AdminMenu /> : <AdminLogin />}</>;
 };
 
 const mapStateToProps = (state: AppState) => ({
