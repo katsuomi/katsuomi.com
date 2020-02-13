@@ -4,7 +4,7 @@
  *
  */
 
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 
 //import utils
@@ -55,8 +55,13 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
   ${props => props.disabled && { color: colors.BLACK }};
 `;
 
-const Button = (props: DefaultProps) => {
-  const { isDisabled, onSubmit, children, color, padding } = props;
+const Button: FC<DefaultProps> = ({
+  isDisabled,
+  onSubmit,
+  children,
+  color,
+  padding
+}) => {
   return (
     <ButtonWrapper
       disabled={isDisabled}
