@@ -6,7 +6,7 @@
 
 // main 5 colors
 export const BLUE = "#00a0eb"; // base color
-export const RED = "#F60074";
+export const RED = "#fc0303";
 export const GREEN = "#00F149";
 export const ORANGE = "#FF8900"; // 補色
 export const PURPLE = "#C300EC";
@@ -33,6 +33,8 @@ export const LIGHTER_BG = "#F9F9FA";
 export const BRIGHT_BLUE = "#2AB8FC";
 export const BLACK = "#2D323C";
 export const BORDER_GRAY = "#EDF0F2";
+export const BORDER_LIGHT_GRAY = "#ccc";
+export const BACKGROUND_LIGHT_GRAY = "#fafafa";
 export const DARK_GRAY = "#4D657C";
 export const LIGHT_GRAY = "#CDD7DC";
 export const BG_GRAY = "#F8FAFB";

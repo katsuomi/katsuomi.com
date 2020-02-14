@@ -1,6 +1,6 @@
 /**
  *
- * Input
+ * TextArea
  *
  */
 
@@ -9,12 +9,9 @@ import styled from "styled-components";
 
 //import utils
 import * as colors from "utils/color";
-import * as fontSize from "utils/fontSize";
 
 interface DefaultProps {
   placeholder?: string;
-  isPassword: boolean;
-  isEmail?: boolean;
   isRequired?: boolean;
   value?: string;
   width?: string;
@@ -22,11 +19,13 @@ interface DefaultProps {
   backgroundColor?: string;
   margin?: string[];
   padding?: string[];
+  fontSize?: string;
+  rows: number;
   onChange: (value: string) => void;
   children?: string | ReactElement<any>;
 }
 
-interface InputStyleProps {
+interface TextAreaStyleProps {
   width?: string;
   borderColor?: string;
   backgroundColor?: string;
@@ -38,16 +37,15 @@ interface InputStyleProps {
   paddingBottom?: string;
   paddingLeft?: string;
   paddingRight?: string;
+  fontSize?: string;
 }
 
-const InputWrapper = styled.input<InputStyleProps>`
-  background-color: ${props =>
-    props.backgroundColor ? props.backgroundColor : colors.WHITE};
+const TextAreaWrapper = styled.textarea<TextAreaStyleProps>`
+  background-color: ${props => props.backgroundColor && props.backgroundColor};
   border: 2px
     ${props => (props.borderColor ? props.borderColor : colors.BORDER_GRAY)}
     solid;
   outline: none;
-  font-size: ${fontSize.MINI};
   transition: all 0.2s;
   color: ${colors.BLACK};
   margin-top: ${props => props.marginTop && props.marginTop};
@@ -62,29 +60,31 @@ const InputWrapper = styled.input<InputStyleProps>`
     border-color: ${colors.LIGHTER_BLUE};
   }
   width: ${props => (props.width ? props.width : "inherit")};
+  font-size: ${props => props.fontSize && props.fontSize};
 `;
 
-const Input: FC<DefaultProps> = ({
+const TextArea: FC<DefaultProps> = ({
   placeholder,
+  isRequired,
   value,
   width,
   onChange,
-  isPassword,
-  isEmail,
-  isRequired,
   borderColor,
   backgroundColor,
+  rows,
   margin,
-  padding
+  padding,
+  fontSize
 }) => {
   return (
-    <InputWrapper
-      type={isPassword ? "password" : isEmail ? "email" : undefined}
+    <TextAreaWrapper
       placeholder={placeholder}
       value={value}
-      width={width}
       required={isRequired}
+      width={width}
+      fontSize={fontSize}
       borderColor={borderColor}
+      rows={rows}
       backgroundColor={backgroundColor}
       marginTop={margin && margin[0]}
       marginBottom={margin && margin[1]}
@@ -99,4 +99,4 @@ const Input: FC<DefaultProps> = ({
   );
 };
 
-export default Input;
+export default TextArea;

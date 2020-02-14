@@ -4,7 +4,7 @@
  *
  */
 
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -28,8 +28,7 @@ const AnchorWrapper = styled.span`
   }
 `;
 
-const Anchor = (props: DefaultProps) => {
-  const { src, children } = props;
+const Anchor: FC<DefaultProps> = ({ src, children }) => {
   return (
     <AnchorWrapper>
       <Link to={src}>{children}</Link>

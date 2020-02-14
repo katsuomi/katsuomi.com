@@ -13,8 +13,13 @@ import * as fontSize from "utils/fontSize";
 
 interface DefaultProps {
   isDisabled: boolean;
+  isFontWeight?: boolean;
   color?: string;
   padding?: string[];
+  width?: string;
+  borderColor?: string;
+  backgroundColor?: string;
+  margin?: string[];
   onSubmit: () => void;
   children?: string | ReactElement<any>;
 }
@@ -22,28 +27,42 @@ interface DefaultProps {
 interface ButtonStyleProps {
   color?: string;
   disabled?: boolean;
+  width?: string;
+  borderColor?: string;
+  backgroundColor?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
   paddingTop?: string;
   paddingBottom?: string;
   paddingLeft?: string;
   paddingRight?: string;
+  isFontWeight?: boolean;
 }
 
 const ButtonWrapper = styled.button<ButtonStyleProps>`
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 2px 40px;
   border-radius: 5px;
-  background-color: ${props =>
-    props.color === "blue" ? colors.BLUE : colors.WHITE};
-  border: 1px ${colors.BORDER_GRAY} solid;
+  background-color: ${props => props.backgroundColor && props.backgroundColor};
+  border: 2px
+    ${props =>
+      !props.disabled && props.borderColor
+        ? props.borderColor
+        : colors.BORDER_GRAY}
+    solid;
   outline: none;
   font-size: ${fontSize.MINI};
+  font-weight: ${props => props.isFontWeight && "bold"};
   transition-duration: 0.2s;
-  color: ${props => (props.color === "blue" ? colors.WHITE : colors.BLACK)};
+  color: ${props => props.color && props.color};
   padding-top: ${props => props.paddingTop && props.paddingTop};
   padding-bottom: ${props => props.paddingBottom && props.paddingBottom};
   padding-left: ${props => props.paddingLeft && props.paddingLeft};
   padding-right: ${props => props.paddingRight && props.paddingRight};
+  margin-top: ${props => props.marginTop && props.marginTop};
+  margin-bottom: ${props => props.marginBottom && props.marginBottom};
+  margin-left: ${props => props.marginLeft && props.marginLeft};
+  margin-right: ${props => props.marginRight && props.marginRight};
   &:hover {
     border-color: ${colors.LIGHTER_BLUE};
     background-color: ${colors.LIGHTER_BLUE};
@@ -52,7 +71,7 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
   }
   cursor: pointer;
   ${props => props.disabled && { "background-color": colors.BORDER_GRAY }};
-  ${props => props.disabled && { color: colors.BLACK }};
+  ${props => props.disabled && { color: colors.WHITE }};
 `;
 
 const Button: FC<DefaultProps> = ({
@@ -60,13 +79,26 @@ const Button: FC<DefaultProps> = ({
   onSubmit,
   children,
   color,
-  padding
+  padding,
+  isFontWeight,
+  width,
+  borderColor,
+  backgroundColor,
+  margin
 }) => {
   return (
     <ButtonWrapper
       disabled={isDisabled}
       onClick={onSubmit}
+      width={width}
       color={color}
+      isFontWeight={isFontWeight}
+      borderColor={borderColor}
+      backgroundColor={backgroundColor}
+      marginTop={margin && margin[0]}
+      marginBottom={margin && margin[1]}
+      marginLeft={margin && margin[2]}
+      marginRight={margin && margin[3]}
       paddingTop={padding && padding[0]}
       paddingBottom={padding && padding[1]}
       paddingLeft={padding && padding[2]}
