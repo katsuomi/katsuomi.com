@@ -4,7 +4,7 @@
  *
  */
 
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, FormEvent } from "react";
 import styled from "styled-components";
 
 //import utils
@@ -20,7 +20,7 @@ interface DefaultProps {
   borderColor?: string;
   backgroundColor?: string;
   margin?: string[];
-  onSubmit: () => void;
+  onClick: (e: FormEvent) => void;
   children?: string | ReactElement<any>;
 }
 
@@ -76,7 +76,7 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
 
 const Button: FC<DefaultProps> = ({
   isDisabled,
-  onSubmit,
+  onClick,
   children,
   color,
   padding,
@@ -89,7 +89,7 @@ const Button: FC<DefaultProps> = ({
   return (
     <ButtonWrapper
       disabled={isDisabled}
-      onClick={onSubmit}
+      onClick={onClick}
       width={width}
       color={color}
       isFontWeight={isFontWeight}

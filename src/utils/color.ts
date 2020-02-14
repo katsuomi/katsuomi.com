@@ -7,7 +7,7 @@
 // main 5 colors
 export const BLUE = "#00a0eb"; // base color
 export const RED = "#fc0303";
-export const GREEN = "#00F149";
+export const GREEN = "#00c972";
 export const ORANGE = "#FF8900"; // 補色
 export const PURPLE = "#C300EC";
 export const YELLOW = "#FFD466";
@@ -19,6 +19,7 @@ export const LIGHTER_RED = "#ff5da9";
 export const LIGHTER_BLUE = "#52C8FF";
 export const LIGHTER_BLACK = "#313131";
 export const DARKER_BLUE = "#005B85";
+export const LIGHTER_GREEN = "#50ff2d";
 
 // base colors
 export const INK = "#171a1f";

@@ -9,16 +9,22 @@ import * as ActionTypes from "constants/actionTypes";
 
 export interface FlashMessageType {
   id: number;
+  type: string;
+  message: string;
+}
+
+export interface FlashMessagePayloadType {
+  type: string;
   message: string;
 }
 
 export interface FlashMessageState {
-  flashMessages: { id: number; message: string }[];
+  flashMessages: { id: number; type: string; message: string }[];
 }
 
 export interface AddFlashMessageAction {
   type: typeof ActionTypes.ADD_FLASH_MESSAGE;
-  payload: string;
+  payload: FlashMessagePayloadType;
 }
 
 export interface RemoveFlashMessageAction {

@@ -14,11 +14,13 @@ export interface FlashMessageProps {
   message: string;
   index: number;
   id: number;
+  type: string;
   removeFlashMessage: (payload: number) => void;
 }
 
 export interface FlashMessageWrapperProps {
   index: number;
+  type: string;
 }
 
 const FlashMessageWrapper = styled.div<FlashMessageWrapperProps>`
@@ -26,7 +28,8 @@ const FlashMessageWrapper = styled.div<FlashMessageWrapperProps>`
   padding: 20px 0px;
   opacity: 0.8;
   margin: 10px 30px;
-  background-color: ${colors.RED};
+  ${props => props.type === "failure" && { "background-color": colors.RED }}
+  ${props => props.type === "success" && { "background-color": colors.GREEN }}
   color: ${colors.WHITE};
   font-weight: bold;
   position: fixed;
@@ -38,8 +41,14 @@ const FlashMessageWrapper = styled.div<FlashMessageWrapperProps>`
   cursor: pointer;
   transition: all 300ms 0s ease;
   &:hover {
-    border-color: ${colors.LIGHTER_RED};
-    background-color: ${colors.LIGHTER_RED};
+    ${props =>
+      props.type === "failure" && { "border-color": colors.LIGHTER_RED }}
+    ${props =>
+      props.type === "failure" && { "background-color": colors.LIGHTER_RED }}
+    ${props =>
+      props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
+    ${props =>
+      props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
   }
 `;
 
@@ -47,13 +56,18 @@ const FlashMessage: FC<FlashMessageProps> = ({
   message,
   index,
   id,
+  type,
   removeFlashMessage
 }) => {
   useEffect(() => {
     setTimeout(() => removeFlashMessage(id), 3000);
   }, [id, removeFlashMessage]);
   return message ? (
-    <FlashMessageWrapper onClick={() => removeFlashMessage(id)} index={index}>
+    <FlashMessageWrapper
+      onClick={() => removeFlashMessage(id)}
+      index={index}
+      type={type}
+    >
       {message}
     </FlashMessageWrapper>
   ) : (

@@ -20,12 +20,13 @@ const flashMessages: Reducer<
   switch (action.type) {
     case ActionTypes.ADD_FLASH_MESSAGE:
       const flashMessagesLength = state.flashMessages.length;
-      const errorMessage = action.payload;
+      const message = action.payload.message;
+      const type = action.payload.type;
       return {
         ...state,
         flashMessages: [
           ...state.flashMessages,
-          { id: flashMessagesLength, message: errorMessage }
+          { id: flashMessagesLength, type: type, message: message }
         ]
       };
     case ActionTypes.REMOVE_FLASH_MESSAGE:

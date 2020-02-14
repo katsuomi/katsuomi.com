@@ -11,16 +11,25 @@ import { addFlashMessage } from "actions/flashMessagesAction";
 import * as API from "apis/adminLoginAPI";
 
 // import models
-import * as Models from "models/adminLoginModel";
+import * as Model from "models/adminLoginModel";
 
-function* runAdminLogin(action: Models.AdminLoginStartAction) {
+function* runAdminLogin(action: Model.AdminLoginStartAction) {
   const password = action.payload;
   const handler = API.adminLogin;
   const { user, error } = yield call(handler, password);
   if (user && !error) {
+    const payload = {
+      type: "success",
+      message: `管理者ID: ${user.uid}さんのログイン完了`
+    };
     yield put(adminLogin.success(user));
+    yield put(addFlashMessage(payload));
   } else {
-    yield put(addFlashMessage(error.message));
+    const payload = {
+      type: "failure",
+      message: error.message && error.message
+    };
+    yield put(addFlashMessage(payload));
     yield put(adminLogin.failure());
   }
 }

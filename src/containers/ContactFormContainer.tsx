@@ -1,5 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
 
 // import utils
 import * as colors from "utils/color";
@@ -11,6 +13,15 @@ import Input from "components/atoms/Input";
 import TextArea from "components/atoms/TextArea";
 import Button from "components/atoms/Button";
 
+// import actions
+import { submitContactForm } from "actions/contactFormAction";
+// import models
+import * as Model from "models/contactFormModel";
+
+interface DispatchProps {
+  submitContactForm: (payload: Model.ContactFormType) => void;
+}
+
 const ContentWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -18,11 +29,24 @@ const ContentWrapper = styled.form`
   margin-left: ${breakPoints.isSmartPhone() ? "5%" : "15%"};
 `;
 
-const ContactFormContainer: FC = () => {
+const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const isDisabled = name && email && content ? false : true;
+
+  const handleOnSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const data: Model.ContactFormType = {
+      name: name,
+      email: email,
+      content: content
+    };
+    submitContactForm(data);
+    setName("");
+    setEmail("");
+    setContent("");
+  };
   return (
     <ContentWrapper>
       <InputLabel isRequired={true}>お名前</InputLabel>
@@ -30,6 +54,7 @@ const ContactFormContainer: FC = () => {
         placeholder=""
         isPassword={false}
         isRequired={true}
+        value={name}
         width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
         borderColor={colors.BORDER_LIGHT_GRAY}
         backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
@@ -43,6 +68,7 @@ const ContactFormContainer: FC = () => {
         isPassword={false}
         isEmail={true}
         isRequired={true}
+        value={email}
         width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
         borderColor={colors.BORDER_LIGHT_GRAY}
         backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
@@ -54,6 +80,7 @@ const ContactFormContainer: FC = () => {
       <TextArea
         rows={breakPoints.isSmartPhone() ? 10 : 20}
         placeholder=""
+        value={content}
         fontSize={"15px"}
         isRequired={true}
         width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
@@ -69,7 +96,7 @@ const ContactFormContainer: FC = () => {
         backgroundColor={colors.BRIGHT_BLUE}
         color={colors.WHITE}
         isFontWeight={true}
-        onSubmit={() => console.log("yeah")}
+        onClick={handleOnSubmit}
       >
         送信
       </Button>
@@ -77,4 +104,12 @@ const ContactFormContainer: FC = () => {
   );
 };
 
-export default ContactFormContainer;
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      submitContactForm: payload => submitContactForm.start(payload)
+    },
+    dispatch
+  );
+
+export default connect(null, mapDispatchToProps)(ContactFormContainer);

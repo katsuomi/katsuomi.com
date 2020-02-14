@@ -5,10 +5,10 @@ import * as ActionTypes from "constants/actionTypes";
 import * as Model from "models/flashMessagesModel";
 
 export const addFlashMessage = (
-  errorMessage: string
+  payload: Model.FlashMessagePayloadType
 ): Model.AddFlashMessageAction => ({
   type: ActionTypes.ADD_FLASH_MESSAGE,
-  payload: errorMessage
+  payload: payload
 });
 
 export const removeFlashMessage = (

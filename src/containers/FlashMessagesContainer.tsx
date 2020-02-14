@@ -34,6 +34,7 @@ const FlashMessagesContainer: FC<DefaultProps> = ({
           message={flashMessage.message}
           index={i}
           id={flashMessage.id}
+          type={flashMessage.type}
           removeFlashMessage={removeFlashMessage}
         />
       ))}

@@ -87,9 +87,10 @@ const AdminLoginContainer: FC<DefaultProps> = ({
             isPassword={true}
           />
           <Button
-            onSubmit={handleOnSubmit}
-            color="blue"
+            onClick={handleOnSubmit}
             padding={["5px", "5px", "99px", "99px"]}
+            backgroundColor={colors.BRIGHT_BLUE}
+            color={colors.WHITE}
             isDisabled={password ? false : true}
           >
             Login
