@@ -11,22 +11,13 @@ export const tabletMaxWidth = 1024;
 export const currentWidth = window.outerWidth;
 
 export const isSmartPhone = (): boolean => {
-  if (currentWidth < smartphoneMaxWidth) {
-    return true;
-  }
-  return false;
+  return currentWidth < smartphoneMaxWidth;
 };
 
 export const isIPhone5s = (): boolean => {
-  if (currentWidth < iPhone5sMaxWidth) {
-    return true;
-  }
-  return false;
+  return currentWidth < iPhone5sMaxWidth;
 };
 
 export const hasWidth800 = (): boolean => {
-  if (currentWidth >= 800) {
-    return true;
-  }
-  return false;
+  return currentWidth >= 800;
 };
