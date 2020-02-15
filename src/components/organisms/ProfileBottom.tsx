@@ -1,8 +1,13 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
+// import atoms
+import Button from "components/atoms/Button";
+import Anchor from "components/atoms/Anchor";
 // import utils
 import * as colors from "utils/color";
+import * as breakPoints from "utils/breakPoints";
+import * as fontSize from "utils/fontSize";
 
 // import images
 import qiita from "images/qiita.png";
@@ -19,6 +24,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 20px;
+  margin-bottom: ${breakPoints.isSmartPhone() ? "10px" : "60px"};
 `;
 
 const A = styled.a.attrs(
@@ -40,6 +46,12 @@ const Img = styled.img<{ src: string }>`
   align-self: center;
 `;
 
+const MiniMessage = styled.p`
+  font-size: ${fontSize.MICRO};
+  color: ${colors.INFO_GRAY};
+  margin-top: 20px;
+`;
+
 const ProfileBottom: FC = () => (
   <>
     <Wrapper>
@@ -56,6 +68,20 @@ const ProfileBottom: FC = () => (
         <Img src={facebook} />
       </A>
     </Wrapper>
+    <MiniMessage>
+      開発の依頼やご質問等、まずはお気軽にご連絡ください。
+    </MiniMessage>
+    <Anchor src="/contact">
+      <Button
+        isDisabled={false}
+        backgroundColor={colors.BRIGHT_BLUE}
+        color={colors.WHITE}
+        padding={["5px", "5px", "80px", "80px"]}
+        width={breakPoints.isSmartPhone() ? "" : "500px"}
+      >
+        お問い合わせはこちら
+      </Button>
+    </Anchor>
   </>
 );
 

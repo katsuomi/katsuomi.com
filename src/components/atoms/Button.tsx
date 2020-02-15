@@ -20,7 +20,7 @@ interface DefaultProps {
   borderColor?: string;
   backgroundColor?: string;
   margin?: string[];
-  onClick: (e: FormEvent) => void;
+  onClick?: (e: FormEvent) => void;
   children?: string | ReactElement<any>;
 }
 
@@ -63,6 +63,7 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
   margin-bottom: ${props => props.marginBottom && props.marginBottom};
   margin-left: ${props => props.marginLeft && props.marginLeft};
   margin-right: ${props => props.marginRight && props.marginRight};
+  width: ${props => props.width};
   &:hover {
     border-color: ${colors.LIGHTER_BLUE};
     background-color: ${colors.LIGHTER_BLUE};
