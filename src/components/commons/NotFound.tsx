@@ -3,22 +3,39 @@ import styled from "styled-components";
 
 // import atoms
 import Button from "components/atoms/Button";
+import Anchor from "components/atoms/Anchor";
 
 // import utils
 import * as fontSize from "utils/fontSize";
+import * as colors from "utils/color";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+  text-align: center;
+`;
+
+const Txt = styled.p`
+  font-size: ${fontSize.H4};
+  font-weight: bold;
 `;
 
 const NotFound: FC = () => (
   <>
     <Wrapper>
-      This page is not Found.
-      <Button isDisabled={false}>go Home</Button>
+      <Txt>This page is not Found.</Txt>
+      <Anchor src="/">
+        <Button
+          isDisabled={false}
+          borderColor={colors.BRIGHT_BLUE}
+          backgroundColor={colors.BRIGHT_BLUE}
+          color={colors.WHITE}
+          padding={["5px", "5px", "120px", "120px"]}
+        >
+          go Home
+        </Button>
+      </Anchor>
     </Wrapper>
   </>
 );

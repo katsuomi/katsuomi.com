@@ -4,9 +4,6 @@ import { Helmet } from "react-helmet";
 // import utils
 import pages from "utils/pages";
 
-// import commons
-import NotFound from "components/commons/NotFound";
-
 // import containers
 import AdminCreateArticleContainer from "containers/AdminCreateArticleContainer";
 
