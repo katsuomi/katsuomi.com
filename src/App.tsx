@@ -21,6 +21,11 @@ const App: FC = () => (
       <Switch>
         <Route path={pages.home.path} component={routes.Home} exact />
         <Route path={pages.admin.path} component={routes.Admin} exact />
+        <Route
+          path={pages.adminCreateArticle.path}
+          component={routes.AdminCreateArticle}
+          exact
+        />
         <Route path={pages.contact.path} component={routes.Contact} exact />
         <Route path={pages.profile.path} component={routes.Profile} exact />
         <Route path={pages.news.path} component={routes.News} exact />

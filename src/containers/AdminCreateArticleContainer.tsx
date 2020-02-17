@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { connect } from "react-redux";
 
 // import organisms
-import AdminLogin from "components/organisms/AdminLogin";
 import AdminMenu from "components/organisms/AdminMenu";
+import AdminLogin from "components/organisms/AdminLogin";
 
 // import models
 import { AppState } from "models/index";
@@ -18,13 +18,13 @@ interface StateProps {
 
 type DefaultProps = StateProps;
 
-const AdminContainer: FC<DefaultProps> = ({ user }) => {
+const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   if (user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
   }
   return (
     <>
-      <AdminMenu />
+      <div>aaa</div>
     </>
   );
 };
@@ -33,4 +33,4 @@ const mapStateToProps = (state: AppState) => ({
   user: state.adminLogin.user
 });
 
-export default connect(mapStateToProps, null)(AdminContainer);
+export default connect(mapStateToProps, null)(AdminCreateArticleContainer);
