@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 
+import "./react-input-tag.css";
+
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -9,19 +11,16 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 const AdminCreateArticle = () => {
-  const [tags, setTags] = useState<{ id: string; text: string }[]>([
-    { id: "Thailand", text: "Thailand" },
-    { id: "India", text: "India" }
-  ]);
+  const [tags, setTags] = useState<{ id: string; text: string }[]>([]);
   const [suggestions, setSuggestions] = useState<
     { id: string; text: string }[]
   >([
-    { id: "USA", text: "USA" },
-    { id: "Germany", text: "Germany" },
-    { id: "Austria", text: "Austria" },
-    { id: "Costa Rica", text: "Costa Rica" },
-    { id: "Sri Lanka", text: "Sri Lanka" },
-    { id: "Thailand", text: "Thailand" }
+    { id: "News", text: "News" },
+    { id: "受賞", text: "受賞" },
+    { id: "制作物", text: "制作物" },
+    { id: "つぶやき", text: "つぶやき" },
+    { id: "競馬", text: "競馬" },
+    { id: "プログラミング", text: "プログラミング" }
   ]);
 
   const handleDelete = (i: number) => {
@@ -41,16 +40,14 @@ const AdminCreateArticle = () => {
   };
 
   return (
-    <div>
-      <ReactTags
-        tags={tags}
-        suggestions={suggestions}
-        handleDelete={handleDelete}
-        handleAddition={handleAddition}
-        handleDrag={handleDrag}
-        delimiters={delimiters}
-      />
-    </div>
+    <ReactTags
+      tags={tags}
+      suggestions={suggestions}
+      handleDelete={handleDelete}
+      handleAddition={handleAddition}
+      handleDrag={handleDrag}
+      delimiters={delimiters}
+    />
   );
 };
 

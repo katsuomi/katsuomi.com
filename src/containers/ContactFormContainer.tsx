@@ -33,7 +33,9 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const isDisabled = name && email && content ? false : true;
+  const regexpForEmail = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+  const isDisabled =
+    name && email && content && regexpForEmail.test(email) ? false : true;
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
