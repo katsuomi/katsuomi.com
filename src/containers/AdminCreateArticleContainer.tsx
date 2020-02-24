@@ -40,7 +40,7 @@ type DefaultProps = StateProps;
 const ContentWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
   align-items: center;
 `;
 
@@ -57,15 +57,19 @@ const Left = styled.span`
 
 const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   const [title, setTitle] = useState<string>("");
-  const [day, setDay] = useState<string>("");
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [startDate, setStartDate] = useState(new Date());
-  const isDisabled = title && content ? false : true;
+  const [date, setDate] = useState(new Date());
+  const isDisabled =
+    title && content && thumbnailImagePath && date ? false : true;
 
   if (user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
   }
+
+  const handleOnSubmit = () => {
+    console.log("yeah!");
+  };
 
   return (
     <>
@@ -95,14 +99,14 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
         <Input
           placeholder=""
           isRequired={true}
-          date={startDate}
+          date={date}
           type="date"
           width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
           borderColor={colors.BORDER_LIGHT_GRAY}
           backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
           margin={["10px", "10px", "0px", "0px"]}
           padding={["10px", "10px", "10px", "10px"]}
-          onChange={setStartDate}
+          onChange={setDate}
         />
         <Left>
           <InputLabel isRequired={true}>サムネイル画像</InputLabel>
@@ -115,6 +119,20 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
           <InputLabel isRequired={true}>内容</InputLabel>
         </Left>
         <Editor onChange={setContent} />
+
+        <Button
+          isDisabled={isDisabled}
+          borderColor={colors.BLUE}
+          backgroundColor={colors.BRIGHT_BLUE}
+          color={colors.WHITE}
+          isFontWeight={true}
+          onClick={handleOnSubmit}
+          padding={["3px", "3px", "80px", "80px"]}
+          margin={["20px", "0px", "0px", "0px"]}
+          width="75%"
+        >
+          送信
+        </Button>
       </ContentWrapper>
     </>
   );
