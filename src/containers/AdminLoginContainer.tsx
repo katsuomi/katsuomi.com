@@ -84,7 +84,7 @@ const AdminLoginContainer: FC<DefaultProps> = ({
             placeholder="password"
             onChange={handleOnChange}
             width="250px"
-            isPassword={true}
+            type="password"
           />
           <Button
             onClick={handleOnSubmit}

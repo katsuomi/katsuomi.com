@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import DatePicker from "react-datepicker";
 
 // import organisms
 import AdminLogin from "components/organisms/AdminLogin";
@@ -51,9 +52,11 @@ const Left = styled.span`
 
 const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   const [title, setTitle] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [day, setDay] = useState<string>("");
+  const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const isDisabled = title && email && content ? false : true;
+  const [startDate, setStartDate] = useState(new Date());
+  const isDisabled = title && content ? false : true;
 
   if (user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
@@ -63,11 +66,14 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
       <ContentWrapper>
         <Title>記事をかく</Title>
         <Left>
+          <InputLabel isRequired={true}>タグを追加</InputLabel>
+        </Left>
+        <AdminCreateArticleTags />
+        <Left>
           <InputLabel isRequired={true}>タイトル</InputLabel>
         </Left>
         <Input
           placeholder=""
-          isPassword={false}
           isRequired={true}
           value={title}
           width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
@@ -78,9 +84,20 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
           onChange={setTitle}
         />
         <Left>
-          <InputLabel isRequired={true}>タグを追加</InputLabel>
+          <InputLabel isRequired={true}>日付</InputLabel>
         </Left>
-        <AdminCreateArticleTags />
+        <Input
+          placeholder=""
+          isRequired={true}
+          date={startDate}
+          type="date"
+          width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+          borderColor={colors.BORDER_LIGHT_GRAY}
+          backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
+          margin={["10px", "10px", "0px", "0px"]}
+          padding={["10px", "10px", "10px", "10px"]}
+          onChange={setStartDate}
+        />
       </ContentWrapper>
     </>
   );

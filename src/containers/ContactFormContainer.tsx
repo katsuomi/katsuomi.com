@@ -54,7 +54,6 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
       <InputLabel isRequired={true}>お名前</InputLabel>
       <Input
         placeholder=""
-        isPassword={false}
         isRequired={true}
         value={name}
         width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
@@ -67,8 +66,7 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
       <InputLabel isRequired={true}>メールアドレス</InputLabel>
       <Input
         placeholder=""
-        isPassword={false}
-        isEmail={true}
+        type="email"
         isRequired={true}
         value={email}
         width={breakPoints.isSmartPhone() ? "300px" : "70vw"}

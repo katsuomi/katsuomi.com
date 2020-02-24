@@ -6,23 +6,27 @@
 
 import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
 
 //import utils
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 
+// import css
+import "react-datepicker/dist/react-datepicker.css";
+
 interface DefaultProps {
   placeholder?: string;
-  isPassword: boolean;
-  isEmail?: boolean;
+  type?: string;
   isRequired?: boolean;
   value?: string;
+  date?: Date;
   width?: string;
   borderColor?: string;
   backgroundColor?: string;
   margin?: string[];
   padding?: string[];
-  onChange: (value: string) => void;
+  onChange: (value: any) => void;
   children?: string | ReactElement<any>;
 }
 
@@ -64,22 +68,65 @@ const InputWrapper = styled.input<InputStyleProps>`
   width: ${props => (props.width ? props.width : "inherit")};
 `;
 
+const DateWrapper = styled.div<InputStyleProps>`
+  > div > div > input {
+    background-color: ${props =>
+      props.backgroundColor ? props.backgroundColor : colors.WHITE};
+    border: 2px
+      ${props => (props.borderColor ? props.borderColor : colors.BORDER_GRAY)}
+      solid;
+    outline: none;
+    font-size: ${fontSize.MINI};
+    transition: all 0.2s;
+    color: ${colors.BLACK};
+    margin-top: ${props => props.marginTop && props.marginTop};
+    margin-bottom: ${props => props.marginBottom && props.marginBottom};
+    margin-left: ${props => props.marginLeft && props.marginLeft};
+    margin-right: ${props => props.marginRight && props.marginRight};
+    padding-top: ${props => props.paddingTop && props.paddingTop};
+    padding-bottom: ${props => props.paddingBottom && props.paddingBottom};
+    padding-left: ${props => props.paddingLeft && props.paddingLeft};
+    padding-right: ${props => props.paddingRight && props.paddingRight};
+    &:focus {
+      border-color: ${colors.LIGHTER_BLUE};
+    }
+    width: ${props => (props.width ? props.width : "inherit")};
+  }
+`;
+
 const Input: FC<DefaultProps> = ({
   placeholder,
   value,
+  date,
   width,
   onChange,
-  isPassword,
-  isEmail,
+  type,
   isRequired,
   borderColor,
   backgroundColor,
   margin,
   padding
 }) => {
-  return (
+  return type === "date" ? (
+    <DateWrapper
+      placeholder={placeholder}
+      width={width}
+      borderColor={borderColor}
+      backgroundColor={backgroundColor}
+      marginTop={margin && margin[0]}
+      marginBottom={margin && margin[1]}
+      marginLeft={margin && margin[2]}
+      marginRight={margin && margin[3]}
+      paddingTop={padding && padding[0]}
+      paddingBottom={padding && padding[1]}
+      paddingLeft={padding && padding[2]}
+      paddingRight={padding && padding[3]}
+    >
+      <DatePicker selected={date} onChange={date => date && onChange(date)} />
+    </DateWrapper>
+  ) : (
     <InputWrapper
-      type={isPassword ? "password" : isEmail ? "email" : undefined}
+      type={type ? type : undefined}
       placeholder={placeholder}
       value={value}
       width={width}
@@ -100,3 +147,20 @@ const Input: FC<DefaultProps> = ({
 };
 
 export default Input;
+
+// background-color: #fafafa;
+// border: 2px #ccc solid;
+// outline: none;
+// font-size: 1.2rem;
+// -webkit-transition: all 0.2s;
+// transition: all 0.2s;
+// color: #2D323C;
+// margin-top: 10px;
+// margin-bottom: 10px;
+// margin-left: 0px;
+// margin-right: 0px;
+// padding-top: 10px;
+// padding-bottom: 10px;
+// padding-left: 10px;
+// padding-right: 10px;
+// width: 70vw;
