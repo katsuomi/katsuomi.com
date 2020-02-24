@@ -10,15 +10,17 @@ import { Dimmer, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 
 export interface SpinnerProps {
-  top: string;
+  top?: string;
+  position?: "abslute" | "relative";
 }
 
-export interface FlashMessageWrapperProps {
-  index: number;
+export interface SpinnerStyleProps {
+  top?: string;
+  position?: "abslute" | "relative";
 }
 
-const SegmentWrapper = styled.div<{ top: string }>`
-  position: absolute;
+const SegmentWrapper = styled.div<SpinnerStyleProps>`
+  position: ${props => (props.position ? props.position : "absolute")};
   top: ${props => (props.top ? props.top : "50%")};
   left: 50%;
   margin-right: -50%;
@@ -30,8 +32,8 @@ const SegmentWrapper = styled.div<{ top: string }>`
 
 const LoadWrapper = styled.p``;
 
-const Spinner: FC<SpinnerProps> = ({ top }) => (
-  <SegmentWrapper top={top}>
+const Spinner: FC<SpinnerProps> = ({ top, position }) => (
+  <SegmentWrapper top={top ? top : ""} position={position}>
     <Segment className="spinner">
       <Dimmer active inverted>
         <LoadWrapper>読み込み中...</LoadWrapper>

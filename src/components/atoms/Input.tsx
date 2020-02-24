@@ -147,20 +147,3 @@ const Input: FC<DefaultProps> = ({
 };
 
 export default Input;
-
-// background-color: #fafafa;
-// border: 2px #ccc solid;
-// outline: none;
-// font-size: 1.2rem;
-// -webkit-transition: all 0.2s;
-// transition: all 0.2s;
-// color: #2D323C;
-// margin-top: 10px;
-// margin-bottom: 10px;
-// margin-left: 0px;
-// margin-right: 0px;
-// padding-top: 10px;
-// padding-bottom: 10px;
-// padding-left: 10px;
-// padding-right: 10px;
-// width: 70vw;

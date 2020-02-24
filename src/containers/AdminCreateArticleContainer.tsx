@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import DatePicker from "react-datepicker";
 
 // import organisms
 import AdminLogin from "components/organisms/AdminLogin";
@@ -25,6 +24,12 @@ import { isAdmin } from "methods/adminLoginMethods";
 import * as breakPoints from "utils/breakPoints";
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
+
+// import imageUploader
+import ImageUploader from "imageUploader/ImageUploader";
+
+// import draft-js
+import Editor from "markdown-editor/Editor";
 
 interface StateProps {
   user?: Model.User;
@@ -61,6 +66,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   if (user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
   }
+
   return (
     <>
       <ContentWrapper>
@@ -98,6 +104,17 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
           padding={["10px", "10px", "10px", "10px"]}
           onChange={setStartDate}
         />
+        <Left>
+          <InputLabel isRequired={true}>サムネイル画像</InputLabel>
+        </Left>
+        <ImageUploader
+          onChange={setThumbnailImagePath}
+          value="サムネイル画像"
+        />
+        <Left>
+          <InputLabel isRequired={true}>内容</InputLabel>
+        </Left>
+        <Editor onChange={setContent} />
       </ContentWrapper>
     </>
   );
