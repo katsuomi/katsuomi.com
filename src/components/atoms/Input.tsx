@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 interface DefaultProps {
   placeholder?: string;
   type?: string;
+  id?: string;
   isRequired?: boolean;
   value?: string;
   date?: Date;
@@ -66,6 +67,8 @@ const InputWrapper = styled.input<InputStyleProps>`
     border-color: ${colors.LIGHTER_BLUE};
   }
   width: ${props => (props.width ? props.width : "inherit")};
+
+  transform: ${props => (props.type === "checkbox" ? "scale(2)" : "scale(1)")};
 `;
 
 const DateWrapper = styled.div<InputStyleProps>`
@@ -96,6 +99,7 @@ const DateWrapper = styled.div<InputStyleProps>`
 
 const Input: FC<DefaultProps> = ({
   placeholder,
+  id,
   value,
   date,
   width,
@@ -107,43 +111,69 @@ const Input: FC<DefaultProps> = ({
   margin,
   padding
 }) => {
-  return type === "date" ? (
-    <DateWrapper
-      placeholder={placeholder}
-      width={width}
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}
-      marginTop={margin && margin[0]}
-      marginBottom={margin && margin[1]}
-      marginLeft={margin && margin[2]}
-      marginRight={margin && margin[3]}
-      paddingTop={padding && padding[0]}
-      paddingBottom={padding && padding[1]}
-      paddingLeft={padding && padding[2]}
-      paddingRight={padding && padding[3]}
-    >
-      <DatePicker selected={date} onChange={date => date && onChange(date)} />
-    </DateWrapper>
-  ) : (
-    <InputWrapper
-      type={type ? type : undefined}
-      placeholder={placeholder}
-      value={value}
-      width={width}
-      required={isRequired}
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}
-      marginTop={margin && margin[0]}
-      marginBottom={margin && margin[1]}
-      marginLeft={margin && margin[2]}
-      marginRight={margin && margin[3]}
-      paddingTop={padding && padding[0]}
-      paddingBottom={padding && padding[1]}
-      paddingLeft={padding && padding[2]}
-      paddingRight={padding && padding[3]}
-      onChange={e => onChange(e.target.value)}
-    />
-  );
+  if (type === "date") {
+    return (
+      <DateWrapper
+        placeholder={placeholder}
+        width={width}
+        borderColor={borderColor}
+        backgroundColor={backgroundColor}
+        marginTop={margin && margin[0]}
+        marginBottom={margin && margin[1]}
+        marginLeft={margin && margin[2]}
+        marginRight={margin && margin[3]}
+        paddingTop={padding && padding[0]}
+        paddingBottom={padding && padding[1]}
+        paddingLeft={padding && padding[2]}
+        paddingRight={padding && padding[3]}
+      >
+        <DatePicker selected={date} onChange={date => date && onChange(date)} />
+      </DateWrapper>
+    );
+  } else if (type === "checkbox") {
+    return (
+      <InputWrapper
+        type={type ? type : undefined}
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        width={width}
+        required={isRequired}
+        borderColor={borderColor}
+        backgroundColor={backgroundColor}
+        marginTop={margin && margin[0]}
+        marginBottom={margin && margin[1]}
+        marginLeft={margin && margin[2]}
+        marginRight={margin && margin[3]}
+        paddingTop={padding && padding[0]}
+        paddingBottom={padding && padding[1]}
+        paddingLeft={padding && padding[2]}
+        paddingRight={padding && padding[3]}
+        onChange={e => onChange(e.target.value)}
+      />
+    );
+  } else {
+    return (
+      <InputWrapper
+        type={type ? type : undefined}
+        placeholder={placeholder}
+        value={value}
+        width={width}
+        required={isRequired}
+        borderColor={borderColor}
+        backgroundColor={backgroundColor}
+        marginTop={margin && margin[0]}
+        marginBottom={margin && margin[1]}
+        marginLeft={margin && margin[2]}
+        marginRight={margin && margin[3]}
+        paddingTop={padding && padding[0]}
+        paddingBottom={padding && padding[1]}
+        paddingLeft={padding && padding[2]}
+        paddingRight={padding && padding[3]}
+        onChange={e => onChange(e.target.value)}
+      />
+    );
+  }
 };
 
 export default Input;
