@@ -5,7 +5,7 @@ import { WithContext as ReactTags } from "react-tag-input";
 import "./react-input-tag.css";
 
 // import methods
-import * as firebaseMethods from "methods/firebaseMethods";
+import * as firebaseMethods from "methods/tagMethods";
 
 const KeyCodes = {
   comma: 188,
