@@ -8,6 +8,7 @@ import AdminCreateArticleTags from "react-input-tag/AdminCreateArticleTags";
 
 // import molecules
 import InputLabel from "components/molecules/InputLabel";
+import CheckBox from "components/molecules/CheckBox";
 // import atoms
 import Input from "components/atoms/Input";
 import TextArea from "components/atoms/TextArea";
@@ -50,7 +51,7 @@ const Title = styled.h4`
   color: ${colors.CAPTION};
 `;
 
-const Left = styled.span`
+const Left = styled.div`
   align-self: flex-start;
   margin-left: 14%;
 `;
@@ -60,6 +61,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [date, setDate] = useState(new Date());
+  const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(false);
 
   const isDisabled =
     title && content && thumbnailImagePath && date ? false : true;
@@ -69,7 +71,11 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   }
 
   const handleOnSubmit = () => {
-    console.log("yeah!");
+    console.log("送信");
+  };
+
+  const handleOnChangeIsAddSlideShow = () => {
+    setIsAddSlideShow(!isAddSlideShow);
   };
 
   return (
@@ -116,6 +122,11 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
           onChange={setThumbnailImagePath}
           value="サムネイル画像"
         />
+        <Left>
+          <CheckBox keyWord="isSlider" onChange={handleOnChangeIsAddSlideShow}>
+            スライドショーに載せる
+          </CheckBox>
+        </Left>
         <Left>
           <InputLabel isRequired={true}>内容</InputLabel>
         </Left>
