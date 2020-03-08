@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -28,7 +28,7 @@ import * as fontSize from "utils/fontSize";
 // import imageUploader
 import ImageUploader from "imageUploader/ImageUploader";
 
-// import draft-js
+// import markdown-editor
 import Editor from "markdown-editor/Editor";
 
 interface StateProps {
@@ -60,6 +60,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [date, setDate] = useState(new Date());
+
   const isDisabled =
     title && content && thumbnailImagePath && date ? false : true;
 

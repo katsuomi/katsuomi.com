@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 
+// import css
 import "./react-input-tag.css";
+
+// import methods
+import * as firebaseMethods from "methods/firebaseMethods";
 
 const KeyCodes = {
   comma: 188,
@@ -14,14 +18,16 @@ const AdminCreateArticle = () => {
   const [tags, setTags] = useState<{ id: string; text: string }[]>([]);
   const [suggestions, setSuggestions] = useState<
     { id: string; text: string }[]
-  >([
-    { id: "News", text: "News" },
-    { id: "受賞", text: "受賞" },
-    { id: "制作物", text: "制作物" },
-    { id: "つぶやき", text: "つぶやき" },
-    { id: "競馬", text: "競馬" },
-    { id: "プログラミング", text: "プログラミング" }
-  ]);
+  >([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const data = await firebaseMethods.getTags();
+    setSuggestions(data);
+  };
 
   const handleDelete = (i: number) => {
     setTags(tags.filter((tag: any, index: any) => index !== i));
@@ -29,6 +35,12 @@ const AdminCreateArticle = () => {
 
   const handleAddition = (tag: any) => {
     setTags([...tags, tag]);
+  };
+
+  const handleInputBlur = () => {
+    tags.forEach(tag => {
+      firebaseMethods.addTag(tag.text);
+    });
   };
 
   const handleDrag = (tag: any, currPos: any, newPos: any) => {
@@ -46,6 +58,7 @@ const AdminCreateArticle = () => {
       handleDelete={handleDelete}
       handleAddition={handleAddition}
       handleDrag={handleDrag}
+      handleInputBlur={handleInputBlur}
       delimiters={delimiters}
     />
   );
