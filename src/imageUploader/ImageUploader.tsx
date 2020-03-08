@@ -51,7 +51,9 @@ const Wrapper = styled.div`
   width: 70vw;
   height: 31px;
 `;
+
 const ImgWrapper = styled.div``;
+
 const LoadingWrapper = styled.div``;
 
 const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
@@ -134,30 +136,32 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
   };
 
   return (
-    <Wrapper>
-      <Label htmlFor={value + "file"}>{value}</Label>
-      {/* file to imgのみ、複雑になるので、素のinputタグを利用 */}
-      <input
-        accept="image/*"
-        id={value + "file"}
-        multiple
-        type="file"
-        style={{ display: "none" }}
-        onChange={handleOnChange}
-        ref={inputEl}
-      />
-      <LoadingWrapper
-        className="createForm-circle"
-        style={{
-          display: imgDownLoaded ? "none" : "block"
-        }}
-      >
-        <Spinner position="relative" />
-      </LoadingWrapper>
-      <ImgWrapper className="createForm-image" style={{ marginTop: "20px" }}>
+    <>
+      <Wrapper>
+        <Label htmlFor={value + "file"}>{value}</Label>
+        {/* file to imgのみ、複雑になるので、素のinputタグを利用 */}
+        <input
+          accept="image/*"
+          id={value + "file"}
+          multiple
+          type="file"
+          style={{ display: "none" }}
+          onChange={handleOnChange}
+          ref={inputEl}
+        />
+        <LoadingWrapper
+          className="createForm-circle"
+          style={{
+            display: imgDownLoaded ? "none" : "block"
+          }}
+        >
+          <Spinner position="relative" />
+        </LoadingWrapper>
+      </Wrapper>
+      <ImgWrapper className="createForm-image">
         <img src={img} width="200px" />
       </ImgWrapper>
-    </Wrapper>
+    </>
   );
 };
 
