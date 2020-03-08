@@ -1,13 +1,13 @@
 /**
  *
- * postModel
+ * articleModel
  *
  */
 
 // import constants
 import * as ActionTypes from "constants/actionTypes";
 
-export interface Post {
+export interface Article {
   uid: string;
   content: string;
   title: string;
