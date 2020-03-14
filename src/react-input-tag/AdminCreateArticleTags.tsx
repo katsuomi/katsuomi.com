@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 
 // import css
@@ -7,6 +7,13 @@ import "./react-input-tag.css";
 // import methods
 import * as firebaseMethods from "methods/tagMethods";
 
+// import models
+import * as Model from "models/tagModel";
+
+interface DefaultProps {
+  onChange: (tags: { id: string; text: string }[]) => void;
+}
+
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -14,11 +21,9 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const AdminCreateArticle = () => {
-  const [tags, setTags] = useState<{ id: string; text: string }[]>([]);
-  const [suggestions, setSuggestions] = useState<
-    { id: string; text: string }[]
-  >([]);
+const AdminCreateArticle: FC<DefaultProps> = ({ onChange }) => {
+  const [tags, setTags] = useState<Model.Tag[]>([]);
+  const [suggestions, setSuggestions] = useState<Model.Tag[]>([]);
 
   useEffect(() => {
     getData();
@@ -30,10 +35,10 @@ const AdminCreateArticle = () => {
   };
 
   const handleDelete = (i: number) => {
-    setTags(tags.filter((tag: any, index: any) => index !== i));
+    setTags(tags.filter((tag: Model.Tag, index: number) => index !== i));
   };
 
-  const handleAddition = (tag: any) => {
+  const handleAddition = (tag: Model.Tag) => {
     setTags([...tags, tag]);
   };
 
@@ -41,9 +46,10 @@ const AdminCreateArticle = () => {
     tags.forEach(tag => {
       firebaseMethods.addTag(tag.text);
     });
+    onChange(tags);
   };
 
-  const handleDrag = (tag: any, currPos: any, newPos: any) => {
+  const handleDrag = (tag: Model.Tag, currPos: number, newPos: number) => {
     const newTags = tags.slice();
 
     newTags.splice(currPos, 1);
