@@ -16,7 +16,8 @@ import Button from "components/atoms/Button";
 
 // import models
 import { AppState } from "models/index";
-import * as Model from "models/adminLoginModel";
+import * as adminLoginModel from "models/adminLoginModel";
+import * as tagModel from "models/tagModel";
 
 // import methods
 import { isAdmin } from "methods/adminLoginMethods";
@@ -33,7 +34,7 @@ import ImageUploader from "imageUploader/ImageUploader";
 import Editor from "markdown-editor/Editor";
 
 interface StateProps {
-  user?: Model.User;
+  user?: adminLoginModel.User;
 }
 
 type DefaultProps = StateProps;
@@ -60,7 +61,8 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   const [title, setTitle] = useState<string>("");
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [date, setDate] = useState(new Date());
+  const [tagIds, setTagIds] = useState<string[]>([]);
+  const [date, setDate] = useState<Date>(new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(false);
 
   const isDisabled =
@@ -71,11 +73,21 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
   }
 
   const handleOnSubmit = () => {
-    console.log("送信");
+    const payload = {
+      title: title,
+      thumbnailImagePath: thumbnailImagePath,
+      content: content,
+      date: date,
+      isAddSlideShow: isAddSlideShow
+    };
   };
 
   const handleOnChangeIsAddSlideShow = () => {
     setIsAddSlideShow(!isAddSlideShow);
+  };
+
+  const handleOnChangeTagIds = (tags: tagModel.Tag[]) => {
+    console.log("ooooooooo", tags);
   };
 
   return (
@@ -85,7 +97,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({ user }) => {
         <Left>
           <InputLabel isRequired={true}>タグを追加</InputLabel>
         </Left>
-        <AdminCreateArticleTags />
+        <AdminCreateArticleTags onChange={tags => handleOnChangeTagIds(tags)} />
         <Left>
           <InputLabel isRequired={true}>タイトル</InputLabel>
         </Left>
