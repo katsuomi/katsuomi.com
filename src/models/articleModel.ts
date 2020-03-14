@@ -11,7 +11,7 @@ export interface Article {
   uid: string;
   content: string;
   title: string;
-  day: string;
+  day: Date;
   tag_ids: string[];
   thumbnail_image_path: string;
   favorite_count: number;
