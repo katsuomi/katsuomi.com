@@ -4,7 +4,7 @@ import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import * as ActionTypes from "constants/actionTypes";
 
 // import actions
-import { createArticle } from "actions/articleAction";
+import { createArticle, getSlideShowArticles } from "actions/articleAction";
 import { addFlashMessage } from "actions/flashMessagesAction";
 
 // import APIs
@@ -34,8 +34,29 @@ function* runCreateArticle(action: Model.CreateArticleStartAction) {
   }
 }
 
+function* runGetSlideShowArticles(
+  action: Model.GetSlideShowArticlesStartAction
+) {
+  const handler = API.getSlideShowArticles;
+  const { articles, error } = yield call(handler);
+  if (articles && !error) {
+    yield put(getSlideShowArticles.success(articles));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getSlideShowArticles.failure());
+  }
+}
+
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
+  yield takeLatest(
+    ActionTypes.GET_SLIDE_SHOW_ARTICLES_START,
+    runGetSlideShowArticles
+  );
 }
 
 export default function* rootSaga() {
