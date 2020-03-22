@@ -25,7 +25,7 @@ type DefaultProps = StateProps & DispatchProps;
 const FlashMessagesContainer: FC<DefaultProps> = ({
   flashMessages,
   removeFlashMessage
-}) => {
+}: DefaultProps) => {
   return (
     <>
       {flashMessages.map((flashMessage: Model.FlashMessageType, i: number) => (
