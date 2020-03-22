@@ -6,14 +6,14 @@ import styled from "styled-components";
 import pages from "utils/pages";
 
 // import components
-import Slide from "slick/Slide";
+import SlideContainer from "slick/SlideContainer";
 
 const Home: FC = () => (
   <>
     <Helmet htmlAttributes={{ lang: "ja" }}>
       <title>{pages.home.title}</title>
     </Helmet>
-    <Slide />
+    <SlideContainer />
   </>
 );
 
