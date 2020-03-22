@@ -15,11 +15,12 @@ export interface Article {
   tag_ids: string[];
   thumbnail_image_path: string;
   favorite_count?: number;
-  is_add_slide_show: boolean;
+  is_add_slide_show?: boolean;
 }
 
 export interface ArticleState {
   isLoading: boolean;
+  slideShowArticles: Article[];
 }
 
 export interface CreateArticleStartAction {
@@ -35,7 +36,23 @@ export interface CreateArticleFailureAction {
   type: typeof ActionTypes.CREATE_ARTICLE_FAILURE;
 }
 
+export interface GetSlideShowArticlesStartAction {
+  type: typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_START;
+}
+
+export interface GetSlideShowArticlesSuccessAction {
+  type: typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_SUCCESS;
+  payload: Article[];
+}
+
+export interface GetSlideShowArticlesFilureAction {
+  type: typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_FAILURE;
+}
+
 export type ArticleAction =
   | CreateArticleStartAction
   | CreateArticleSuccessAction
-  | CreateArticleFailureAction;
+  | CreateArticleFailureAction
+  | GetSlideShowArticlesStartAction
+  | GetSlideShowArticlesSuccessAction
+  | GetSlideShowArticlesFilureAction;
