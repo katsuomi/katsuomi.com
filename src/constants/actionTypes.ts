@@ -24,3 +24,11 @@ export const ADMIN_LOGIN_CACHE_FAILURE = "ADMIN_LOGIN_CACHE_FAILURE";
 export const SUBMIT_CONTACT_FORM_START = "SUBMIT_CONTACT_FORM_START";
 export const SUBMIT_CONTACT_FORM_SUCCESS = "SUBMIT_CONTACT_FORM_SUCCESS";
 export const SUBMIT_CONTACT_FORM_FAILURE = "SUBMIT_CONTACT_FORM_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Create Article
+// -----------------------------------------------------------------------------
+
+export const CREATE_ARTICLE_START = "CREATE_ARTICLE_START";
+export const CREATE_ARTICLE_SUCCESS = "CREATE_ARTICLE_SUCCESS";
+export const CREATE_ARTICLE_FAILURE = "CREATE_ARTICLE_FAILURE";
