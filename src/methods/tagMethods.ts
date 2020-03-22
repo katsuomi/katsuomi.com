@@ -10,7 +10,7 @@ import "firebase/firestore";
 import * as Model from "models/tagModel";
 
 // タグの追加
-export const addTag = (text: string) => {
+export const addTag = (text: string): void => {
   firebase
     .firestore()
     .collection("tags")
@@ -22,7 +22,7 @@ export const addTag = (text: string) => {
 };
 
 // タグの取得
-export const getTags = async () => {
+export const getTags = async (): Promise<Model.Tag[]> => {
   const data: Model.Tag[] = [];
 
   await firebase
