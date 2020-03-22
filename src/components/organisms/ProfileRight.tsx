@@ -31,12 +31,12 @@ const ProfileRight: FC = () => (
         所属: <Bold>名古屋大学情報学部4回生</Bold>
       </P>
       <P>
-        趣味: <Bold>競馬,筋トレ,ドライブ,フットサル, Jリーグ</Bold>
+        趣味: <Bold>競馬,筋トレ,ドライブ,フットサル,Jリーグ</Bold>
       </P>
-      <P> ひとこと:</P>
+      <P>スキルセット:</P>
       <P>
         <Bold>
-          技術力だけに特化するのではなく、ビジネスのこともしっかりと考えられるエンジニアになりたい。
+          TypeScript, JavaScript, React, Ruby, Ruby on Rails, Go, AWS, Firebase
         </Bold>
       </P>
     </Wrapper>

@@ -76,7 +76,7 @@ const ProfileBottom: FC = () => (
         isDisabled={false}
         backgroundColor={colors.BRIGHT_BLUE}
         color={colors.WHITE}
-        padding={["5px", "5px", "80px", "80px"]}
+        padding={["5px", "5px", "60px", "60px"]}
         width={breakPoints.isSmartPhone() ? "" : "500px"}
       >
         お問い合わせはこちら
