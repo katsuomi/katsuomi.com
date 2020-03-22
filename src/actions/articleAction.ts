@@ -17,3 +17,17 @@ export const createArticle = {
     type: ActionTypes.CREATE_ARTICLE_FAILURE as typeof ActionTypes.CREATE_ARTICLE_FAILURE
   })
 };
+
+export const getSlideShowArticles = {
+  start: () => ({
+    type: ActionTypes.GET_SLIDE_SHOW_ARTICLES_START as typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_START
+  }),
+  success: (articles: Model.Article[]) => ({
+    type: ActionTypes.GET_SLIDE_SHOW_ARTICLES_SUCCESS as typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_SUCCESS,
+    payload: articles
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GET_SLIDE_SHOW_ARTICLES_FAILURE as typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_FAILURE
+  })
+};
