@@ -103,6 +103,12 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
     };
 
     await createArticle(payload);
+    setTitle("");
+    setThumbnailImagePath("");
+    setContent("");
+    setTagIds([]);
+    setDate(new Date());
+    setIsAddSlideShow(false);
   };
 
   const handleOnChangeIsAddSlideShow = () => {
