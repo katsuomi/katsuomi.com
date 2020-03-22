@@ -2,6 +2,11 @@
 .slick-slider .slick-list {
   background: #fff;
 }
+.slick-slider {
+  max-width: 1200px;
+  margin: 0px auto;
+}
+
 .slick-initialized .slick-slide {
   opacity: 0.6; /* 両サイドの画像を透過 */
 }

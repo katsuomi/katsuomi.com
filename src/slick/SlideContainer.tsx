@@ -52,8 +52,6 @@ const SlideContainer: FC<DefaultProps> = ({
   useEffect(() => {
     getSlideShowArticles();
   }, [getSlideShowArticles]);
-  console.log("slideShowArticles:", slideShowArticles);
-  console.log("isLoading:", isLoading);
   const settings = {
     centerMode: true,
     centerPadding: "300px",
