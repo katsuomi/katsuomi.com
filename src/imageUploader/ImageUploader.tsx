@@ -59,10 +59,10 @@ const LoadingWrapper = styled.div``;
 const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
   const [img, setImg] = useState("");
   const [imgDownLoaded, setImgDownLoaded] = useState(true);
-  const inputEl = useRef<any>(null);
+  const inputEl = useRef<HTMLInputElement | null>(null);
 
   const ImgB64Resize = (
-    imgB64_src: any,
+    imgB64_src: string,
     width: any,
     height: any,
     callback: any,
@@ -127,12 +127,17 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
 
   const handleOnChange = () => {
     setImgDownLoaded(false);
-    const file = inputEl.current.files[0];
+    const file =
+      inputEl &&
+      inputEl.current &&
+      inputEl.current.files &&
+      inputEl.current.files[0];
     const fr = new FileReader();
     fr.onload = (e: any) => {
       ImgB64Resize(e.target.result, 300, 300, goFirebase, 90);
     };
-    fr.readAsDataURL(file);
+
+    file && fr.readAsDataURL(file);
   };
 
   return (
