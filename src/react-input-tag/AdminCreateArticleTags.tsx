@@ -11,7 +11,7 @@ import * as firebaseMethods from "methods/tagMethods";
 import * as Model from "models/tagModel";
 
 interface DefaultProps {
-  onChange: (tags: { id: string; text: string }[]) => void;
+  onBlur: (tags: { id: string; text: string }[]) => void;
 }
 
 const KeyCodes = {
@@ -21,7 +21,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const AdminCreateArticle: FC<DefaultProps> = ({ onChange }) => {
+const AdminCreateArticle: FC<DefaultProps> = ({ onBlur }) => {
   const [tags, setTags] = useState<Model.Tag[]>([]);
   const [suggestions, setSuggestions] = useState<Model.Tag[]>([]);
 
@@ -46,7 +46,7 @@ const AdminCreateArticle: FC<DefaultProps> = ({ onChange }) => {
     tags.forEach(tag => {
       firebaseMethods.addTag(tag.text);
     });
-    onChange(tags);
+    onBlur(tags);
   };
 
   const handleDrag = (tag: Model.Tag, currPos: number, newPos: number) => {
