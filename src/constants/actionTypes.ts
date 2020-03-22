@@ -32,3 +32,13 @@ export const SUBMIT_CONTACT_FORM_FAILURE = "SUBMIT_CONTACT_FORM_FAILURE";
 export const CREATE_ARTICLE_START = "CREATE_ARTICLE_START";
 export const CREATE_ARTICLE_SUCCESS = "CREATE_ARTICLE_SUCCESS";
 export const CREATE_ARTICLE_FAILURE = "CREATE_ARTICLE_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Get Slide Show Articles
+// -----------------------------------------------------------------------------
+
+export const GET_SLIDE_SHOW_ARTICLES_START = "GET_SLIDE_SHOW_ARTICLES_START";
+export const GET_SLIDE_SHOW_ARTICLES_SUCCESS =
+  "GET_SLIDE_SHOW_ARTICLES_SUCCESS";
+export const GET_SLIDE_SHOW_ARTICLES_FAILURE =
+  "GET_SLIDE_SHOW_ARTICLES_FAILURE";
