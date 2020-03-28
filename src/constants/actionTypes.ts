@@ -50,3 +50,11 @@ export const GET_SLIDE_SHOW_ARTICLES_FAILURE =
 export const GET_LATEST_ARTICLES_START = "GET_LATEST_ARTICLES_START";
 export const GET_LATEST_ARTICLES_SUCCESS = "GET_LATEST_ARTICLES_SUCCESS";
 export const GET_LATEST_ARTICLES_FAILURE = "GET_LATEST_ARTICLES_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Get Tags
+// -----------------------------------------------------------------------------
+
+export const GET_TAGS_START = "GET_TAGS_START";
+export const GET_TAGS_SUCCESS = "GET_TAGS_SUCCESS";
+export const GET_TAGS_FAILURE = "GET_TAGS_FAILURE";
