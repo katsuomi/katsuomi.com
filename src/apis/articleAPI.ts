@@ -3,6 +3,7 @@ import firebase from "utils/firebase";
 // import models
 import * as Model from "models/articleModel";
 
+// 記事作成
 export const createAtricle = async (payload: Model.Article) => {
   try {
     await firebase
@@ -20,6 +21,7 @@ export const createAtricle = async (payload: Model.Article) => {
   }
 };
 
+// スライドショー用記事取得
 export const getSlideShowArticles = async () => {
   try {
     const articles: Model.Article[] = [];
@@ -27,6 +29,40 @@ export const getSlideShowArticles = async () => {
       .firestore()
       .collection("articles")
       .where("is_add_slide_show", "==", true)
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          return;
+        }
+        snapshot.forEach(doc => {
+          articles.push({
+            uid: doc.id,
+            content: doc.data().content,
+            title: doc.data().title,
+            date: doc.data().date,
+            tag_ids: doc.data().tag_ids,
+            thumbnail_image_path: doc.data().thumbnail_image_path
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    return { articles };
+  } catch (error) {
+    return { error };
+  }
+};
+
+// 最新の記事を5件取得
+export const getLatestArticles = async () => {
+  try {
+    const articles: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("date")
+      .limit(5)
       .get()
       .then(snapshot => {
         if (snapshot.empty) {

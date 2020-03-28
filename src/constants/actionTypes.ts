@@ -42,3 +42,11 @@ export const GET_SLIDE_SHOW_ARTICLES_SUCCESS =
   "GET_SLIDE_SHOW_ARTICLES_SUCCESS";
 export const GET_SLIDE_SHOW_ARTICLES_FAILURE =
   "GET_SLIDE_SHOW_ARTICLES_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Get Latest Articles
+// -----------------------------------------------------------------------------
+
+export const GET_LATEST_ARTICLES_START = "GET_LATEST_ARTICLES_START";
+export const GET_LATEST_ARTICLES_SUCCESS = "GET_LATEST_ARTICLES_SUCCESS";
+export const GET_LATEST_ARTICLES_FAILURE = "GET_LATEST_ARTICLES_FAILURE";

@@ -8,7 +8,8 @@ import * as Model from "models/articleModel";
 
 const initialState: Model.ArticleState = {
   isLoading: false,
-  slideShowArticles: []
+  slideShowArticles: [],
+  latestArticles: []
 };
 
 const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
@@ -43,6 +44,22 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_SLIDE_SHOW_ARTICLES_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_LATEST_ARTICLES_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_LATEST_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        latestArticles: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_LATEST_ARTICLES_FAILURE:
       return {
         ...state,
         isLoading: false

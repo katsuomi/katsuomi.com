@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import HomeCenterContainer from "containers/HomeCenterContainer";
 
 const Wrapper = styled.div`
   width: 60%;
@@ -7,7 +8,9 @@ const Wrapper = styled.div`
 
 const HomeCenterSide: FC = () => (
   <>
-    <Wrapper>HomeCenterSide</Wrapper>
+    <Wrapper>
+      <HomeCenterContainer />
+    </Wrapper>
   </>
 );
 

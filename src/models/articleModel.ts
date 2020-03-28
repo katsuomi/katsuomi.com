@@ -21,6 +21,7 @@ export interface Article {
 export interface ArticleState {
   isLoading: boolean;
   slideShowArticles: Article[];
+  latestArticles: Article[];
 }
 
 export interface CreateArticleStartAction {
@@ -49,10 +50,26 @@ export interface GetSlideShowArticlesFilureAction {
   type: typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_FAILURE;
 }
 
+export interface GetLatestArticlesStartAction {
+  type: typeof ActionTypes.GET_LATEST_ARTICLES_START;
+}
+
+export interface GetLatestArticlesSuccessAction {
+  type: typeof ActionTypes.GET_LATEST_ARTICLES_SUCCESS;
+  payload: Article[];
+}
+
+export interface GetLatestArticlesFilureAction {
+  type: typeof ActionTypes.GET_LATEST_ARTICLES_FAILURE;
+}
+
 export type ArticleAction =
   | CreateArticleStartAction
   | CreateArticleSuccessAction
   | CreateArticleFailureAction
   | GetSlideShowArticlesStartAction
   | GetSlideShowArticlesSuccessAction
-  | GetSlideShowArticlesFilureAction;
+  | GetSlideShowArticlesFilureAction
+  | GetLatestArticlesStartAction
+  | GetLatestArticlesSuccessAction
+  | GetLatestArticlesFilureAction;
