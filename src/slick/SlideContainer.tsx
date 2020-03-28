@@ -1,4 +1,4 @@
-import React, { FC, useEffect, FormEvent } from "react";
+import React, { FC, useEffect } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -22,7 +22,6 @@ import * as breakPoints from "utils/breakPoints";
 
 // import models
 import { AppState } from "models/index";
-import * as adminLoginModel from "models/adminLoginModel";
 import * as articleModel from "models/articleModel";
 
 interface StateProps {

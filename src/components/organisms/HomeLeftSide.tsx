@@ -19,7 +19,7 @@ const TimeLineWrapper = styled.div`
 const TimeLineEmbedded = styled.a.attrs({
   href: "https://twitter.com/aoki_eng?ref_src=twsrc%5Etfw"
 })`
-  height: 200px;
+  height: 400px;
   &:hover {
     opacity: 0.7;
   }
