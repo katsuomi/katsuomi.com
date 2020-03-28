@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // import atoms
 import Button from "components/atoms/Button";
-import Anchor from "components/atoms/Anchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import utils
 import * as colors from "utils/color";
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const AdminMenu: FC = () => (
   <>
     <Wrapper>
-      <Anchor src="/admin/create_article">
+      <LinkAnchor src="/admin/create_article">
         <Button
           isDisabled={false}
           borderColor={colors.BRIGHT_BLUE}
@@ -28,7 +28,7 @@ const AdminMenu: FC = () => (
         >
           記事を書く
         </Button>
-      </Anchor>
+      </LinkAnchor>
     </Wrapper>
   </>
 );

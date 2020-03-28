@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 // import atoms
-import Anchor from "components/atoms/Anchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 // import utils
 import * as colors from "utils/color";
 import * as breakPoints from "utils/breakPoints";
@@ -44,14 +44,14 @@ const Header: FC = () => {
     <>
       <HeaderWrapper>
         <HeaderTitle>
-          <Anchor src="/">AOKI KATSUOMI</Anchor>
+          <LinkAnchor src="/">Katsuomi.com</LinkAnchor>
         </HeaderTitle>
         <HeaderContents>
-          <Anchor src="/news">News</Anchor>
-          <Anchor src="/awards">Awards</Anchor>
-          <Anchor src="/products">Products</Anchor>
-          <Anchor src="/profile">Profile</Anchor>
-          <Anchor src="/contact">Contact</Anchor>
+          <LinkAnchor src="/news">News</LinkAnchor>
+          <LinkAnchor src="/awards">Awards</LinkAnchor>
+          <LinkAnchor src="/products">Products</LinkAnchor>
+          <LinkAnchor src="/profile">Profile</LinkAnchor>
+          <LinkAnchor src="/contact">Contact</LinkAnchor>
         </HeaderContents>
       </HeaderWrapper>
       <FlashMessagesContainer />

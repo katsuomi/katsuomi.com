@@ -122,7 +122,10 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
   return (
     <>
       {isLoading ? (
-        <Spinner top={breakPoints.isSmartPhone() ? "58%" : "35%"} />
+        <Spinner
+          top={breakPoints.isSmartPhone() ? "58%" : "35%"}
+          left={"50%"}
+        />
       ) : (
         <ContentWrapper>
           <Title>記事をかく</Title>

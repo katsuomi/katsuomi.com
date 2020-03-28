@@ -15,20 +15,23 @@ import * as colors from "utils/color";
 export interface SpinnerProps {
   top?: string;
   left?: string;
+  right?: string;
   position?: "abslute" | "relative";
 }
 
 export interface SpinnerStyleProps {
   top?: string;
   left?: string;
+  right?: string;
   position?: "abslute" | "relative";
 }
 
 const SegmentWrapper = styled.div<SpinnerStyleProps>`
   position: ${props => (props.position ? props.position : "absolute")};
   top: ${props => (props.top ? props.top : "50%")};
-  left: ${props => (props.left ? props.left : "50%")};
-  margin-right: -50%;
+  left: ${props => (props.left ? props.left : undefined)};
+  right: ${props => (props.right ? props.right : undefined)};
+  margin-right: ${props => (props.right ? undefined : "-50%")};
   transform: translate(-50%, -50%);
   > * > * {
     justify-content: center;
@@ -39,10 +42,11 @@ const LoadWrapper = styled.p`
   color: ${colors.BLACK};
 `;
 
-const Spinner: FC<SpinnerProps> = ({ top, left, position }) => (
+const Spinner: FC<SpinnerProps> = ({ top, left, right, position }) => (
   <SegmentWrapper
     top={top ? top : ""}
     left={left ? left : ""}
+    right={right ? right : ""}
     position={position}
   >
     <Segment className="spinner">

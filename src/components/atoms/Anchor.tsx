@@ -6,34 +6,33 @@
 
 import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 //import utils
 import * as colors from "utils/color";
 
 interface DefaultProps {
-  src: string;
+  href: string;
   children?: string | ReactElement<any>;
 }
 
-const AnchorWrapper = styled.span`
-  > a {
-    color: ${colors.BLUE};
-    text-decoration: none;
-    cursor: pointer;
-  }
-  > a:hover {
-    color: ${colors.HOVER_WHITE};
-    text-decoration: solid;
+interface AnchorProps {
+  href?: string;
+  target?: string;
+}
+
+const A = styled.a.attrs(
+  ({ href }): AnchorProps => ({
+    href: href,
+    target: "_blank"
+  })
+)`
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
   }
 `;
-
-const Anchor: FC<DefaultProps> = ({ src, children }) => {
-  return (
-    <AnchorWrapper>
-      <Link to={src}>{children}</Link>
-    </AnchorWrapper>
-  );
+const Anchor: FC<DefaultProps> = ({ href, children }) => {
+  return <A href={href}>{children}</A>;
 };
 
 export default Anchor;

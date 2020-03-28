@@ -4,6 +4,7 @@ import styled from "styled-components";
 // import atoms
 import Button from "components/atoms/Button";
 import Anchor from "components/atoms/Anchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 // import utils
 import * as colors from "utils/color";
 import * as breakPoints from "utils/breakPoints";
@@ -15,28 +16,11 @@ import github from "images/github.png";
 import twitter from "images/twitter.png";
 import facebook from "images/facebook.png";
 
-interface AnchorProps {
-  href?: string;
-  target?: string;
-}
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: ${breakPoints.isSmartPhone() ? "10px" : "60px"};
-`;
-
-const A = styled.a.attrs(
-  ({ href }): AnchorProps => ({
-    href: href,
-    target: "_blank"
-  })
-)`
-  cursor: pointer;
-  &:hover {
-    opacity: 0.7;
-  }
 `;
 
 const Img = styled.img<{ src: string }>`
@@ -55,23 +39,23 @@ const MiniMessage = styled.p`
 const ProfileBottom: FC = () => (
   <>
     <Wrapper>
-      <A href="https://qiita.com/katsuomi">
+      <Anchor href="https://qiita.com/katsuomi">
         <Img src={qiita} />
-      </A>
-      <A href="https://github.com/katsuomi">
+      </Anchor>
+      <Anchor href="https://github.com/katsuomi">
         <Img src={github} />
-      </A>
-      <A href="https://twitter.com/aoki_eng">
+      </Anchor>
+      <Anchor href="https://twitter.com/aoki_eng">
         <Img src={twitter} />
-      </A>
-      <A href="https://www.facebook.com/aoki.katsuomi">
+      </Anchor>
+      <Anchor href="https://www.facebook.com/aoki.katsuomi">
         <Img src={facebook} />
-      </A>
+      </Anchor>
     </Wrapper>
     <MiniMessage>
       開発の依頼やご質問等、まずはお気軽にご連絡ください。
     </MiniMessage>
-    <Anchor src="/contact">
+    <LinkAnchor src="/contact">
       <Button
         isDisabled={false}
         backgroundColor={colors.BRIGHT_BLUE}
@@ -81,7 +65,7 @@ const ProfileBottom: FC = () => (
       >
         お問い合わせはこちら
       </Button>
-    </Anchor>
+    </LinkAnchor>
   </>
 );
 

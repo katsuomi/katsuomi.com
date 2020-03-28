@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // import atoms
 import Button from "components/atoms/Button";
-import Anchor from "components/atoms/Anchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import utils
 import * as fontSize from "utils/fontSize";
@@ -25,7 +25,7 @@ const NotFound: FC = () => (
   <>
     <Wrapper>
       <Txt>This page is not Found.</Txt>
-      <Anchor src="/">
+      <LinkAnchor src="/">
         <Button
           isDisabled={false}
           borderColor={colors.BRIGHT_BLUE}
@@ -35,7 +35,7 @@ const NotFound: FC = () => (
         >
           go Home
         </Button>
-      </Anchor>
+      </LinkAnchor>
     </Wrapper>
   </>
 );

@@ -76,7 +76,10 @@ const AdminLoginContainer: FC<DefaultProps> = ({
   return (
     <>
       {isLoading ? (
-        <Spinner top={breakPoints.isSmartPhone() ? "58%" : "35%"} />
+        <Spinner
+          top={breakPoints.isSmartPhone() ? "58%" : "35%"}
+          left={"50%"}
+        />
       ) : (
         <Wrapper>
           <Title>Admin Login</Title>

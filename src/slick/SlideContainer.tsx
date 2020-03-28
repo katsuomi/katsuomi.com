@@ -9,7 +9,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import "./slick.css";
 
 // import atoms
-import Anchor from "components/atoms/Anchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import commons
 import Spinner from "components/commons/Spinner";
@@ -84,15 +84,18 @@ const SlideContainer: FC<DefaultProps> = ({
   return (
     <>
       {isLoading ? (
-        <Spinner top={breakPoints.isSmartPhone() ? "30%" : "25%"} />
+        <Spinner
+          top={breakPoints.isSmartPhone() ? "30%" : "25%"}
+          left={"50%"}
+        />
       ) : (
         <Slider {...settings}>
           {slideShowArticles &&
             slideShowArticles.map((article, i) => (
               <Wrapper key={i}>
-                <Anchor src={"/articles/" + article.uid}>
+                <LinkAnchor src={"/articles/" + article.uid}>
                   <Img src={article.thumbnail_image_path} alt={article.title} />
-                </Anchor>
+                </LinkAnchor>
               </Wrapper>
             ))}
         </Slider>
