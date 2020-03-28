@@ -8,6 +8,9 @@ import marked from "marked";
 // import atoms
 import Anchor from "components/atoms/Anchor";
 
+// import molecules
+import MarkDownContent from "components/molecules/MarkDownContent";
+
 // import commons
 import Spinner from "components/commons/Spinner";
 
@@ -20,6 +23,7 @@ import * as breakPoints from "utils/breakPoints";
 // import models
 import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
+
 
 interface StateProps {
   latestArticles?: articleModel.Article[];
@@ -83,12 +87,9 @@ const Title = styled.h3`
   font-size: 22px;
 `;
 
-const Text = styled.p`
-  margin-bottom: 16px;
-  line-height: 1.5;
-  text-align: justify;
-  word-break: break-all;
-  font-size: 14px;
+const ContentWrapper = styled.div`
+  height: 150px;
+  overflow: scroll;
 `;
 
 const HomeCenterContainer: FC<DefaultProps> = ({
@@ -111,13 +112,9 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                 <UpperPart>
                   <Left>
                     <Title>{article.title}</Title>
-                    <Text>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: marked(article.content)
-                        }}
-                      />
-                    </Text>
+                    <ContentWrapper>
+                      <MarkDownContent content={article.content} />
+                    </ContentWrapper>
                   </Left>
                   <Right>
                     <Img src={article.thumbnail_image_path} />

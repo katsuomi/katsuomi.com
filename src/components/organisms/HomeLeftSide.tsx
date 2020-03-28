@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const TimeLineWrapper = styled.div`
-  height: 500px;
+  height: 1000px;
   overflow: scroll;
 `;
 
