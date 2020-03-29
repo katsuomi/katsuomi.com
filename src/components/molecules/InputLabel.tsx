@@ -7,7 +7,7 @@
 import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 
-//import utils
+// import utils
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 

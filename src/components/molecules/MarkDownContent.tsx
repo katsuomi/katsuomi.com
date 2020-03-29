@@ -4,13 +4,9 @@
  *
  */
 
-import React, { FC, ReactElement } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import marked from "marked";
-
-//import utils
-import * as colors from "utils/color";
-import * as fontSize from "utils/fontSize";
 
 interface DefaultProps {
   content: any;

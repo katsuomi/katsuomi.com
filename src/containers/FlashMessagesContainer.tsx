@@ -30,7 +30,7 @@ const FlashMessagesContainer: FC<DefaultProps> = ({
     <>
       {flashMessages.map((flashMessage: Model.FlashMessageType, i: number) => (
         <FlashMessage
-          key={i}
+          key={flashMessage.id}
           message={flashMessage.message}
           index={i}
           id={flashMessage.id}

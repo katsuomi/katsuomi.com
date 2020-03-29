@@ -5,7 +5,7 @@ import { WithContext as ReactTags } from "react-tag-input";
 import "./react-input-tag.css";
 
 // import methods
-import * as firebaseMethods from "methods/tagMethods";
+import * as tagMethod from "methods/tagMethods";
 
 // import models
 import * as Model from "models/tagModel";
@@ -30,7 +30,7 @@ const AdminCreateArticle: FC<DefaultProps> = ({ onBlur }) => {
   }, []);
 
   const getData = async () => {
-    const data = await firebaseMethods.getTags();
+    const data = await tagMethod.getTags();
     setSuggestions(data);
   };
 
@@ -44,7 +44,7 @@ const AdminCreateArticle: FC<DefaultProps> = ({ onBlur }) => {
 
   const handleInputBlur = () => {
     tags.forEach(tag => {
-      firebaseMethods.addTag(tag.text);
+      tagMethod.addTag(tag.text);
     });
     onBlur(tags);
   };

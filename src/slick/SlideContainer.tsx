@@ -91,8 +91,8 @@ const SlideContainer: FC<DefaultProps> = ({
       ) : (
         <Slider {...settings}>
           {slideShowArticles &&
-            slideShowArticles.map((article, i) => (
-              <Wrapper key={i}>
+            slideShowArticles.map(article => (
+              <Wrapper key={article.uid}>
                 <LinkAnchor src={"/articles/" + article.uid}>
                   <Img src={article.thumbnail_image_path} alt={article.title} />
                 </LinkAnchor>
