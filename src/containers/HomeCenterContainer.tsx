@@ -9,6 +9,7 @@ import Anchor from "components/atoms/LinkAnchor";
 
 // import molecules
 import MarkDownContent from "components/molecules/MarkDownContent";
+import Tag from "components/molecules/Tag";
 
 // import commons
 import Spinner from "components/commons/Spinner";
@@ -100,14 +101,6 @@ const ContentWrapper = styled.div`
   overflow: scroll;
 `;
 
-const Tag = styled.span`
-  background-color: ${colors.BG_TAG};
-  color: ${colors.WHITE};
-  padding: 5px 30px;
-  border-radius: 20px;
-  margin: 5px;
-`;
-
 const HomeCenterContainer: FC<DefaultProps> = ({
   latestArticles,
   isLoading,
@@ -125,9 +118,9 @@ const HomeCenterContainer: FC<DefaultProps> = ({
         />
       ) : (
         <Wrapper>
-          {latestArticles?.map((article, i) => {
+          {latestArticles?.map(article => {
             return (
-              <ArticleWrapper key={i}>
+              <ArticleWrapper key={article.uid}>
                 <UpperPart>
                   <Left>
                     <Title>{article.title}</Title>
@@ -140,8 +133,8 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                   </Right>
                 </UpperPart>
                 <LowerPart>
-                  {article.tag_ids.map((tag, i) => (
-                    <Tag key={i}>{tag}</Tag>
+                  {article.tag_ids.map(tag => (
+                    <Tag key={tag} text={tag} isArticleCount={false} />
                   ))}
                 </LowerPart>
               </ArticleWrapper>

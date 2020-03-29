@@ -40,3 +40,23 @@ export const getTags = async (): Promise<Model.Tag[]> => {
 
   return data;
 };
+
+export const getArticleCountByTag = async (tagId: string): Promise<number> => {
+  let count = 0;
+  await firebase
+    .firestore()
+    .collection("articles")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        if (doc.data().tag_ids.indexOf(tagId) >= 0) {
+          count += 1;
+        }
+      });
+    })
+    .catch(err => {
+      throw Error(err);
+    });
+
+  return count;
+};
