@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const AdminMenu: FC = () => (
   <>
     <Wrapper>
-      <LinkAnchor src="/admin/create_article">
+      <LinkAnchor src="/admin/create_article" isHoverWhite={true}>
         <Button
           isDisabled={false}
           borderColor={colors.BRIGHT_BLUE}

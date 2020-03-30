@@ -55,7 +55,7 @@ const ProfileBottom: FC = () => (
     <MiniMessage>
       開発の依頼やご質問等、まずはお気軽にご連絡ください。
     </MiniMessage>
-    <LinkAnchor src="/contact">
+    <LinkAnchor src="/contact" isHoverWhite={true}>
       <Button
         isDisabled={false}
         backgroundColor={colors.BRIGHT_BLUE}

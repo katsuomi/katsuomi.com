@@ -5,7 +5,7 @@ import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 
 // import atoms
-import Anchor from "components/atoms/LinkAnchor";
+import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import molecules
 import MarkDownContent from "components/molecules/MarkDownContent";
@@ -57,6 +57,10 @@ const ArticleWrapper = styled.div`
   }
 `;
 
+const Linkable = styled.div`
+  height: 100%;
+`;
+
 const UpperPart = styled.div`
   display: flex;
   height: 200px;
@@ -94,11 +98,13 @@ const Title = styled.h3`
   -webkit-font-feature-settings: "palt" 1;
   font-feature-settings: "palt" 1;
   font-size: ${fontSize.H3};
+  color: ${colors.BLACK};
 `;
 
 const ContentWrapper = styled.div`
   height: 150px;
   overflow: scroll;
+  color: ${colors.LIGHTER_BLACK};
 `;
 
 const HomeCenterContainer: FC<DefaultProps> = ({
@@ -121,22 +127,26 @@ const HomeCenterContainer: FC<DefaultProps> = ({
           {latestArticles?.map(article => {
             return (
               <ArticleWrapper key={article.uid}>
-                <UpperPart>
-                  <Left>
-                    <Title>{article.title}</Title>
-                    <ContentWrapper>
-                      <MarkDownContent content={article.content} />
-                    </ContentWrapper>
-                  </Left>
-                  <Right>
-                    <Img src={article.thumbnail_image_path} />
-                  </Right>
-                </UpperPart>
-                <LowerPart>
-                  {article.tag_ids.map(tag => (
-                    <Tag key={tag} text={tag} isArticleCount={false} />
-                  ))}
-                </LowerPart>
+                <LinkAnchor src={`articles/${article.uid}`}>
+                  <Linkable>
+                    <UpperPart>
+                      <Left>
+                        <Title>{article.title}</Title>
+                        <ContentWrapper>
+                          <MarkDownContent content={article.content} />
+                        </ContentWrapper>
+                      </Left>
+                      <Right>
+                        <Img src={article.thumbnail_image_path} />
+                      </Right>
+                    </UpperPart>
+                    <LowerPart>
+                      {article.tag_ids.map(tag => (
+                        <Tag key={tag} text={tag} isArticleCount={false} />
+                      ))}
+                    </LowerPart>
+                  </Linkable>
+                </LinkAnchor>
               </ArticleWrapper>
             );
           })}

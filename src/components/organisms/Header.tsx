@@ -44,14 +44,26 @@ const Header: FC = () => {
     <>
       <HeaderWrapper>
         <HeaderTitle>
-          <LinkAnchor src="/">Katsuomi.com</LinkAnchor>
+          <LinkAnchor src="/" isHoverWhite={true}>
+            Katsuomi.com
+          </LinkAnchor>
         </HeaderTitle>
         <HeaderContents>
-          <LinkAnchor src="/news">News</LinkAnchor>
-          <LinkAnchor src="/awards">Awards</LinkAnchor>
-          <LinkAnchor src="/products">Products</LinkAnchor>
-          <LinkAnchor src="/profile">Profile</LinkAnchor>
-          <LinkAnchor src="/contact">Contact</LinkAnchor>
+          <LinkAnchor src="/news" isHoverWhite={true}>
+            News
+          </LinkAnchor>
+          <LinkAnchor src="/awards" isHoverWhite={true}>
+            Awards
+          </LinkAnchor>
+          <LinkAnchor src="/products" isHoverWhite={true}>
+            Products
+          </LinkAnchor>
+          <LinkAnchor src="/profile" isHoverWhite={true}>
+            Profile
+          </LinkAnchor>
+          <LinkAnchor src="/contact" isHoverWhite={true}>
+            Contact
+          </LinkAnchor>
         </HeaderContents>
       </HeaderWrapper>
       <FlashMessagesContainer />

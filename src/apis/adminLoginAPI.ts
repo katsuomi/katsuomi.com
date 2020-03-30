@@ -5,7 +5,7 @@ import * as Model from "models/adminLoginModel";
 
 export const adminLogin = async (password: string) => {
   try {
-    let user: Model.User = { uid: "" };
+    const user: Model.User = { uid: "" };
     const email: string = process.env.REACT_APP_ADMIN_EMAIL
       ? process.env.REACT_APP_ADMIN_EMAIL
       : "";

@@ -14,23 +14,28 @@ import * as colors from "utils/color";
 interface DefaultProps {
   src: string;
   children?: string | ReactElement<any>;
+  isHoverWhite?: boolean;
 }
 
-const AnchorWrapper = styled.span`
+interface AnchorStyleProps {
+  isHoverWhite: boolean;
+}
+
+const AnchorWrapper = styled.span<AnchorStyleProps>`
   > a {
     color: ${colors.BLUE};
     text-decoration: none;
     cursor: pointer;
   }
   > a:hover {
-    color: ${colors.HOVER_WHITE};
+    color: ${props => (props.isHoverWhite ? colors.HOVER_WHITE : undefined)};
     text-decoration: solid;
   }
 `;
 
-const LinkAnchor: FC<DefaultProps> = ({ src, children }) => {
+const LinkAnchor: FC<DefaultProps> = ({ src, children, isHoverWhite }) => {
   return (
-    <AnchorWrapper>
+    <AnchorWrapper isHoverWhite={isHoverWhite ? isHoverWhite : false}>
       <Link to={src}>{children}</Link>
     </AnchorWrapper>
   );
