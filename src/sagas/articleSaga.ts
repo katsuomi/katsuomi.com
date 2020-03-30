@@ -7,7 +7,8 @@ import * as ActionTypes from "constants/actionTypes";
 import {
   createArticle,
   getSlideShowArticles,
-  getLatestArticles
+  getLatestArticles,
+  getArticle
 } from "actions/articleAction";
 import { addFlashMessage } from "actions/flashMessagesAction";
 
@@ -70,6 +71,22 @@ function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
   }
 }
 
+function* runGetArticle(action: Model.GetArticleStartAction) {
+  const id = action.payload;
+  const handler = API.getArticle;
+  const { article, error } = yield call(handler, id);
+  if (article && !error) {
+    yield put(getArticle.success(article));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getArticle.failure());
+  }
+}
+
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
   yield takeLatest(
@@ -77,6 +94,7 @@ export function* watchArticle() {
     runGetSlideShowArticles
   );
   yield takeLatest(ActionTypes.GET_LATEST_ARTICLES_START, runGetLatestArticles);
+  yield takeLatest(ActionTypes.GET_ARTICLE_START, runGetArticle);
 }
 
 export default function* rootSaga() {

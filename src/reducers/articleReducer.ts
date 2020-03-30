@@ -9,7 +9,15 @@ import * as Model from "models/articleModel";
 const initialState: Model.ArticleState = {
   isLoading: false,
   slideShowArticles: [],
-  latestArticles: []
+  latestArticles: [],
+  article: {
+    uid: "",
+    content: "",
+    title: "",
+    date: new Date(),
+    tag_ids: [],
+    thumbnail_image_path: ""
+  }
 };
 
 const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
@@ -60,6 +68,22 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_LATEST_ARTICLES_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLE_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        article: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLE_FAILURE:
       return {
         ...state,
         isLoading: false

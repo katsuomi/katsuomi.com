@@ -87,3 +87,27 @@ export const getLatestArticles = async () => {
     return { error };
   }
 };
+
+// idに一致した記事を取得
+export const getArticle = async (id: string) => {
+  try {
+    let article = null;
+    await firebase
+      .firestore()
+      .collection("articles")
+      .doc(id)
+      .get()
+      .then(doc => {
+        if (!doc.exists) {
+          return;
+        }
+        article = doc.data();
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    return { article };
+  } catch (error) {
+    return { error };
+  }
+};

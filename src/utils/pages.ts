@@ -17,6 +17,10 @@ const pages = {
     path: "/admin/create_article",
     title: "管理者-記事作成- -AOKI KATSUOMI-"
   },
+  article: {
+    path: "/articles/:id",
+    title: "記事詳細-- -AOKI KATSUOMI-"
+  },
   contact: {
     path: "/contact",
     title: "お問い合わせ -AOKI KATSUOMI-"

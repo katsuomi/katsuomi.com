@@ -45,3 +45,18 @@ export const getLatestArticles = {
     type: ActionTypes.GET_LATEST_ARTICLES_FAILURE as typeof ActionTypes.GET_LATEST_ARTICLES_FAILURE
   })
 };
+
+export const getArticle = {
+  start: (id: string) => ({
+    type: ActionTypes.GET_ARTICLE_START as typeof ActionTypes.GET_ARTICLE_START,
+    payload: id
+  }),
+  success: (article: Model.Article) => ({
+    type: ActionTypes.GET_ARTICLE_SUCCESS as typeof ActionTypes.GET_ARTICLE_SUCCESS,
+    payload: article
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GET_ARTICLE_FAILURE as typeof ActionTypes.GET_ARTICLE_FAILURE
+  })
+};
