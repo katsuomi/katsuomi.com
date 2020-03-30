@@ -39,6 +39,7 @@ export const getSlideShowArticles = async () => {
             uid: doc.id,
             content: doc.data().content,
             title: doc.data().title,
+            subTitle: doc.data().subTitle,
             date: doc.data().date,
             tag_ids: doc.data().tag_ids,
             thumbnail_image_path: doc.data().thumbnail_image_path
@@ -72,6 +73,7 @@ export const getLatestArticles = async () => {
           articles.push({
             uid: doc.id,
             content: doc.data().content,
+            subTitle: doc.data().subTitle,
             title: doc.data().title,
             date: doc.data().date,
             tag_ids: doc.data().tag_ids,

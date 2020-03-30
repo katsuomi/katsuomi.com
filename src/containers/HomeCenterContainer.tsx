@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+import Image from "react-image-resizer";
 
 // import atoms
 import LinkAnchor from "components/atoms/LinkAnchor";
@@ -79,14 +80,13 @@ const Left = styled.div`
 
 const Right = styled.div`
   width: 30%;
-`;
-
-const Img = styled.img`
-  width: 180px;
-  height: 180px;
-  margin: 20px;
-  margin-left: 42px;
-  border-radius: 10px;
+  & > div {
+    margin: 20px auto;
+    margin-left: 45px;
+  }
+  & > div > img {
+    border-radius: 10px;
+  }
 `;
 
 const Title = styled.h3`
@@ -102,8 +102,8 @@ const Title = styled.h3`
 `;
 
 const ContentWrapper = styled.div`
+  margin-top: 30px;
   height: 150px;
-  overflow: scroll;
   color: ${colors.LIGHTER_BLACK};
 `;
 
@@ -132,12 +132,14 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                     <UpperPart>
                       <Left>
                         <Title>{article.title}</Title>
-                        <ContentWrapper>
-                          <MarkDownContent content={article.content} />
-                        </ContentWrapper>
+                        <ContentWrapper>{article.subTitle}...</ContentWrapper>
                       </Left>
                       <Right>
-                        <Img src={article.thumbnail_image_path} />
+                        <Image
+                          src={article.thumbnail_image_path}
+                          height={180}
+                          width={180}
+                        />
                       </Right>
                     </UpperPart>
                     <LowerPart>

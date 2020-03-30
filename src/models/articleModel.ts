@@ -11,6 +11,7 @@ export interface Article {
   uid?: string;
   content: string;
   title: string;
+  subTitle: string;
   date: Date;
   tag_ids: string[];
   thumbnail_image_path: string;

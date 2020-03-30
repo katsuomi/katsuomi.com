@@ -14,6 +14,7 @@ const initialState: Model.ArticleState = {
     uid: "",
     content: "",
     title: "",
+    subTitle: "",
     date: new Date(),
     tag_ids: [],
     thumbnail_image_path: ""

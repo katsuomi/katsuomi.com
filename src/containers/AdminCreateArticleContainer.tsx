@@ -78,6 +78,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
   createArticle
 }) => {
   const [title, setTitle] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [tagIds, setTagIds] = useState<string[]>([]);
@@ -85,7 +86,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(false);
 
   const isDisabled =
-    title && content && thumbnailImagePath && date ? false : true;
+    title && subTitle && content && thumbnailImagePath && date ? false : true;
 
   if (user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
@@ -95,6 +96,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
     e.preventDefault();
     const payload = {
       title: title,
+      subTitle: subTitle,
       thumbnail_image_path: thumbnailImagePath,
       content: content,
       date: date,
@@ -104,6 +106,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
 
     await createArticle(payload);
     setTitle("");
+    setSubTitle("");
     setThumbnailImagePath("");
     setContent("");
     setTagIds([]);
@@ -146,6 +149,20 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
             margin={["10px", "10px", "0px", "0px"]}
             padding={["10px", "10px", "10px", "10px"]}
             onChange={setTitle}
+          />
+          <Left>
+            <InputLabel isRequired={true}>サブタイトル</InputLabel>
+          </Left>
+          <Input
+            placeholder=""
+            isRequired={true}
+            value={subTitle}
+            width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+            borderColor={colors.BORDER_LIGHT_GRAY}
+            backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
+            margin={["10px", "10px", "0px", "0px"]}
+            padding={["10px", "10px", "10px", "10px"]}
+            onChange={setSubTitle}
           />
           <Left>
             <InputLabel isRequired={true}>日付</InputLabel>
