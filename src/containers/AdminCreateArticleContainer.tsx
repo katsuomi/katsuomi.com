@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from "redux";
 
 // import organisms
 import AdminLogin from "components/organisms/AdminLogin";
-import AdminCreateArticleTags from "react-input-tag/AdminCreateArticleTags";
+import AdminCreateArticleTags from "components/react-input-tag/AdminCreateArticleTags";
 
 // import molecules
 import InputLabel from "components/molecules/InputLabel";
@@ -38,10 +38,10 @@ import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 
 // import imageUploader
-import ImageUploader from "imageUploader/ImageUploader";
+import ImageUploader from "components/imageUploader/ImageUploader";
 
 // import markdown-editor
-import Editor from "markdown-editor/Editor";
+import Editor from "components/markdown-editor/Editor";
 
 interface StateProps {
   user?: adminLoginModel.User;
