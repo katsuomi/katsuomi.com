@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+import Image from "react-image-resizer";
 
 // import atoms
 import LinkAnchor from "components/atoms/LinkAnchor";
@@ -58,14 +59,10 @@ const RightSide = styled.div`
   width: 15%;
 `;
 
-const P = styled.p`
-  text-align: center;
-`;
-
-const Img = styled.img`
-  width: 360px;
-  height: 360px;
-  border-radius: 10px;
+const ImageWrapper = styled.p`
+  & > div {
+    margin: 0 auto;
+  }
 `;
 
 const ArticleContainer: FC<DefaultProps> = ({
@@ -89,9 +86,13 @@ const ArticleContainer: FC<DefaultProps> = ({
           <Wrapper>
             <LeftSide></LeftSide>
             <CenterSide>
-              <P>
-                <Img src={article.thumbnail_image_path} />
-              </P>
+              <ImageWrapper>
+                <Image
+                  src={article.thumbnail_image_path}
+                  height={300}
+                  width={700}
+                />
+              </ImageWrapper>
               <MarkDownContent content={article.content} />
             </CenterSide>
             <RightSide></RightSide>
