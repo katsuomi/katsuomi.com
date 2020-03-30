@@ -25,7 +25,7 @@ const NotFound: FC = () => (
   <>
     <Wrapper>
       <Txt>This page is not Found.</Txt>
-      <LinkAnchor src="/">
+      <LinkAnchor src="/" isHoverWhite={true}>
         <Button
           isDisabled={false}
           borderColor={colors.BRIGHT_BLUE}
