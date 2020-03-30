@@ -15,6 +15,8 @@ import HomeRightSide from "components/organisms/HomeRightSide";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  max-width: 1600px;
+  margin: 0 auto;
 `;
 
 const Home: FC = () => (

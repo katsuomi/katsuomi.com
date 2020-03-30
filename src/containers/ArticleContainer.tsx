@@ -80,6 +80,10 @@ const Date = styled.p`
   text-align: right;
 `;
 
+const ContentWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 const ArticleContainer: FC<DefaultProps> = ({
   article,
   isLoading,
@@ -110,7 +114,12 @@ const ArticleContainer: FC<DefaultProps> = ({
               </ImageWrapper>
               <Title>{article.title}</Title>
               <Date>{dateToString(article.date)}</Date>
-              <MarkDownContent content={article.content} />
+              {article.tag_ids.map(tag => (
+                <Tag key={tag} text={tag} isArticleCount={false} />
+              ))}
+              <ContentWrapper>
+                <MarkDownContent content={article.content} />
+              </ContentWrapper>
             </CenterSide>
             <RightSide></RightSide>
           </Wrapper>

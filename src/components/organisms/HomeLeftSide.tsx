@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 
 // import organisms
 import ProfileLeft from "components/organisms/ProfileLeft";
@@ -64,6 +65,10 @@ const Img = styled.img<{ src: string }>`
 
 const HomeLeftSide: FC = () => (
   <>
+    {/* ブラウザバックへの対応 */}
+    <Helmet>
+      <script src="https://platform.twitter.com/widgets.js" />
+    </Helmet>
     <Wrapper>
       <ProfileWrapper>
         <ProfileLeft />
