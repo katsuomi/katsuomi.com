@@ -23,6 +23,10 @@ import * as breakPoints from "utils/breakPoints";
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 
+// import methods
+import { getUrlId } from "methods/utilsMethods";
+import { dateToString } from "methods/articleMethods";
+
 // import models
 import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
@@ -59,10 +63,21 @@ const RightSide = styled.div`
   width: 15%;
 `;
 
-const ImageWrapper = styled.p`
+const ImageWrapper = styled.div`
   & > div {
     margin: 0 auto;
   }
+`;
+
+const Title = styled.h3`
+  margin-top: 10px;
+  font-size: ${fontSize.H3};
+`;
+
+const Date = styled.p`
+  font-size: ${fontSize.CAPTION};
+  color: ${colors.DARK_GRAY};
+  text-align: right;
 `;
 
 const ArticleContainer: FC<DefaultProps> = ({
@@ -71,14 +86,14 @@ const ArticleContainer: FC<DefaultProps> = ({
   getArticle
 }) => {
   useEffect(() => {
-    getArticle("KPrwXcb6d7DiKDhL7Sxw");
+    getArticle(getUrlId());
   }, [getArticle]);
 
   return (
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "30%" : "55%"}
+          top={breakPoints.isSmartPhone() ? "10%" : "25%"}
           left={"50%"}
         />
       ) : (
@@ -93,6 +108,8 @@ const ArticleContainer: FC<DefaultProps> = ({
                   width={700}
                 />
               </ImageWrapper>
+              <Title>{article.title}</Title>
+              <Date>{dateToString(article.date)}</Date>
               <MarkDownContent content={article.content} />
             </CenterSide>
             <RightSide></RightSide>

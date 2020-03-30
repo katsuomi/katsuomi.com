@@ -41,6 +41,7 @@ export const getTags = async (): Promise<Model.Tag[]> => {
   return data;
 };
 
+// タグに紐付いた記事件数の取得
 export const getArticleCountByTag = async (tagId: string): Promise<number> => {
   let count = 0;
   await firebase
