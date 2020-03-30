@@ -7,7 +7,7 @@ import pages from "utils/pages";
 import * as breakPoints from "utils/breakPoints";
 
 // import components
-import SlideContainer from "components/slick/SlideContainer";
+import SlideContainer from "containers/slick/SlideContainer";
 import HomeLeftSide from "components/organisms/HomeLeftSide";
 import HomeCenterSide from "components/organisms/HomeCenterSide";
 import HomeRightSide from "components/organisms/HomeRightSide";
