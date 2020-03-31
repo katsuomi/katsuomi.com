@@ -10,6 +10,7 @@ const initialState: Model.ArticleState = {
   isLoading: false,
   slideShowArticles: [],
   latestArticles: [],
+  articlesByTag: [],
   article: {
     uid: "",
     content: "",
@@ -85,6 +86,22 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_BY_TAG_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_ARTICLES_BY_TAG_SUCCESS:
+      return {
+        ...state,
+        articlesByTag: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_BY_TAG_FAILURE:
       return {
         ...state,
         isLoading: false

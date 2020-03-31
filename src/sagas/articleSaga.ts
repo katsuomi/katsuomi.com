@@ -8,7 +8,8 @@ import {
   createArticle,
   getSlideShowArticles,
   getLatestArticles,
-  getArticle
+  getArticle,
+  getArticlesByTag
 } from "actions/articleAction";
 import { addFlashMessage } from "actions/flashMessagesAction";
 
@@ -87,6 +88,22 @@ function* runGetArticle(action: Model.GetArticleStartAction) {
   }
 }
 
+function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
+  const handler = API.getArticlesByTag;
+  const tagId = action.payload;
+  const { articlesByTag, error } = yield call(handler, tagId);
+  if (articlesByTag && !error) {
+    yield put(getArticlesByTag.success(articlesByTag));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getArticlesByTag.failure());
+  }
+}
+
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
   yield takeLatest(
@@ -95,6 +112,7 @@ export function* watchArticle() {
   );
   yield takeLatest(ActionTypes.GET_LATEST_ARTICLES_START, runGetLatestArticles);
   yield takeLatest(ActionTypes.GET_ARTICLE_START, runGetArticle);
+  yield takeLatest(ActionTypes.GET_ARTICLES_BY_TAG_START, runGetArticlesByTag);
 }
 
 export default function* rootSaga() {

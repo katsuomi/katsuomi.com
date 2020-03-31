@@ -60,3 +60,18 @@ export const getArticle = {
     type: ActionTypes.GET_ARTICLE_FAILURE as typeof ActionTypes.GET_ARTICLE_FAILURE
   })
 };
+
+export const getArticlesByTag = {
+  start: (tagId: string) => ({
+    type: ActionTypes.GET_ARTICLES_BY_TAG_START as typeof ActionTypes.GET_ARTICLES_BY_TAG_START,
+    payload: tagId
+  }),
+  success: (articlesByTag: Model.Article[]) => ({
+    type: ActionTypes.GET_ARTICLES_BY_TAG_SUCCESS as typeof ActionTypes.GET_ARTICLES_BY_TAG_SUCCESS,
+    payload: articlesByTag
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GET_ARTICLES_BY_TAG_FAILURE as typeof ActionTypes.GET_ARTICLES_BY_TAG_FAILURE
+  })
+};

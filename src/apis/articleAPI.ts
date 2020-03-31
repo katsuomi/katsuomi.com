@@ -113,3 +113,38 @@ export const getArticle = async (id: string) => {
     return { error };
   }
 };
+
+// タグ名に紐ずく記事の取得
+export const getArticlesByTag = async (tagId: string) => {
+  try {
+    const articlesByTag: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("date", "desc")
+      .where("tag_ids", "array-contains", tagId)
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          return;
+        }
+        snapshot.forEach(doc => {
+          articlesByTag.push({
+            uid: doc.id,
+            content: doc.data().content,
+            subTitle: doc.data().subTitle,
+            title: doc.data().title,
+            date: doc.data().date,
+            tag_ids: doc.data().tag_ids,
+            thumbnail_image_path: doc.data().thumbnail_image_path
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    return { articlesByTag };
+  } catch (error) {
+    return { error };
+  }
+};

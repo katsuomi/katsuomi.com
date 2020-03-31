@@ -23,6 +23,7 @@ export interface ArticleState {
   isLoading: boolean;
   slideShowArticles: Article[];
   latestArticles: Article[];
+  articlesByTag: Article[];
   article: Article;
 }
 
@@ -79,6 +80,20 @@ export interface GetArticleFilureAction {
   type: typeof ActionTypes.GET_ARTICLE_FAILURE;
 }
 
+export interface GetArticlesByTagStartAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_TAG_START;
+  payload: string;
+}
+
+export interface GetArticlesByTagSuccessAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_TAG_SUCCESS;
+  payload: Article[];
+}
+
+export interface GetArticlesByTagFilureAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_TAG_FAILURE;
+}
+
 export type ArticleAction =
   | CreateArticleStartAction
   | CreateArticleSuccessAction
@@ -91,4 +106,7 @@ export type ArticleAction =
   | GetLatestArticlesFilureAction
   | GetArticleStartAction
   | GetArticleSuccessAction
-  | GetArticleFilureAction;
+  | GetArticleFilureAction
+  | GetArticlesByTagStartAction
+  | GetArticlesByTagSuccessAction
+  | GetArticlesByTagFilureAction;

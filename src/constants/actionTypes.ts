@@ -66,3 +66,11 @@ export const GET_ARTICLE_FAILURE = "GET_ARTICLE_FAILURE";
 export const GET_TAGS_START = "GET_TAGS_START";
 export const GET_TAGS_SUCCESS = "GET_TAGS_SUCCESS";
 export const GET_TAGS_FAILURE = "GET_TAGS_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Get Articles By Tag
+// -----------------------------------------------------------------------------
+
+export const GET_ARTICLES_BY_TAG_START = "GET_ARTICLES_BY_TAG_START";
+export const GET_ARTICLES_BY_TAG_SUCCESS = "GET_ARTICLES_BY_TAG_SUCCESS";
+export const GET_ARTICLES_BY_TAG_FAILURE = "GET_ARTICLES_BY_TAG_FAILURE";
