@@ -127,17 +127,33 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
 
   const handleOnChange = () => {
     setImgDownLoaded(false);
+
+    let naturalWidth = 0;
+    let naturalHeight = 0;
+
     const file =
       inputEl &&
       inputEl.current &&
       inputEl.current.files &&
       inputEl.current.files[0];
     const fr = new FileReader();
-    fr.onload = (e: any) => {
-      ImgB64Resize(e.target.result, 300, 300, goFirebase, 90);
-    };
 
-    file && fr.readAsDataURL(file);
+    const image = new Image();
+    image.onload = function() {
+      naturalWidth = image.naturalWidth;
+      naturalHeight = image.naturalHeight;
+      const width =
+        naturalWidth !== 0 && naturalHeight !== 0
+          ? (300 * naturalWidth) / naturalHeight
+          : 0;
+
+      fr.onload = (e: any) => {
+        ImgB64Resize(e.target.result, Math.round(width), 300, goFirebase, 90);
+      };
+
+      file && fr.readAsDataURL(file);
+    };
+    image.src = URL.createObjectURL(file);
   };
 
   return (
@@ -164,7 +180,7 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
         </LoadingWrapper>
       </Wrapper>
       <ImgWrapper className="createForm-image">
-        <img src={img} width="200px" />
+        <img src={img} width="100%" />
       </ImgWrapper>
     </>
   );
