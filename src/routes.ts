@@ -5,6 +5,9 @@ export const Admin = loadable(() => import("./components/templates/Admin"));
 export const AdminCreateArticle = loadable(() =>
   import("./components/templates/AdminCreateArticle")
 );
+export const AdminArticles = loadable(() =>
+  import("./components/templates/AdminArticles")
+);
 export const Article = loadable(() => import("./components/templates/Article"));
 export const Tag = loadable(() => import("./components/templates/Tag"));
 export const Awards = loadable(() => import("./components/templates/Awards"));

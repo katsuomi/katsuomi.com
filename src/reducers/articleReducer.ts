@@ -1,4 +1,4 @@
-import { Reducer } from "redux";
+import {Reducer} from "redux";
 
 // import constants
 import * as ActionTypes from "constants/actionTypes";
@@ -6,10 +6,11 @@ import * as ActionTypes from "constants/actionTypes";
 // import models
 import * as Model from "models/articleModel";
 
-const initialState: Model.ArticleState = {
+const initialState: Model.ArticleState={
   isLoading: false,
   slideShowArticles: [],
   latestArticles: [],
+  articles: [],
   articlesByTag: [],
   article: {
     uid: "",
@@ -22,11 +23,11 @@ const initialState: Model.ArticleState = {
   }
 };
 
-const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
-  state: Model.ArticleState = initialState,
+const article: Reducer<Model.ArticleState,Model.ArticleAction>=(
+  state: Model.ArticleState=initialState,
   action: Model.ArticleAction
 ): Model.ArticleState => {
-  switch (action.type) {
+  switch(action.type) {
     case ActionTypes.CREATE_ARTICLE_START:
       return {
         ...state,
@@ -70,6 +71,22 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_LATEST_ARTICLES_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_FAILURE:
       return {
         ...state,
         isLoading: false

@@ -27,6 +27,11 @@ const App: FC = () => (
           component={routes.AdminCreateArticle}
           exact
         />
+        <Route
+          path={pages.adminArticles.path}
+          component={routes.AdminArticles}
+          exact
+        />
         <Route path={pages.article.path} component={routes.Article} exact />
         <Route path={pages.tag.path} component={routes.Tag} exact />
         <Route path={pages.contact.path} component={routes.Contact} exact />

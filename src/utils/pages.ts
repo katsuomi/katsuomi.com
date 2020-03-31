@@ -17,6 +17,10 @@ const pages = {
     path: "/admin/create_article",
     title: "管理者-記事作成- -Katsuomi.com-"
   },
+  adminArticles: {
+    path: "/admin/articles",
+    title: "管理者-記事一覧- -Katsuomi.com-"
+  },
   article: {
     path: "/articles/:id",
     title: "記事詳細-- -Katsuomi.com-"

@@ -52,6 +52,14 @@ export const GET_LATEST_ARTICLES_SUCCESS = "GET_LATEST_ARTICLES_SUCCESS";
 export const GET_LATEST_ARTICLES_FAILURE = "GET_LATEST_ARTICLES_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Get Articles
+// -----------------------------------------------------------------------------
+
+export const GET_ARTICLES_START = "GET_ARTICLES_START";
+export const GET_ARTICLES_SUCCESS = "GET_ARTICLES_SUCCESS";
+export const GET_ARTICLES_FAILURE = "GET_ARTICLES_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Article
 // -----------------------------------------------------------------------------
 

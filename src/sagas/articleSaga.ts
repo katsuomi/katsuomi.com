@@ -9,7 +9,8 @@ import {
   getSlideShowArticles,
   getLatestArticles,
   getArticle,
-  getArticlesByTag
+  getArticlesByTag,
+  getArticles
 } from "actions/articleAction";
 import { addFlashMessage } from "actions/flashMessagesAction";
 
@@ -72,6 +73,22 @@ function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
   }
 }
 
+function* runGetArticles(action: Model.GetArticlesStartAction) {
+  const handler = API.getArticles;
+  const { articles, error } = yield call(handler);
+  if (articles && !error) {
+    yield put(getArticles.success(articles));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getArticles.failure());
+  }
+}
+
+
 function* runGetArticle(action: Model.GetArticleStartAction) {
   const id = action.payload;
   const handler = API.getArticle;
@@ -111,6 +128,7 @@ export function* watchArticle() {
     runGetSlideShowArticles
   );
   yield takeLatest(ActionTypes.GET_LATEST_ARTICLES_START, runGetLatestArticles);
+  yield takeLatest(ActionTypes.GET_ARTICLES_START, runGetArticles);
   yield takeLatest(ActionTypes.GET_ARTICLE_START, runGetArticle);
   yield takeLatest(ActionTypes.GET_ARTICLES_BY_TAG_START, runGetArticlesByTag);
 }

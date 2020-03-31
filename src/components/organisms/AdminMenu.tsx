@@ -1,13 +1,45 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import _ from "lodash";
+import { bindActionCreators, Dispatch } from "redux";
+import Image from "react-image-resizer";
 
 // import atoms
-import Button from "components/atoms/Button";
 import LinkAnchor from "components/atoms/LinkAnchor";
+import Button from "components/atoms/Button";
+
+// import molecules
+import Tag from "components/molecules/Tag";
+
+// import commons
+import Spinner from "components/commons/Spinner";
+
+// import actions
+import { getArticles } from "actions/articleAction";
+
+// import methods
+import { dateToString } from "methods/articleMethods";
 
 // import utils
+import * as breakPoints from "utils/breakPoints";
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
+
+// import models
+import { AppState } from "models/index";
+import * as articleModel from "models/articleModel";
+
+interface StateProps {
+  articles?: articleModel.Article[];
+  isLoading?: boolean;
+}
+
+interface DispatchProps {
+  getArticles: () => void;
+}
+
+type DefaultProps = StateProps & DispatchProps;
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,6 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const Section = styled.div`
+  margin-top: 30px;
 `;
 
 const Center = styled.div`
@@ -31,32 +64,78 @@ const Title = styled.h3`
   word-break: break-all;
   -webkit-font-feature-settings: "palt" 1;
   font-feature-settings: "palt" 1;
-  font-size: ${fontSize.H3 };
-  color: ${colors.BLACK };
+  font-size: ${fontSize.H3};
+  color: ${colors.BLACK};
 `;
 
-const AdminMenu: FC = () => (
-  <Wrapper>
-    <Section>
-      <Center>
-        <LinkAnchor src="/admin/create_article" isHoverWhite={ true }>
-          <Button
-            isDisabled={false}
-            borderColor={ colors.BRIGHT_BLUE}
-            backgroundColor={ colors.BRIGHT_BLUE}
-            color={ colors.WHITE }
-            padding={ [ "5px", "5px", "35px", "35px" ] }
-          >
-            記事を書く
-        </Button>
-        </LinkAnchor>
-      </Center>
-    </Section>
+const AdminMenu: FC<DefaultProps> = ({
+  articles,
+  isLoading,
+  getArticles
+}) => {
+  useEffect(() => {
+    getArticles();
+  }, [getArticles]);
 
-    <Section>
-      <Title>記事一覧</Title>
-    </Section>
-  </Wrapper>
-);
+  return (
+    <>
+      {isLoading ? (
+        <Spinner
+          top={breakPoints.isSmartPhone() ? "30%" : "55%"}
+          left={"50%"}
+        />
+      ) : (
+          <Wrapper>
+            <Section>
+              <Center>
+                <LinkAnchor src="/admin/create_article" isHoverWhite={true}>
+                  <Button
+                    isDisabled={false}
+                    borderColor={colors.BRIGHT_BLUE}
+                    backgroundColor={colors.BRIGHT_BLUE}
+                    color={colors.WHITE}
+                    padding={["5px", "5px", "35px", "35px"]}
+                  >
+                    記事を書く
+                  </Button>
+                </LinkAnchor>
+              </Center>
+            </Section>
+            <Section>
+              <Center>
+                <LinkAnchor src="/admin/articles" isHoverWhite={true}>
+                  <Button
+                    isDisabled={false}
+                    borderColor={colors.BRIGHT_BLUE}
+                    backgroundColor={colors.BRIGHT_BLUE}
+                    color={colors.WHITE}
+                    padding={["5px", "5px", "35px", "35px"]}
+                  >
+                    記事一覧へ
+                  </Button>
+                </LinkAnchor>
+              </Center>
+            </Section>
+          </Wrapper>
+        )}
+    </>
+  );
+};
 
-export default AdminMenu;
+const mapStateToProps = (state: AppState) => ({
+  articles: state.article.articles,
+  isLoading: state.article.isLoading
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      getArticles: () => getArticles.start()
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminMenu);

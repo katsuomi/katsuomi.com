@@ -19,7 +19,7 @@ interface StateProps {
 type DefaultProps = StateProps;
 
 const AdminContainer: FC<DefaultProps> = ({ user }) => {
-  if (user === undefined || (user && !isAdmin(user))) {
+  if(user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
   }
   return (

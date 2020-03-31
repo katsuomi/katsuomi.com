@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import pages from "utils/pages";
 
 // import containers
-import AdminCreateArticleContainer from "containers/AdminCreateArticleContainer";
+import AdminCreateArticleContainer from "containers/admin/AdminCreateArticleContainer";
 
 const AdminCreateArticle: FC = () => {
   return (

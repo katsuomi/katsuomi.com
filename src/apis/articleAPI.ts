@@ -90,6 +90,40 @@ export const getLatestArticles = async () => {
   }
 };
 
+// 記事を全て取得
+export const getArticles = async () => {
+  try {
+    const articles: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("date", "desc")
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          return;
+        }
+        snapshot.forEach(doc => {
+          articles.push({
+            uid: doc.id,
+            content: doc.data().content,
+            subTitle: doc.data().subTitle,
+            title: doc.data().title,
+            date: doc.data().date,
+            tag_ids: doc.data().tag_ids,
+            thumbnail_image_path: doc.data().thumbnail_image_path
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    return { articles };
+  } catch (error) {
+    return { error };
+  }
+};
+
 // idに一致した記事を取得
 export const getArticle = async (id: string) => {
   try {
