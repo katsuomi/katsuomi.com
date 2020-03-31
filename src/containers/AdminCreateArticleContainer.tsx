@@ -191,7 +191,7 @@ const AdminCreateArticleContainer: FC<DefaultProps> = ({
               keyWord="isSlider"
               onChange={handleOnChangeIsAddSlideShow}
             >
-              スライドショーに載せる
+              スライドショーに載せる(横長写真推奨)
             </CheckBox>
           </Left>
           <Left>

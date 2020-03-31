@@ -9,7 +9,6 @@ import Image from "react-image-resizer";
 import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import molecules
-import MarkDownContent from "components/molecules/MarkDownContent";
 import Tag from "components/molecules/Tag";
 
 // import commons
@@ -17,6 +16,9 @@ import Spinner from "components/commons/Spinner";
 
 // import actions
 import { getLatestArticles } from "actions/articleAction";
+
+// import methods
+import { dateToString } from "methods/articleMethods";
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
@@ -104,7 +106,14 @@ const Title = styled.h3`
 const ContentWrapper = styled.div`
   margin-top: 30px;
   height: 150px;
-  color: ${colors.LIGHTER_BLACK};
+  color: ${colors.SUB_GRAY};
+`;
+
+const Date = styled.p`
+  font-size: ${fontSize.CAPTION};
+  color: ${colors.DARK_GRAY};
+  margin-left: auto;
+  margin-top: 0px;
 `;
 
 const HomeCenterContainer: FC<DefaultProps> = ({
@@ -132,7 +141,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                     <UpperPart>
                       <Left>
                         <Title>{article.title}</Title>
-                        <ContentWrapper>{article.subTitle}...</ContentWrapper>
+                        <ContentWrapper>{article.subTitle} ...</ContentWrapper>
                       </Left>
                       <Right>
                         <Image
@@ -146,6 +155,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                       {article.tag_ids.map(tag => (
                         <Tag key={tag} text={tag} isArticleCount={false} />
                       ))}
+                      <Date>{dateToString(article.date)}</Date>
                     </LowerPart>
                   </Linkable>
                 </LinkAnchor>

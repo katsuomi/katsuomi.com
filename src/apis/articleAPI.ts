@@ -62,7 +62,7 @@ export const getLatestArticles = async () => {
     await firebase
       .firestore()
       .collection("articles")
-      .orderBy("date")
+      .orderBy("date", "desc")
       .limit(5)
       .get()
       .then(snapshot => {
