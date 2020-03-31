@@ -132,39 +132,39 @@ const HomeCenterContainer: FC<DefaultProps> = ({
           left={"50%"}
         />
       ) : (
-        <Wrapper>
-          <Title>最新の記事</Title>
-          {latestArticles?.map(article => {
-            return (
-              <ArticleWrapper key={article.uid}>
-                <LinkAnchor src={`/articles/${article.uid}`}>
-                  <Linkable>
-                    <UpperPart>
-                      <Left>
-                        <Title>{article.title}</Title>
-                        <ContentWrapper>{article.subTitle} ...</ContentWrapper>
-                      </Left>
-                      <Right>
-                        <Image
-                          src={article.thumbnail_image_path}
-                          height={180}
-                          width={180}
-                        />
-                      </Right>
-                    </UpperPart>
-                    <LowerPart>
-                      {article.tag_ids.map(tag => (
-                        <Tag key={tag} text={tag} isArticleCount={false} />
-                      ))}
-                      <Date>{dateToString(article.date)}</Date>
-                    </LowerPart>
-                  </Linkable>
-                </LinkAnchor>
-              </ArticleWrapper>
-            );
-          })}
-        </Wrapper>
-      )}
+          <Wrapper>
+            <Title>最新の記事</Title>
+            {latestArticles?.map(article => {
+              return (
+                <ArticleWrapper key={article.uid}>
+                  <LinkAnchor src={`/articles/${article.uid}`}>
+                    <Linkable>
+                      <UpperPart>
+                        <Left>
+                          <Title>{article.title}</Title>
+                          <ContentWrapper>{article.subTitle} ...</ContentWrapper>
+                        </Left>
+                        <Right>
+                          <Image
+                            src={article.thumbnail_image_path}
+                            height={180}
+                            width={180}
+                          />
+                        </Right>
+                      </UpperPart>
+                      <LowerPart>
+                        {article.tag_ids.map(tag => (
+                          <Tag key={tag} text={tag} isArticleCount={false} />
+                        ))}
+                        <Date>{dateToString(article.date)}</Date>
+                      </LowerPart>
+                    </Linkable>
+                  </LinkAnchor>
+                </ArticleWrapper>
+              );
+            })}
+          </Wrapper>
+        )}
     </>
   );
 };
