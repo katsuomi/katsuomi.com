@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 // import components
 import Header from "components/organisms/Header";
+
 // import utils
 import pages from "utils/pages";
 import * as breakPoints from "utils/breakPoints";
@@ -27,6 +28,7 @@ const App: FC = () => (
           exact
         />
         <Route path={pages.article.path} component={routes.Article} exact />
+        <Route path={pages.tag.path} component={routes.Tag} exact />
         <Route path={pages.contact.path} component={routes.Contact} exact />
         <Route path={pages.profile.path} component={routes.Profile} exact />
         <Route path={pages.news.path} component={routes.News} exact />
