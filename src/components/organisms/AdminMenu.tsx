@@ -12,14 +12,16 @@ import * as fontSize from "utils/fontSize";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  justify-content: center;
+  width: 1300px;
+  margin: 20px auto;
 `;
 
 const Section = styled.div`
-  
 `;
 
+const Center = styled.div`
+  text-align: center;
+`;
 
 const Title = styled.h3`
   margin-bottom: 8px;
@@ -36,17 +38,19 @@ const Title = styled.h3`
 const AdminMenu: FC = () => (
   <Wrapper>
     <Section>
-      <LinkAnchor src="/admin/create_article" isHoverWhite={ true }>
-        <Button
-          isDisabled={ false }
-          borderColor={ colors.BRIGHT_BLUE }
-          backgroundColor={ colors.BRIGHT_BLUE }
-          color={ colors.WHITE }
-          padding={ [ "5px", "5px", "35px", "35px" ] }
-        >
-          記事を書く
+      <Center>
+        <LinkAnchor src="/admin/create_article" isHoverWhite={ true }>
+          <Button
+            isDisabled={false}
+            borderColor={ colors.BRIGHT_BLUE}
+            backgroundColor={ colors.BRIGHT_BLUE}
+            color={ colors.WHITE }
+            padding={ [ "5px", "5px", "35px", "35px" ] }
+          >
+            記事を書く
         </Button>
-      </LinkAnchor>
+        </LinkAnchor>
+      </Center>
     </Section>
 
     <Section>
