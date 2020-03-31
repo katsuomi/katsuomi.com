@@ -24,7 +24,7 @@ import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 
 // import methods
-import { getUrlId } from "methods/utilsMethods";
+import { getUrlId, decodeToString } from "methods/utilsMethods";
 import { dateToString } from "methods/articleMethods";
 
 // import models
@@ -44,44 +44,93 @@ type DefaultProps = StateProps & DispatchProps;
 
 const Wrapper = styled.div`
   display: flex;
-  margin-top: 30px;
+  flex-direction: column;
 `;
 
-const LeftSide = styled.div`
-  width: 15%;
+const ArticleWrapper = styled.div`
+  width: 100%;
+  height: 400px;
+  background-color: #fefefe;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid ${colors.BORDER_LIGHT_DARK};
+  padding: 2px 10px;
+  &:hover {
+    background-color: ${colors.HOVER};
+  }
 `;
 
-const CenterSide = styled.div`
+const Linkable = styled.div`
+  height: 100%;
+`;
+
+const UpperPart = styled.div`
+  display: flex;
+  height: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const LowerPart = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+
+const Left = styled.div`
   width: 70%;
-  word-break: break-all;
-  max-width: 900px;
-  margin: 0px auto;
-  padding: 20px 10px;
 `;
 
-const RightSide = styled.div`
-  width: 15%;
-`;
-
-const ImageWrapper = styled.div`
+const Right = styled.div`
+  width: 30%;
   & > div {
-    margin: 0 auto;
+    margin: 20px auto;
+    margin-left: 45px;
+  }
+  & > div > img {
+    border-radius: 10px;
   }
 `;
 
 const Title = styled.h3`
-  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  word-break: break-all;
+  -webkit-font-feature-settings: "palt" 1;
+  font-feature-settings: "palt" 1;
   font-size: ${fontSize.H3};
+  color: ${colors.BLACK};
+`;
+
+const PageTitle = styled.h3`
+  margin-bottom: 8px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  word-break: break-all;
+  -webkit-font-feature-settings: "palt" 1;
+  font-feature-settings: "palt" 1;
+  font-size: ${fontSize.H3};
+  color: ${colors.BLACK};
+  width: 900px;
+  margin: 10px auto;
+  margin-top: 25px;
+`;
+
+const ContentWrapper = styled.div`
+  margin-top: 30px;
+  height: 150px;
+  color: ${colors.SUB_GRAY};
 `;
 
 const Date = styled.p`
   font-size: ${fontSize.CAPTION};
   color: ${colors.DARK_GRAY};
-  text-align: right;
-`;
-
-const ContentWrapper = styled.div`
-  margin-top: 20px;
+  margin-left: auto;
+  margin-top: 0px;
 `;
 
 const TagContainer: FC<DefaultProps> = ({
@@ -90,10 +139,11 @@ const TagContainer: FC<DefaultProps> = ({
   getArticlesByTag
 }) => {
   useEffect(() => {
-    getArticlesByTag(getUrlId());
+    getArticlesByTag(decodeToString(getUrlId()));
   }, [getArticlesByTag]);
 
-  console.log({ articlesByTag });
+  const articlesCount: number = articlesByTag ? articlesByTag.length : 0;
+
   return (
     <>
       {isLoading ? (
@@ -102,7 +152,40 @@ const TagContainer: FC<DefaultProps> = ({
           left={"50%"}
         />
       ) : (
-        <>aaaa</>
+        <Wrapper>
+          <PageTitle>
+            {decodeToString(getUrlId())}の記事({String(articlesCount)})
+          </PageTitle>
+          {articlesByTag?.map(article => {
+            return (
+              <ArticleWrapper key={article.uid}>
+                <LinkAnchor src={`/articles/${article.uid}`}>
+                  <Linkable>
+                    <UpperPart>
+                      <Left>
+                        <Title>{article.title}</Title>
+                        <ContentWrapper>{article.subTitle} ...</ContentWrapper>
+                      </Left>
+                      <Right>
+                        <Image
+                          src={article.thumbnail_image_path}
+                          height={180}
+                          width={180}
+                        />
+                      </Right>
+                    </UpperPart>
+                    <LowerPart>
+                      {article.tag_ids.map(tag => (
+                        <Tag key={tag} text={tag} isArticleCount={false} />
+                      ))}
+                      <Date>{dateToString(article.date)}</Date>
+                    </LowerPart>
+                  </Linkable>
+                </LinkAnchor>
+              </ArticleWrapper>
+            );
+          })}
+        </Wrapper>
       )}
     </>
   );

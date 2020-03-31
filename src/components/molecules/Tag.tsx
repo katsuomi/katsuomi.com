@@ -4,8 +4,11 @@
  *
  */
 
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
+
+// import atoms
+import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import utils
 import * as colors from "utils/color";
@@ -13,6 +16,7 @@ import * as fontSize from "utils/fontSize";
 
 // import methods
 import { getArticleCountByTag } from "methods/tagMethods";
+import { encodeToString } from "methods/utilsMethods";
 
 interface DefaultProps {
   text: string;
@@ -20,8 +24,10 @@ interface DefaultProps {
 }
 
 const TagWrapper = styled.span`
+  & > span > a {
+    color: ${colors.WHITE};
+  }
   background-color: ${colors.BG_TAG};
-  color: ${colors.WHITE};
   padding: 6px 15px;
   border-radius: 20px;
   margin: 10px 5px;
@@ -40,10 +46,10 @@ const ArticleCount = styled.span`
 const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
   const [articleCount, setArticleCount] = useState<number>(0);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const data = await getArticleCountByTag(text);
     setArticleCount(data);
-  };
+  }, [text]);
 
   useEffect(() => {
     getData();
@@ -51,12 +57,16 @@ const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
 
   return (
     <TagWrapper>
-      {text}
-      {isArticleCount && (
-        <ArticleCountWrapper>
-          (<ArticleCount>{articleCount}</ArticleCount>)
-        </ArticleCountWrapper>
-      )}
+      <LinkAnchor src={`/tags/${encodeToString(text)}`}>
+        <>
+          {text}
+          {isArticleCount && (
+            <ArticleCountWrapper>
+              (<ArticleCount>{articleCount}</ArticleCount>)
+            </ArticleCountWrapper>
+          )}
+        </>
+      </LinkAnchor>
     </TagWrapper>
   );
 };

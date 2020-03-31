@@ -133,10 +133,11 @@ const HomeCenterContainer: FC<DefaultProps> = ({
         />
       ) : (
         <Wrapper>
+          <Title>最新の記事</Title>
           {latestArticles?.map(article => {
             return (
               <ArticleWrapper key={article.uid}>
-                <LinkAnchor src={`articles/${article.uid}`}>
+                <LinkAnchor src={`/articles/${article.uid}`}>
                   <Linkable>
                     <UpperPart>
                       <Left>
