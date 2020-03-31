@@ -43,6 +43,12 @@ const ArticleCount = styled.span`
   font-weight: bold;
 `;
 
+const Linkable = styled.span`
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
 const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
   const [articleCount, setArticleCount] = useState<number>(0);
 
@@ -58,14 +64,14 @@ const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
   return (
     <TagWrapper>
       <LinkAnchor src={`/tags/${encodeToString(text)}`}>
-        <>
+        <Linkable>
           {text}
           {isArticleCount && (
             <ArticleCountWrapper>
               (<ArticleCount>{articleCount}</ArticleCount>)
             </ArticleCountWrapper>
           )}
-        </>
+        </Linkable>
       </LinkAnchor>
     </TagWrapper>
   );
