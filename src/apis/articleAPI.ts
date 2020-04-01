@@ -1,7 +1,10 @@
+import { concat } from "lodash";
+
 // import utils
 import firebase from "utils/firebase";
 // import models
 import * as Model from "models/articleModel";
+
 
 // 記事作成
 export const createAtricle = async (payload: Model.Article) => {
@@ -16,7 +19,26 @@ export const createAtricle = async (payload: Model.Article) => {
       });
     const success = { success: "200 ok, success" };
     return { success };
-  } catch (error) {
+  } catch(error) {
+    return { error };
+  }
+};
+
+// 記事更新
+export const updateAtricle = async (payload: Model.Article) => {
+  console.log({ payload })
+  try {
+    await firebase
+      .firestore()
+      .collection("articles")
+      .doc(payload.uid)
+      .update(payload)
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    const success = { success: "200 ok, success" };
+    return { success };
+  } catch(error) {
     return { error };
   }
 };
@@ -31,7 +53,7 @@ export const getSlideShowArticles = async () => {
       .where("is_add_slide_show", "==", true)
       .get()
       .then(snapshot => {
-        if (snapshot.empty) {
+        if(snapshot.empty) {
           return;
         }
         snapshot.forEach(doc => {
@@ -50,7 +72,7 @@ export const getSlideShowArticles = async () => {
         throw new Error(err.message);
       });
     return { articles };
-  } catch (error) {
+  } catch(error) {
     return { error };
   }
 };
@@ -66,7 +88,7 @@ export const getLatestArticles = async () => {
       .limit(5)
       .get()
       .then(snapshot => {
-        if (snapshot.empty) {
+        if(snapshot.empty) {
           return;
         }
         snapshot.forEach(doc => {
@@ -85,7 +107,7 @@ export const getLatestArticles = async () => {
         throw new Error(err.message);
       });
     return { articles };
-  } catch (error) {
+  } catch(error) {
     return { error };
   }
 };
@@ -100,7 +122,7 @@ export const getArticles = async () => {
       .orderBy("date", "desc")
       .get()
       .then(snapshot => {
-        if (snapshot.empty) {
+        if(snapshot.empty) {
           return;
         }
         snapshot.forEach(doc => {
@@ -119,7 +141,7 @@ export const getArticles = async () => {
         throw new Error(err.message);
       });
     return { articles };
-  } catch (error) {
+  } catch(error) {
     return { error };
   }
 };
@@ -134,16 +156,18 @@ export const getArticle = async (id: string) => {
       .doc(id)
       .get()
       .then(doc => {
-        if (!doc.exists) {
+        if(!doc.exists) {
           return;
         }
-        article = doc.data();
+        const data = Object.assign({}, doc.data());
+        data.uid = doc.id
+        article = data
       })
       .catch(err => {
         throw new Error(err.message);
       });
     return { article };
-  } catch (error) {
+  } catch(error) {
     return { error };
   }
 };
@@ -159,7 +183,7 @@ export const getArticlesByTag = async (tagId: string) => {
       .where("tag_ids", "array-contains", tagId)
       .get()
       .then(snapshot => {
-        if (snapshot.empty) {
+        if(snapshot.empty) {
           return;
         }
         snapshot.forEach(doc => {
@@ -178,7 +202,7 @@ export const getArticlesByTag = async (tagId: string) => {
         throw new Error(err.message);
       });
     return { articlesByTag };
-  } catch (error) {
+  } catch(error) {
     return { error };
   }
 };

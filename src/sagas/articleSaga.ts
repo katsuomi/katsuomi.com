@@ -6,6 +6,7 @@ import * as ActionTypes from "constants/actionTypes";
 // import actions
 import {
   createArticle,
+  updateArticle,
   getSlideShowArticles,
   getLatestArticles,
   getArticle,
@@ -24,7 +25,7 @@ function* runCreateArticle(action: Model.CreateArticleStartAction) {
   const data = action.payload;
   const handler = API.createAtricle;
   const { success, error } = yield call(handler, data);
-  if (success && !error) {
+  if(success && !error) {
     const payload = {
       type: "success",
       message: "記事を投稿しました"
@@ -41,12 +42,33 @@ function* runCreateArticle(action: Model.CreateArticleStartAction) {
   }
 }
 
+function* runUpdateArticle(action: Model.UpdateArticleStartAction) {
+  const data = action.payload;
+  const handler = API.updateAtricle;
+  const { success, error } = yield call(handler, data);
+  if(success && !error) {
+    const payload = {
+      type: "success",
+      message: "記事を更新しました"
+    };
+    yield put(updateArticle.success());
+    yield put(addFlashMessage(payload));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(updateArticle.failure());
+  }
+}
+
 function* runGetSlideShowArticles(
   action: Model.GetSlideShowArticlesStartAction
 ) {
   const handler = API.getSlideShowArticles;
   const { articles, error } = yield call(handler);
-  if (articles && !error) {
+  if(articles && !error) {
     yield put(getSlideShowArticles.success(articles));
   } else {
     const payload = {
@@ -61,7 +83,7 @@ function* runGetSlideShowArticles(
 function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
   const handler = API.getLatestArticles;
   const { articles, error } = yield call(handler);
-  if (articles && !error) {
+  if(articles && !error) {
     yield put(getLatestArticles.success(articles));
   } else {
     const payload = {
@@ -76,7 +98,7 @@ function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
 function* runGetArticles(action: Model.GetArticlesStartAction) {
   const handler = API.getArticles;
   const { articles, error } = yield call(handler);
-  if (articles && !error) {
+  if(articles && !error) {
     yield put(getArticles.success(articles));
   } else {
     const payload = {
@@ -93,7 +115,7 @@ function* runGetArticle(action: Model.GetArticleStartAction) {
   const id = action.payload;
   const handler = API.getArticle;
   const { article, error } = yield call(handler, id);
-  if (article && !error) {
+  if(article && !error) {
     yield put(getArticle.success(article));
   } else {
     const payload = {
@@ -109,7 +131,7 @@ function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
   const handler = API.getArticlesByTag;
   const tagId = action.payload;
   const { articlesByTag, error } = yield call(handler, tagId);
-  if (articlesByTag && !error) {
+  if(articlesByTag && !error) {
     yield put(getArticlesByTag.success(articlesByTag));
   } else {
     const payload = {
@@ -123,6 +145,7 @@ function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
 
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
+  yield takeLatest(ActionTypes.UPDATE_ARTICLE_START, runUpdateArticle);
   yield takeLatest(
     ActionTypes.GET_SLIDE_SHOW_ARTICLES_START,
     runGetSlideShowArticles
@@ -134,5 +157,5 @@ export function* watchArticle() {
 }
 
 export default function* rootSaga() {
-  yield all([fork(watchArticle)]);
+  yield all([ fork(watchArticle) ]);
 }

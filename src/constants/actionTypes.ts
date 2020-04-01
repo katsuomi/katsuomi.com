@@ -34,6 +34,14 @@ export const CREATE_ARTICLE_SUCCESS = "CREATE_ARTICLE_SUCCESS";
 export const CREATE_ARTICLE_FAILURE = "CREATE_ARTICLE_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Update Article
+// -----------------------------------------------------------------------------
+
+export const UPDATE_ARTICLE_START = "UPDATE_ARTICLE_START";
+export const UPDATE_ARTICLE_SUCCESS = "UPDATE_ARTICLE_SUCCESS";
+export const UPDATE_ARTICLE_FAILURE = "UPDATE_ARTICLE_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Slide Show Articles
 // -----------------------------------------------------------------------------
 

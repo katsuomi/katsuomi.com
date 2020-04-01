@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 // import organisms
 import AdminLogin from "components/organisms/AdminLogin";
@@ -20,7 +21,7 @@ import Button from "components/atoms/Button";
 import Spinner from "components/commons/Spinner";
 
 // import actions
-import { createArticle } from "actions/articleAction";
+import { createArticle, updateArticle } from "actions/articleAction";
 
 // import models
 import { AppState } from "models/index";
@@ -49,8 +50,9 @@ interface StateProps {
 
 interface DispatchProps {
   createArticle: (payload: articleModel.Article) => void;
+  updateArticle: (payload: articleModel.Article) => void;
 }
-interface Props {
+interface Props extends RouteComponentProps<{}>, React.Props<{}> {
   isEdit?: boolean
   isCreate?: boolean
   article?: articleModel.Article
@@ -85,9 +87,11 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   user,
   isLoading,
   createArticle,
+  updateArticle,
   isEdit,
   isCreate,
-  article
+  article,
+  history
 }) => {
   const [title, setTitle] = useState<string>(article ? article.title : "");
   const [subTitle, setSubTitle] = useState<string>(article ? article.subTitle : "");
@@ -122,6 +126,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const payload = {
+      uid: article ? article.uid : "",
       title: title,
       subTitle: subTitle,
       thumbnail_image_path: thumbnailImagePath,
@@ -131,14 +136,24 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       is_add_slide_show: isAddSlideShow
     };
 
-    await createArticle(payload);
-    setTitle("");
-    setSubTitle("");
-    setThumbnailImagePath("");
-    setContent("");
-    setTagIds([]);
-    setDate(new Date());
-    setIsAddSlideShow(false);
+    console.log({ payload })
+
+    isCreate && await createArticle(payload);
+    isEdit && await updateArticle(payload);
+
+    if(isCreate) {
+      setTitle("");
+      setSubTitle("");
+      setThumbnailImagePath("");
+      setContent("");
+      setTagIds([]);
+      setDate(new Date());
+      setIsAddSlideShow(false);
+    }
+
+    if(isEdit) {
+      await history.push('/admin')
+    }
   };
 
   const handleOnChangeIsAddSlideShow = () => {
@@ -254,12 +269,13 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      createArticle: payload => createArticle.start(payload)
+      createArticle: payload => createArticle.start(payload),
+      updateArticle: payload => updateArticle.start(payload)
     },
     dispatch
   );
 
-export default connect(
+export default withRouter<any, any>(connect(
   mapStateToProps,
   mapDispatchToProps
-)(AdminCreateEditArticleContainer);
+)(AdminCreateEditArticleContainer));
