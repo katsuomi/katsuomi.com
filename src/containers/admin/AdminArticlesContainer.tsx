@@ -7,7 +7,6 @@ import Image from "react-image-resizer";
 
 // import atoms
 import LinkAnchor from "components/atoms/LinkAnchor";
-import Button from "components/atoms/Button";
 
 // import molecules
 import Tag from "components/molecules/Tag";
@@ -163,7 +162,7 @@ const AdminArticleContainer: FC<DefaultProps> = ({
             {articles?.map(article => {
               return (
                 <ArticleWrapper key={article.uid}>
-                  <LinkAnchor src={`/articles/${article.uid}`}>
+                  <LinkAnchor src={`/articles/${article.uid}/edit`}>
                     <Linkable>
                       <UpperPart>
                         <Left>

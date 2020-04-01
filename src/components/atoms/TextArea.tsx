@@ -23,6 +23,7 @@ interface DefaultProps {
   rows: number;
   onChange: (value: string) => void;
   children?: string | ReactElement<any>;
+  defaultValue?: string;
 }
 
 interface TextAreaStyleProps {
@@ -74,7 +75,8 @@ const TextArea: FC<DefaultProps> = ({
   rows,
   margin,
   padding,
-  fontSize
+  fontSize,
+  defaultValue
 }) => {
   return (
     <TextAreaWrapper
@@ -95,6 +97,7 @@ const TextArea: FC<DefaultProps> = ({
       paddingLeft={padding && padding[2]}
       paddingRight={padding && padding[3]}
       onChange={e => onChange(e.target.value)}
+      defaultValue={defaultValue ? defaultValue : ''}
     />
   );
 };

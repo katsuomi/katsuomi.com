@@ -101,30 +101,30 @@ const ArticleContainer: FC<DefaultProps> = ({
           left={"50%"}
         />
       ) : (
-        article && (
-          <Wrapper>
-            <LeftSide></LeftSide>
-            <CenterSide>
-              <ImageWrapper>
-                <Image
-                  src={article.thumbnail_image_path}
-                  height={300}
-                  width={700}
-                />
-              </ImageWrapper>
-              <Title>{article.title}</Title>
-              <Date>{dateToString(article.date)}</Date>
-              {article.tag_ids.map(tag => (
-                <Tag key={tag} text={tag} isArticleCount={false} />
-              ))}
-              <ContentWrapper>
-                <MarkDownContent content={article.content} />
-              </ContentWrapper>
-            </CenterSide>
-            <RightSide></RightSide>
-          </Wrapper>
-        )
-      )}
+          article && (
+            <Wrapper>
+              <LeftSide></LeftSide>
+              <CenterSide>
+                <ImageWrapper>
+                  <Image
+                    src={article.thumbnail_image_path}
+                    height={300}
+                    width={700}
+                  />
+                </ImageWrapper>
+                <Title>{article.title}</Title>
+                <Date>{dateToString(article.date)}</Date>
+                {article.tag_ids.map(tag => (
+                  <Tag key={tag} text={tag} isArticleCount={false} />
+                ))}
+                <ContentWrapper>
+                  <MarkDownContent content={article.content} />
+                </ContentWrapper>
+              </CenterSide>
+              <RightSide></RightSide>
+            </Wrapper>
+          )
+        )}
     </>
   );
 };

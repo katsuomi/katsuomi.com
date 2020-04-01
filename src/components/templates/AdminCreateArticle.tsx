@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import pages from "utils/pages";
 
 // import containers
-import AdminCreateArticleContainer from "containers/admin/AdminCreateArticleContainer";
+import AdminCreateEditArticleContainer from "containers/admin/AdminCreateEditArticleContainer";
 
 const AdminCreateArticle: FC = () => {
   return (
@@ -13,7 +13,7 @@ const AdminCreateArticle: FC = () => {
       <Helmet htmlAttributes={{ lang: "ja" }}>
         <title>{pages.adminCreateArticle.title}</title>
       </Helmet>
-      <AdminCreateArticleContainer />
+      <AdminCreateEditArticleContainer isCreate={true} />
     </>
   );
 };

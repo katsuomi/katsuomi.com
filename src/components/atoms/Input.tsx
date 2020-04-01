@@ -29,6 +29,7 @@ interface DefaultProps {
   padding?: string[];
   onChange: (value: any) => void;
   children?: string | ReactElement<any>;
+  checkBoxValue?: boolean
 }
 
 interface InputStyleProps {
@@ -74,7 +75,7 @@ const InputWrapper = styled.input<InputStyleProps>`
 const DateWrapper = styled.div<InputStyleProps>`
   > div > div > input {
     background-color: ${props =>
-      props.backgroundColor ? props.backgroundColor : colors.WHITE};
+    props.backgroundColor ? props.backgroundColor : colors.WHITE};
     border: 2px
       ${props => (props.borderColor ? props.borderColor : colors.BORDER_GRAY)}
       solid;
@@ -109,9 +110,10 @@ const Input: FC<DefaultProps> = ({
   borderColor,
   backgroundColor,
   margin,
-  padding
+  padding,
+  checkBoxValue
 }) => {
-  if (type === "date") {
+  if(type === "date") {
     return (
       <DateWrapper
         placeholder={placeholder}
@@ -130,13 +132,13 @@ const Input: FC<DefaultProps> = ({
         <DatePicker selected={date} onChange={date => date && onChange(date)} />
       </DateWrapper>
     );
-  } else if (type === "checkbox") {
+  } else if(type === "checkbox") {
     return (
       <InputWrapper
         type={type ? type : undefined}
         id={id}
         placeholder={placeholder}
-        value={value}
+        checked={checkBoxValue}
         width={width}
         required={isRequired}
         borderColor={borderColor}

@@ -5,9 +5,12 @@ import marked from "marked";
 
 // import atoms
 import TextArea from "components/atoms/TextArea";
+const TurndownService = require('turndown').default;
+const turndownService = new TurndownService()
 
 interface DefaultProps {
   onChange: (value: string) => void;
+  defaultValue?: string
 }
 
 const Wrapper = styled.div`
@@ -19,16 +22,23 @@ const Wrapper = styled.div`
 
 const LeftWrapper = styled.div`
   width: 100%;
+  height: 82vh;
+  overflow: scroll;
 `;
 
 const RightWrapper = styled.div`
+  width: 100%;
   padding-left: 15px;
   width: 100%;
+  max-width: 700px;
+  height: 82vh;
+  overflow: scroll;
 `;
 
-const Editor: FC<DefaultProps> = ({ onChange }) => {
-  const [inputContent, setInputContent] = useState<string>("");
+const Editor: FC<DefaultProps> = ({ onChange, defaultValue }) => {
+  const [inputContent, setInputContent] = useState<string>('');
 
+  // firestoreの関係で、HTMLを保存するため、
   // 以下をDBに保存し、
   // marked(inputContent);
   // 以下のように出力する.
@@ -39,15 +49,19 @@ const Editor: FC<DefaultProps> = ({ onChange }) => {
     onChange(marked(value));
   };
 
+  // 編集用にmarkdownに戻す
+  const defaultMarkdown = turndownService.turndown(defaultValue)
+
   return (
     <>
       <Wrapper>
         <LeftWrapper>
           <TextArea
-            rows={50}
+            rows={200}
             width="100%"
             onChange={onHandleChange}
             fontSize="15px"
+            defaultValue={defaultMarkdown}
           />
         </LeftWrapper>
         <RightWrapper>

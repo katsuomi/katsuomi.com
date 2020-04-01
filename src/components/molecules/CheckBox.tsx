@@ -18,6 +18,7 @@ interface DefaultProps {
   keyWord: string;
   children: string | ReactElement<any>;
   onChange: () => void;
+  checkBoxValue?: boolean
 }
 
 const CheckBoxWrapper = styled.p`
@@ -29,10 +30,10 @@ const LabelWrapper = styled.span`
   margin-top: 5px;
 `;
 
-const CheckBox: FC<DefaultProps> = ({ keyWord, children, onChange }) => {
+const CheckBox: FC<DefaultProps> = ({ keyWord, children, onChange, checkBoxValue }) => {
   return (
     <CheckBoxWrapper>
-      <Input type="checkbox" id={keyWord} onChange={onChange} />
+      <Input type="checkbox" id={keyWord} onChange={onChange} checkBoxValue={checkBoxValue} />
       <LabelWrapper>
         <Label htmlFor={keyWord}>{children}</Label>
       </LabelWrapper>
