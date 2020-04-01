@@ -54,6 +54,7 @@
     "resize-image": "^0.1.0",
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.0.1",
+    "turndown": "^6.0.0",
     "typescript": "^3.8.3",
     "yarn": "^1.22.0"
   },
