@@ -9,6 +9,7 @@ export const AdminArticles = loadable(() =>
   import("./components/templates/AdminArticles")
 );
 export const Article = loadable(() => import("./components/templates/Article"));
+export const ArticleEdit = loadable(() => import("./components/templates/ArticleEdit"));
 export const Tag = loadable(() => import("./components/templates/Tag"));
 export const Awards = loadable(() => import("./components/templates/Awards"));
 export const Contact = loadable(() => import("./components/templates/Contact"));

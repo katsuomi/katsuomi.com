@@ -33,6 +33,7 @@ const App: FC = () => (
           exact
         />
         <Route path={pages.article.path} component={routes.Article} exact />
+        <Route path={pages.articleEdit.path} component={routes.ArticleEdit} exact />
         <Route path={pages.tag.path} component={routes.Tag} exact />
         <Route path={pages.contact.path} component={routes.Contact} exact />
         <Route path={pages.profile.path} component={routes.Profile} exact />

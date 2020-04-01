@@ -25,6 +25,10 @@ const pages = {
     path: "/articles/:id",
     title: "記事詳細-- -Katsuomi.com-"
   },
+  articleEdit: {
+    path: "/articles/:id/edit",
+    title: "記事編集-- -Katsuomi.com-"
+  },
   tag: {
     path: "/tags/:id",
     title: "タグ詳細-- -Katsuomi.com-"
