@@ -7,11 +7,12 @@ import * as ActionTypes from "constants/actionTypes";
 import {
   createArticle,
   updateArticle,
+  deleteArticle,
   getSlideShowArticles,
   getLatestArticles,
   getArticle,
   getArticlesByTag,
-  getArticles
+  getArticles,
 } from "actions/articleAction";
 import { addFlashMessage } from "actions/flashMessagesAction";
 
@@ -60,6 +61,27 @@ function* runUpdateArticle(action: Model.UpdateArticleStartAction) {
     };
     yield put(addFlashMessage(payload));
     yield put(updateArticle.failure());
+  }
+}
+
+function* runDeleteArticle(action: Model.DeleteArticleStartAction) {
+  const data = action.payload;
+  const handler = API.deleteAtricle;
+  const { success, error } = yield call(handler, data);
+  if(success && !error) {
+    const payload = {
+      type: "success",
+      message: "記事を削除しました"
+    };
+    yield put(deleteArticle.success());
+    yield put(addFlashMessage(payload));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(deleteArticle.failure());
   }
 }
 
@@ -146,6 +168,7 @@ function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
   yield takeLatest(ActionTypes.UPDATE_ARTICLE_START, runUpdateArticle);
+  yield takeLatest(ActionTypes.DELETE_ARTICLE_START, runDeleteArticle);
   yield takeLatest(
     ActionTypes.GET_SLIDE_SHOW_ARTICLES_START,
     runGetSlideShowArticles
@@ -157,5 +180,5 @@ export function* watchArticle() {
 }
 
 export default function* rootSaga() {
-  yield all([ fork(watchArticle) ]);
+  yield all([fork(watchArticle)]);
 }

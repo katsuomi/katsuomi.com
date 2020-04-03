@@ -42,6 +42,14 @@ export const UPDATE_ARTICLE_SUCCESS = "UPDATE_ARTICLE_SUCCESS";
 export const UPDATE_ARTICLE_FAILURE = "UPDATE_ARTICLE_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Delete Article
+// -----------------------------------------------------------------------------
+
+export const DELETE_ARTICLE_START = "DELETE_ARTICLE_START";
+export const DELETE_ARTICLE_SUCCESS = "DELETE_ARTICLE_SUCCESS";
+export const DELETE_ARTICLE_FAILURE = "DELETE_ARTICLE_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Slide Show Articles
 // -----------------------------------------------------------------------------
 

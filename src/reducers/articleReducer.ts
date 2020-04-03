@@ -59,6 +59,21 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         ...state,
         isLoading: false
       };
+    case ActionTypes.DELETE_ARTICLE_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.DELETE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.DELETE_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
     case ActionTypes.GET_SLIDE_SHOW_ARTICLES_START:
       return {
         ...state,

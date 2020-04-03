@@ -32,6 +32,20 @@ export const updateArticle = {
   })
 };
 
+export const deleteArticle = {
+  start: (payload: Model.Article) => ({
+    type: ActionTypes.DELETE_ARTICLE_START as typeof ActionTypes.DELETE_ARTICLE_START,
+    payload: payload
+  }),
+  success: () => ({
+    type: ActionTypes.DELETE_ARTICLE_SUCCESS as typeof ActionTypes.DELETE_ARTICLE_SUCCESS
+  }),
+
+  failure: () => ({
+    type: ActionTypes.DELETE_ARTICLE_FAILURE as typeof ActionTypes.DELETE_ARTICLE_FAILURE
+  })
+};
+
 export const getSlideShowArticles = {
   start: () => ({
     type: ActionTypes.GET_SLIDE_SHOW_ARTICLES_START as typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_START

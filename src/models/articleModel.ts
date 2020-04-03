@@ -54,6 +54,18 @@ export interface UpdateArticleFailureAction {
   type: typeof ActionTypes.UPDATE_ARTICLE_FAILURE;
 }
 
+export interface DeleteArticleStartAction {
+  type: typeof ActionTypes.DELETE_ARTICLE_START;
+  payload: Article;
+}
+export interface DeleteArticleSuccessAction {
+  type: typeof ActionTypes.DELETE_ARTICLE_SUCCESS;
+}
+
+export interface DeleteArticleFailureAction {
+  type: typeof ActionTypes.DELETE_ARTICLE_FAILURE;
+}
+
 export interface GetSlideShowArticlesStartAction {
   type: typeof ActionTypes.GET_SLIDE_SHOW_ARTICLES_START;
 }
@@ -128,6 +140,9 @@ export type ArticleAction =
   | UpdateArticleStartAction
   | UpdateArticleSuccessAction
   | UpdateArticleFailureAction
+  | DeleteArticleStartAction
+  | DeleteArticleSuccessAction
+  | DeleteArticleFailureAction
   | GetSlideShowArticlesStartAction
   | GetSlideShowArticlesSuccessAction
   | GetSlideShowArticlesFilureAction

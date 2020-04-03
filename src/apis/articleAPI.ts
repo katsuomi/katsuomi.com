@@ -26,13 +26,30 @@ export const createAtricle = async (payload: Model.Article) => {
 
 // 記事更新
 export const updateAtricle = async (payload: Model.Article) => {
-  console.log({ payload })
   try {
     await firebase
       .firestore()
       .collection("articles")
       .doc(payload.uid)
       .update(payload)
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    const success = { success: "200 ok, success" };
+    return { success };
+  } catch(error) {
+    return { error };
+  }
+};
+
+// 記事削除
+export const deleteAtricle = async (payload: Model.Article) => {
+  try {
+    await firebase
+      .firestore()
+      .collection("articles")
+      .doc(payload.uid)
+      .delete()
       .catch(err => {
         throw new Error(err.message);
       });
@@ -160,8 +177,8 @@ export const getArticle = async (id: string) => {
           return;
         }
         const data = Object.assign({}, doc.data());
-        data.uid = doc.id
-        article = data
+        data.uid = doc.id;
+        article = data;
       })
       .catch(err => {
         throw new Error(err.message);
