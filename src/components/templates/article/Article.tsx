@@ -5,15 +5,15 @@ import { Helmet } from "react-helmet";
 import pages from "utils/pages";
 
 // import containers
-import ArticleEditContainer from "containers/ArticleEditContainer";
+import ArticleContainer from "containers/article/ArticleContainer";
 
-const ArticleEdit: FC = () => (
+const Article: FC = () => (
   <>
     <Helmet htmlAttributes={{ lang: "ja" }}>
-      <title>{pages.articleEdit.title}</title>
+      <title>{pages.article.title}</title>
     </Helmet>
-    <ArticleEditContainer />
+    <ArticleContainer />
   </>
 );
 
-export default ArticleEdit;
+export default Article;

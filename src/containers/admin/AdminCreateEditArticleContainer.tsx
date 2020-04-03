@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { withRouter, RouteComponentProps } from 'react-router';
 
 // import organisms
-import AdminLogin from "components/organisms/AdminLogin";
+import AdminLogin from "components/organisms/admin/AdminLogin";
 import AdminCreateArticleTags from "components/react-input-tag/AdminCreateArticleTags";
 
 // import molecules

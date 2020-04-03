@@ -9,9 +9,9 @@ import * as colors from "utils/color";
 import * as breakPoints from "utils/breakPoints";
 
 // import organisms
-import ProfileLeft from "components/organisms/ProfileLeft";
-import ProfileRight from "components/organisms/ProfileRight";
-import ProfileBottom from "components/organisms/ProfileBottom";
+import ProfileLeft from "components/organisms/profile/ProfileLeft";
+import ProfileRight from "components/organisms/profile/ProfileRight";
+import ProfileBottom from "components/organisms/profile/ProfileBottom";
 
 const Wrapper = styled.div`
   display: flex;

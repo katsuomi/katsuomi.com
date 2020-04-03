@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   margin-bottom: ${breakPoints.isSmartPhone() ? "10px" : "60px"};
 `;
 
-const Img = styled.img<{ src: string }>`
+const Img = styled.img<{ src: string; }>`
   width: ${props =>
     props.src === "/static/media/qiita.c6c37228.png" ? "100px" : "50px"};
   height: 50px;

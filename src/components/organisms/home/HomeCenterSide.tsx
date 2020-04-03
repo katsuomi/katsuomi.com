@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import HomeCenterContainer from "containers/HomeCenterContainer";
+import HomeCenterContainer from "containers/home/HomeCenterContainer";
 
 const Wrapper = styled.div`
   width: 60%;

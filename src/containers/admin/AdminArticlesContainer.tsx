@@ -12,7 +12,7 @@ import LinkAnchor from "components/atoms/LinkAnchor";
 import Tag from "components/molecules/Tag";
 
 // import organisms
-import AdminLogin from "components/organisms/AdminLogin";
+import AdminLogin from "components/organisms/admin/AdminLogin";
 
 // import commons
 import Spinner from "components/commons/Spinner";

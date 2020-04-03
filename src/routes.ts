@@ -1,15 +1,15 @@
 import loadable from "@loadable/component";
 
 export const Home = loadable(() => import("./components/templates/Home"));
-export const Admin = loadable(() => import("./components/templates/Admin"));
+export const Admin = loadable(() => import("./components/templates/admin/Admin"));
 export const AdminCreateArticle = loadable(() =>
-  import("./components/templates/AdminCreateArticle")
+  import("./components/templates/admin/AdminCreateArticle")
 );
 export const AdminArticles = loadable(() =>
-  import("./components/templates/AdminArticles")
+  import("./components/templates/admin/AdminArticles")
 );
-export const Article = loadable(() => import("./components/templates/Article"));
-export const ArticleEdit = loadable(() => import("./components/templates/ArticleEdit"));
+export const Article = loadable(() => import("./components/templates/article/Article"));
+export const ArticleEdit = loadable(() => import("./components/templates/article/ArticleEdit"));
 export const Tag = loadable(() => import("./components/templates/Tag"));
 export const Awards = loadable(() => import("./components/templates/Awards"));
 export const Contact = loadable(() => import("./components/templates/Contact"));

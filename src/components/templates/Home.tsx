@@ -8,9 +8,9 @@ import * as breakPoints from "utils/breakPoints";
 
 // import components
 import SlideContainer from "containers/slick/SlideContainer";
-import HomeLeftSide from "components/organisms/HomeLeftSide";
-import HomeCenterSide from "components/organisms/HomeCenterSide";
-import HomeRightSide from "components/organisms/HomeRightSide";
+import HomeLeftSide from "components/organisms/home/HomeLeftSide";
+import HomeCenterSide from "components/organisms/home/HomeCenterSide";
+import HomeRightSide from "components/organisms/home/HomeRightSide";
 
 const Wrapper = styled.div`
   display: flex;

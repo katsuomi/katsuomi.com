@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { connect } from "react-redux";
 
 // import organisms
-import AdminLogin from "components/organisms/AdminLogin";
-import AdminMenu from "components/organisms/AdminMenu";
+import AdminLogin from "components/organisms/admin/AdminLogin";
+import AdminMenu from "components/organisms/admin/AdminMenu";
 
 // import models
 import { AppState } from "models/index";

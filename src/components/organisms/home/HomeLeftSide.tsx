@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 
 // import organisms
-import ProfileLeft from "components/organisms/ProfileLeft";
+import ProfileLeft from "components/organisms/profile/ProfileLeft";
 
 // import atoms
 import Anchor from "components/atoms/Anchor";
@@ -56,7 +56,7 @@ const SNSWrapper = styled.div`
   justify-content: center;
 `;
 
-const Img = styled.img<{ src: string }>`
+const Img = styled.img<{ src: string; }>`
   width: ${props =>
     props.src === "/static/media/qiita.c6c37228.png" ? "100px" : "50px"};
   height: 50px;

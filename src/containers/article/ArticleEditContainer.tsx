@@ -30,7 +30,7 @@ import { dateToString } from "methods/articleMethods";
 // import models
 import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
-import AdminCreateEditArticleContainer from "./admin/AdminCreateEditArticleContainer";
+import AdminCreateEditArticleContainer from "../admin/AdminCreateEditArticleContainer";
 
 interface StateProps {
   article?: articleModel.Article;
