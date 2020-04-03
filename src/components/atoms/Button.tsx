@@ -46,9 +46,9 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
   background-color: ${props => props.backgroundColor && props.backgroundColor};
   border: 2px
     ${props =>
-      !props.disabled && props.borderColor
-        ? props.borderColor
-        : colors.BORDER_GRAY}
+    !props.disabled && props.borderColor
+      ? props.borderColor
+      : colors.BORDER_GRAY}
     solid;
   outline: none;
   font-size: ${fontSize.MINI};
@@ -65,10 +65,9 @@ const ButtonWrapper = styled.button<ButtonStyleProps>`
   margin-right: ${props => props.marginRight && props.marginRight};
   width: ${props => props.width};
   &:hover {
-    border-color: ${colors.LIGHTER_BLUE};
-    background-color: ${colors.LIGHTER_BLUE};
-    ${props => props.disabled && { "background-color": colors.BORDER_GRAY }}
+    ${props => props.disabled && { "background-color": colors.BORDER_GRAY }};
     ${props => props.disabled && { "border-color": colors.BORDER_GRAY }};
+    opacity: 0.5;
   }
   cursor: pointer;
   ${props => props.disabled && { "background-color": colors.BORDER_GRAY }};

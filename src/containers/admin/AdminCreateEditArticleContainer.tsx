@@ -21,7 +21,7 @@ import Button from "components/atoms/Button";
 import Spinner from "components/commons/Spinner";
 
 // import actions
-import { createArticle, updateArticle } from "actions/articleAction";
+import { createArticle, updateArticle, deleteArticle } from "actions/articleAction";
 
 // import models
 import { AppState } from "models/index";
@@ -42,6 +42,7 @@ import ImageUploader from "components/imageUploader/ImageUploader";
 
 // import markdown-editor
 import Editor from "components/markdown-editor/Editor";
+import { dialogMessage } from "methods/utilsMethods";
 
 interface StateProps {
   user?: adminLoginModel.User;
@@ -51,11 +52,12 @@ interface StateProps {
 interface DispatchProps {
   createArticle: (payload: articleModel.Article) => void;
   updateArticle: (payload: articleModel.Article) => void;
+  deleteArticle: (payload: articleModel.Article) => void;
 }
 interface Props extends RouteComponentProps<{}>, React.Props<{}> {
-  isEdit?: boolean
-  isCreate?: boolean
-  article?: articleModel.Article
+  isEdit?: boolean;
+  isCreate?: boolean;
+  article?: articleModel.Article;
 }
 
 type DefaultProps = StateProps & DispatchProps & Props;
@@ -88,6 +90,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   isLoading,
   createArticle,
   updateArticle,
+  deleteArticle,
   isEdit,
   isCreate,
   article,
@@ -101,20 +104,20 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const [date, setDate] = useState<Date | TimeStamp>(article ? article.date : new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.is_add_slide_show ? article.is_add_slide_show : false);
 
-  const defaultDate = date instanceof Date ? date : new Date(date.seconds * 1000)
-  const defaultTags: tagModel.Tag[] = []
+  const defaultDate = date instanceof Date ? date : new Date(date.seconds * 1000);
+  const defaultTags: tagModel.Tag[] = [];
   if(article) {
     article.tag_ids.forEach((tagId) => {
       defaultTags.push({
         id: tagId,
         text: tagId
-      })
-    })
+      });
+    });
   }
 
   useEffect(() => {
-    setDate(defaultDate)
-  }, [defaultDate])
+    setDate(defaultDate);
+  }, [defaultDate]);
 
   const isDisabled =
     title && subTitle && content && thumbnailImagePath && date ? false : true;
@@ -122,6 +125,25 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   if(user === undefined || (user && !isAdmin(user))) {
     return <AdminLogin />;
   }
+
+  const handleOnDelete = async (e: FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      uid: article ? article.uid : "",
+      title: title,
+      subTitle: subTitle,
+      thumbnail_image_path: thumbnailImagePath,
+      content: content,
+      date: date instanceof Date ? date : new Date(),
+      tag_ids: tagIds,
+      is_add_slide_show: isAddSlideShow
+    };
+    const isOK = dialogMessage('この記事を削除します。大丈夫ですか？');
+    if(isOK) {
+      await deleteArticle(payload);
+      await history.push('/admin');
+    }
+  };
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -135,8 +157,6 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       tag_ids: tagIds,
       is_add_slide_show: isAddSlideShow
     };
-
-    console.log({ payload })
 
     isCreate && await createArticle(payload);
     isEdit && await updateArticle(payload);
@@ -152,7 +172,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
     }
 
     if(isEdit) {
-      await history.push('/admin')
+      await history.push('/admin');
     }
   };
 
@@ -164,6 +184,8 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
     tags.forEach(tag => setTagIds(tagIds => _.uniq([...tagIds, tag.id])));
   };
 
+  const submitMessage = isCreate ? '作成' : '更新';
+
   return (
     <>
       {isLoading ? (
@@ -172,90 +194,105 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
           left={"50%"}
         />
       ) : (
-          <ContentWrapper>
-            <Title>記事をかく</Title>
-            <Left>
-              <InputLabel isRequired={true}>タグを追加</InputLabel>
-            </Left>
-            <AdminCreateArticleTags defaultTags={defaultTags} onBlur={tags => handleOnBlurTagIds(tags)} />
-            <Left>
-              <InputLabel isRequired={true}>タイトル</InputLabel>
-            </Left>
-            <Input
-              placeholder=""
-              isRequired={true}
-              value={title}
-              width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
-              borderColor={colors.BORDER_LIGHT_GRAY}
-              backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
-              margin={["10px", "10px", "0px", "0px"]}
-              padding={["10px", "10px", "10px", "10px"]}
-              onChange={setTitle}
-            />
-            <Left>
-              <InputLabel isRequired={true}>サブタイトル</InputLabel>
-            </Left>
-            <Input
-              placeholder=""
-              isRequired={true}
-              value={subTitle}
-              width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
-              borderColor={colors.BORDER_LIGHT_GRAY}
-              backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
-              margin={["10px", "10px", "0px", "0px"]}
-              padding={["10px", "10px", "10px", "10px"]}
-              onChange={setSubTitle}
-            />
-            <Left>
-              <InputLabel isRequired={true}>日付</InputLabel>
-            </Left>
-            <Input
-              placeholder=""
-              isRequired={true}
-              date={date instanceof Date ? date : new Date()}
-              type="date"
-              width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
-              borderColor={colors.BORDER_LIGHT_GRAY}
-              backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
-              margin={["10px", "10px", "0px", "0px"]}
-              padding={["10px", "10px", "10px", "10px"]}
-              onChange={setDate}
-            />
-            <Left>
-              <InputLabel isRequired={true}>サムネイル画像</InputLabel>
-            </Left>
-            <ImageUploader
-              onChange={setThumbnailImagePath}
-              value="サムネイル画像"
-            />
-            <Left>
-              <CheckBox
-                keyWord="isSlider"
-                onChange={handleOnChangeIsAddSlideShow}
-                checkBoxValue={isAddSlideShow}
-              >
-                スライドショーに載せる(横長写真推奨)
-            </CheckBox>
-            </Left>
-            <Left>
-              <InputLabel isRequired={true}>内容</InputLabel>
-            </Left>
-            <Editor onChange={setContent} defaultValue={content} />
+          <>
+            <ContentWrapper>
+              <Title>記事をかく</Title>
+              <Left>
+                <InputLabel isRequired={true}>タグを追加</InputLabel>
+              </Left>
+              <AdminCreateArticleTags defaultTags={defaultTags} onBlur={tags => handleOnBlurTagIds(tags)} />
+              <Left>
+                <InputLabel isRequired={true}>タイトル</InputLabel>
+              </Left>
+              <Input
+                placeholder=""
+                isRequired={true}
+                value={title}
+                width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+                borderColor={colors.BORDER_LIGHT_GRAY}
+                backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
+                margin={["10px", "10px", "0px", "0px"]}
+                padding={["10px", "10px", "10px", "10px"]}
+                onChange={setTitle}
+              />
+              <Left>
+                <InputLabel isRequired={true}>サブタイトル</InputLabel>
+              </Left>
+              <Input
+                placeholder=""
+                isRequired={true}
+                value={subTitle}
+                width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+                borderColor={colors.BORDER_LIGHT_GRAY}
+                backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
+                margin={["10px", "10px", "0px", "0px"]}
+                padding={["10px", "10px", "10px", "10px"]}
+                onChange={setSubTitle}
+              />
+              <Left>
+                <InputLabel isRequired={true}>日付</InputLabel>
+              </Left>
+              <Input
+                placeholder=""
+                isRequired={true}
+                date={date instanceof Date ? date : new Date()}
+                type="date"
+                width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+                borderColor={colors.BORDER_LIGHT_GRAY}
+                backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
+                margin={["10px", "10px", "0px", "0px"]}
+                padding={["10px", "10px", "10px", "10px"]}
+                onChange={setDate}
+              />
+              <Left>
+                <InputLabel isRequired={true}>サムネイル画像</InputLabel>
+              </Left>
+              <ImageUploader
+                onChange={setThumbnailImagePath}
+                value="サムネイル画像"
+              />
+              <Left>
+                <CheckBox
+                  keyWord="isSlider"
+                  onChange={handleOnChangeIsAddSlideShow}
+                  checkBoxValue={isAddSlideShow}
+                >
+                  スライドショーに載せる(横長写真推奨)
+                </CheckBox>
+              </Left>
+              <Left>
+                <InputLabel isRequired={true}>内容</InputLabel>
+              </Left>
+              <Editor onChange={setContent} defaultValue={content} />
 
-            <Button
-              isDisabled={isDisabled}
-              borderColor={colors.BLUE}
-              backgroundColor={colors.BRIGHT_BLUE}
-              color={colors.WHITE}
-              isFontWeight={true}
-              onClick={handleOnSubmit}
-              padding={["3px", "3px", "80px", "80px"]}
-              margin={["20px", "0px", "0px", "0px"]}
-              width="75%"
-            >
-              送信
-          </Button>
-          </ContentWrapper>
+              <Button
+                isDisabled={isDisabled}
+                borderColor={colors.BLUE}
+                backgroundColor={colors.BRIGHT_BLUE}
+                color={colors.WHITE}
+                isFontWeight={true}
+                onClick={handleOnSubmit}
+                padding={["3px", "3px", "80px", "80px"]}
+                margin={["20px", "0px", "0px", "0px"]}
+                width="75%"
+              >
+                {submitMessage}
+              </Button>
+              {isEdit && <Button
+                isDisabled={isDisabled}
+                borderColor={colors.RED}
+                backgroundColor={colors.RED}
+                color={colors.WHITE}
+                isFontWeight={true}
+                onClick={handleOnDelete}
+                padding={["3px", "3px", "80px", "80px"]}
+                margin={["20px", "0px", "0px", "0px"]}
+                width="75%"
+              >
+                削除
+              </Button>}
+            </ContentWrapper>
+          </>
         )}
     </>
   );
@@ -270,7 +307,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       createArticle: payload => createArticle.start(payload),
-      updateArticle: payload => updateArticle.start(payload)
+      updateArticle: payload => updateArticle.start(payload),
+      deleteArticle: payload => deleteArticle.start(payload)
     },
     dispatch
   );

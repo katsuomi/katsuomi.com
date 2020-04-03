@@ -20,3 +20,8 @@ export const encodeToString = (value: string): string => {
 export const decodeToString = (value: string): string => {
   return decodeURIComponent(value);
 };
+
+// ダイアログの表示
+export const dialogMessage = (value: string): boolean => {
+  return window.confirm(value);
+};

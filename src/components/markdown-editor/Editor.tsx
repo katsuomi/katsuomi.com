@@ -24,6 +24,7 @@ const LeftWrapper = styled.div`
   width: 100%;
   height: 82vh;
   overflow: scroll;
+  max-width: 1000px;
 `;
 
 const RightWrapper = styled.div`
