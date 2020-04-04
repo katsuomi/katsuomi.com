@@ -4,9 +4,6 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 
-// import atoms
-import LinkAnchor from "components/atoms/LinkAnchor";
-
 // import molecules
 import Tag from "components/molecules/Tag";
 
@@ -18,11 +15,7 @@ import { getTags } from "actions/tagAction";
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
-import * as colors from "utils/color";
 import * as fonSize from "utils/fontSize";
-
-// import methods
-import { getArticleCountByTag } from "methods/tagMethods";
 
 // import models
 import { AppState } from "models/index";
@@ -70,15 +63,15 @@ const HomeRightContainer: FC<DefaultProps> = ({ tags, isLoading, getTags }) => {
           right={"10%"}
         />
       ) : (
-        <Wrapper>
-          <Title>タグ一覧</Title>
-          <TagWrapper>
-            {tags?.map(tag => {
-              return <Tag key={tag.id} text={tag.text} isArticleCount={true} />;
-            })}
-          </TagWrapper>
-        </Wrapper>
-      )}
+          <Wrapper>
+            <Title>タグ一覧</Title>
+            <TagWrapper>
+              {tags?.map(tag => {
+                return <Tag key={tag.id} text={tag.text} isArticleCount={true} />;
+              })}
+            </TagWrapper>
+          </Wrapper>
+        )}
     </>
   );
 };

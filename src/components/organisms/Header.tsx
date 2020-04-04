@@ -10,6 +10,7 @@ import * as fontSize from "utils/fontSize";
 
 //import containers
 import FlashMessagesContainer from "containers/FlashMessagesContainer";
+import HeaderTitleContainer from "containers/HeaderTitleContainer";
 
 const HeaderWrapper = styled.div`
   display: ${breakPoints.isSmartPhone() ? "block" : "flex"};
@@ -44,9 +45,7 @@ const Header: FC = () => {
     <>
       <HeaderWrapper>
         <HeaderTitle>
-          <LinkAnchor src="/" isHoverWhite={true}>
-            Katsuomi.com
-          </LinkAnchor>
+          <HeaderTitleContainer />
         </HeaderTitle>
         <HeaderContents>
           <LinkAnchor src="/news" isHoverWhite={true}>

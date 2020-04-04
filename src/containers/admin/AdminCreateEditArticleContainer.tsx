@@ -198,7 +198,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
             <ContentWrapper>
               <Title>記事をかく</Title>
               <Left>
-                <InputLabel isRequired={true}>タグを追加</InputLabel>
+                <InputLabel isRequired={true}>タグを追加(最大5個まで)</InputLabel>
               </Left>
               <AdminCreateArticleTags defaultTags={defaultTags} onBlur={tags => handleOnBlurTagIds(tags)} />
               <Left>
