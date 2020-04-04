@@ -1,12 +1,9 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState, FormEvent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 import Image from "react-image-resizer";
-
-// import atoms
-import LinkAnchor from "components/atoms/LinkAnchor";
 
 // import molecules
 import MarkDownContent from "components/molecules/MarkDownContent";
@@ -16,7 +13,7 @@ import Tag from "components/molecules/Tag";
 import Spinner from "components/commons/Spinner";
 
 // import actions
-import { getArticle } from "actions/articleAction";
+import { getArticle, changeArticleGoodCount } from "actions/articleAction";
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
@@ -32,12 +29,13 @@ import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
 
 interface StateProps {
-  article?: articleModel.Article;
-  isLoading?: boolean;
+  article: articleModel.Article;
+  isLoading: boolean;
 }
 
 interface DispatchProps {
   getArticle: (id: string) => void;
+  changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => void;
 }
 
 type DefaultProps = StateProps & DispatchProps;
@@ -77,10 +75,31 @@ const Title = styled.h3`
 const I = styled.i`
   font-size: ${fontSize.H2};
   margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const Good = styled.p`
   margin-right: auto;
+`;
+
+const GoodFix = styled.button`
+  position: fixed;
+  right: 22%;
+  bottom: 5px;
+  background-color: ${colors.BG_GRAY};
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  padding: initial;
+  border-radius: 50%;
+  font-size: ${fontSize.H3};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const Date = styled.p`
@@ -96,11 +115,39 @@ const ContentWrapper = styled.div`
 const ArticleContainer: FC<DefaultProps> = ({
   article,
   isLoading,
-  getArticle
+  getArticle,
+  changeArticleGoodCount
 }) => {
+  const [currentCount, setCurrentCount] = useState<number>(-1);
   useEffect(() => {
     getArticle(getUrlId());
-  }, [getArticle]);
+  }, []);
+
+  const isDoneGoodCount = localStorage.getItem("isDoneGoodCount") === 'true';
+  let goodCountClassNameForFontAweSome = 'far fa-thumbs-up';
+  if(isDoneGoodCount) {
+    goodCountClassNameForFontAweSome = 'fas fa-thumbs-up';
+  }
+  const handleOnSubmitGoodCount = async (e: FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      articleId: article && article.uid ? article.uid : '',
+      isDone: isDoneGoodCount,
+    };
+    await changeArticleGoodCount(payload);
+
+    if(isDoneGoodCount) {
+      localStorage.removeItem("isDoneGoodCount");
+      setCurrentCount(currentCount - 1);
+    } else {
+      localStorage.setItem('isDoneGoodCount', 'true');
+      setCurrentCount(currentCount + 1);
+    }
+  };
+
+  if(article && article.goodCount !== undefined && currentCount === -1) {
+    setCurrentCount(article.goodCount);
+  }
 
   return (
     <>
@@ -122,7 +169,7 @@ const ArticleContainer: FC<DefaultProps> = ({
                   />
                 </ImageWrapper>
                 <Title>{article.title}</Title>
-                <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>
+                <Good>{currentCount}<I className={goodCountClassNameForFontAweSome} onClick={(e) => handleOnSubmitGoodCount(e)}></I></Good>
                 <Date>{dateToString(article.date)}</Date>
                 {article.tagIds.map(tag => (
                   <Tag key={tag} text={tag} isArticleCount={false} />
@@ -130,6 +177,7 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
+                <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
               <RightSide></RightSide>
             </Wrapper>
@@ -147,9 +195,11 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      getArticle: (id: string) => getArticle.start(id)
+      getArticle: (id: string) => getArticle.start(id),
+      changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => changeArticleGoodCount.start(payload)
     },
     dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer);
+

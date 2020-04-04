@@ -74,6 +74,21 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         ...state,
         isLoading: false
       };
+    case ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
     case ActionTypes.GET_SLIDE_SHOW_ARTICLES_START:
       return {
         ...state,

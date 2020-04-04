@@ -50,6 +50,14 @@ export const DELETE_ARTICLE_SUCCESS = "DELETE_ARTICLE_SUCCESS";
 export const DELETE_ARTICLE_FAILURE = "DELETE_ARTICLE_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Change Article Good Count
+// -----------------------------------------------------------------------------
+
+export const CHANGE_ARTICLE_GOOD_COUNT_START = "CHANGE_ARTICLE_GOOD_COUNT_START";
+export const CHANGE_ARTICLE_GOOD_COUNT_SUCCESS = "CHANGE_ARTICLE_GOOD_COUNT_SUCCESS";
+export const CHANGE_ARTICLE_GOOD_COUNT_FAILURE = "CHANGE_ARTICLE_GOOD_COUNT_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Slide Show Articles
 // -----------------------------------------------------------------------------
 

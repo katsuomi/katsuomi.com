@@ -40,6 +40,44 @@ export const updateAtricle = async (payload: Model.Article) => {
   }
 };
 
+// 記事いいね更新
+export const changeArticleGoodCount = async (payload: Model.ArticleGoodCountPayLoad) => {
+  try {
+    let currentGoodCount = 0;
+    // 現在のいいね数取得
+    await firebase
+      .firestore()
+      .collection("articles")
+      .doc(payload.articleId)
+      .get()
+      .then(doc => {
+        if(!doc.exists) {
+          throw new Error();
+        }
+        const data = Object.assign({}, doc.data());
+        currentGoodCount = data.goodCount;
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+
+    await firebase
+      .firestore()
+      .collection("articles")
+      .doc(payload.articleId)
+      .update({
+        goodCount: payload.isDone ? currentGoodCount - 1 : currentGoodCount + 1
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    const success = { success: "200 ok, success" };
+    return { success };
+  } catch(error) {
+    return { error };
+  }
+};
+
 // 記事削除
 export const deleteAtricle = async (payload: string) => {
   try {

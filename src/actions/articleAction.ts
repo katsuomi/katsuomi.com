@@ -32,19 +32,19 @@ export const updateArticle = {
   })
 };
 
-// export const Article = {
-//   start: (payload: Model.Article) => ({
-//     type: ActionTypes.UPDATE_ARTICLE_START as typeof ActionTypes.UPDATE_ARTICLE_START,
-//     payload: payload
-//   }),
-//   success: () => ({
-//     type: ActionTypes.UPDATE_ARTICLE_SUCCESS as typeof ActionTypes.UPDATE_ARTICLE_SUCCESS
-//   }),
+export const changeArticleGoodCount = {
+  start: (payload: Model.ArticleGoodCountPayLoad) => ({
+    type: ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START as typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START,
+    payload: payload
+  }),
+  success: () => ({
+    type: ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS as typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS
+  }),
 
-//   failure: () => ({
-//     type: ActionTypes.UPDATE_ARTICLE_FAILURE as typeof ActionTypes.UPDATE_ARTICLE_FAILURE
-//   })
-// };
+  failure: () => ({
+    type: ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_FAILURE as typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_FAILURE
+  })
+};
 
 export const deleteArticle = {
   start: (payload: Model.Article) => ({

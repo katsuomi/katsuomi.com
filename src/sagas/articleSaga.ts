@@ -7,6 +7,7 @@ import * as ActionTypes from "constants/actionTypes";
 import {
   createArticle,
   updateArticle,
+  changeArticleGoodCount,
   deleteArticle,
   getSlideShowArticles,
   getLatestArticles,
@@ -61,6 +62,27 @@ function* runUpdateArticle(action: Model.UpdateArticleStartAction) {
     };
     yield put(addFlashMessage(payload));
     yield put(updateArticle.failure());
+  }
+}
+
+function* runChangeArticleGoodCount(action: Model.ChangeArticleGoodCountStartAction) {
+  const data = action.payload;
+  const handler = API.changeArticleGoodCount;
+  const { success, error } = yield call(handler, data);
+  if(success && !error) {
+    const payload = {
+      type: "success",
+      message: "記事にイイネしました"
+    };
+    yield put(changeArticleGoodCount.success());
+    yield put(addFlashMessage(payload));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(changeArticleGoodCount.failure());
   }
 }
 
@@ -168,6 +190,7 @@ function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
 export function* watchArticle() {
   yield takeLatest(ActionTypes.CREATE_ARTICLE_START, runCreateArticle);
   yield takeLatest(ActionTypes.UPDATE_ARTICLE_START, runUpdateArticle);
+  yield takeLatest(ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START, runChangeArticleGoodCount);
   yield takeLatest(ActionTypes.DELETE_ARTICLE_START, runDeleteArticle);
   yield takeLatest(
     ActionTypes.GET_SLIDE_SHOW_ARTICLES_START,

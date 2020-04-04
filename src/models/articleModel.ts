@@ -28,6 +28,11 @@ export interface ArticleState {
   article: Article;
 }
 
+export interface ArticleGoodCountPayLoad {
+  articleId: string;
+  isDone: boolean;
+}
+
 export interface CreateArticleStartAction {
   type: typeof ActionTypes.CREATE_ARTICLE_START;
   payload: Article;
@@ -52,6 +57,18 @@ export interface UpdateArticleSuccessAction {
 
 export interface UpdateArticleFailureAction {
   type: typeof ActionTypes.UPDATE_ARTICLE_FAILURE;
+}
+
+export interface ChangeArticleGoodCountStartAction {
+  type: typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START;
+  payload: ArticleGoodCountPayLoad;
+}
+export interface ChangeArticleGoodCountSuccessAction {
+  type: typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS;
+}
+
+export interface ChangeArticleGoodCountFailureAction {
+  type: typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_FAILURE;
 }
 
 export interface DeleteArticleStartAction {
@@ -143,6 +160,9 @@ export type ArticleAction =
   | DeleteArticleStartAction
   | DeleteArticleSuccessAction
   | DeleteArticleFailureAction
+  | ChangeArticleGoodCountStartAction
+  | ChangeArticleGoodCountSuccessAction
+  | ChangeArticleGoodCountFailureAction
   | GetSlideShowArticlesStartAction
   | GetSlideShowArticlesSuccessAction
   | GetSlideShowArticlesFilureAction
