@@ -74,6 +74,15 @@ const Title = styled.h3`
   font-size: ${fontSize.H3};
 `;
 
+const I = styled.i`
+  font-size: ${fontSize.H2};
+  margin-left: 10px;
+`;
+
+const Good = styled.p`
+  margin-right: auto;
+`;
+
 const Date = styled.p`
   font-size: ${fontSize.CAPTION};
   color: ${colors.DARK_GRAY};
@@ -107,14 +116,15 @@ const ArticleContainer: FC<DefaultProps> = ({
               <CenterSide>
                 <ImageWrapper>
                   <Image
-                    src={article.thumbnail_image_path}
+                    src={article.thumbnailImagePath}
                     height={300}
                     width={700}
                   />
                 </ImageWrapper>
                 <Title>{article.title}</Title>
+                <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>
                 <Date>{dateToString(article.date)}</Date>
-                {article.tag_ids.map(tag => (
+                {article.tagIds.map(tag => (
                   <Tag key={tag} text={tag} isArticleCount={false} />
                 ))}
                 <ContentWrapper>

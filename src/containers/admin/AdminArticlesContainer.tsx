@@ -83,7 +83,7 @@ const AdminArticleContainer: FC<DefaultProps> = ({
             <PageTitle>すべての記事</PageTitle>
             {articles?.map(article => {
               return (
-                <ArticleSummary article={article} key={article.uid} />
+                <ArticleSummary article={article} key={article.uid} isEdit={true} />
               );
             })}
           </Wrapper>

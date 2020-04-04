@@ -13,10 +13,10 @@ export interface Article {
   title: string;
   subTitle: string;
   date: Date;
-  tag_ids: string[];
-  thumbnail_image_path: string;
-  favorite_count?: number;
-  is_add_slide_show?: boolean;
+  tagIds: string[];
+  thumbnailImagePath: string;
+  goodCount?: number;
+  isAddSlideShow?: boolean;
 }
 
 export interface ArticleState {
@@ -56,7 +56,7 @@ export interface UpdateArticleFailureAction {
 
 export interface DeleteArticleStartAction {
   type: typeof ActionTypes.DELETE_ARTICLE_START;
-  payload: Article;
+  payload: string;
 }
 export interface DeleteArticleSuccessAction {
   type: typeof ActionTypes.DELETE_ARTICLE_SUCCESS;

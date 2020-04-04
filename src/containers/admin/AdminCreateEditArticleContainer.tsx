@@ -52,7 +52,7 @@ interface StateProps {
 interface DispatchProps {
   createArticle: (payload: articleModel.Article) => void;
   updateArticle: (payload: articleModel.Article) => void;
-  deleteArticle: (payload: articleModel.Article) => void;
+  deleteArticle: (payload: string) => void;
 }
 interface Props extends RouteComponentProps<{}>, React.Props<{}> {
   isEdit?: boolean;
@@ -98,16 +98,16 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
 }) => {
   const [title, setTitle] = useState<string>(article ? article.title : "");
   const [subTitle, setSubTitle] = useState<string>(article ? article.subTitle : "");
-  const [thumbnailImagePath, setThumbnailImagePath] = useState<string>(article ? article.thumbnail_image_path : "");
+  const [thumbnailImagePath, setThumbnailImagePath] = useState<string>(article ? article.thumbnailImagePath : "");
   const [content, setContent] = useState<string>(article ? article.content : "");
-  const [tagIds, setTagIds] = useState<string[]>(article ? article.tag_ids : []);
+  const [tagIds, setTagIds] = useState<string[]>(article ? article.tagIds : []);
   const [date, setDate] = useState<Date | TimeStamp>(article ? article.date : new Date());
-  const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.is_add_slide_show ? article.is_add_slide_show : false);
+  const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.isAddSlideShow ? article.isAddSlideShow : false);
 
   const defaultDate = date instanceof Date ? date : new Date(date.seconds * 1000);
   const defaultTags: tagModel.Tag[] = [];
   if(article) {
-    article.tag_ids.forEach((tagId) => {
+    article.tagIds.forEach((tagId) => {
       defaultTags.push({
         id: tagId,
         text: tagId
@@ -128,19 +128,10 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
 
   const handleOnDelete = async (e: FormEvent) => {
     e.preventDefault();
-    const payload = {
-      uid: article ? article.uid : "",
-      title: title,
-      subTitle: subTitle,
-      thumbnail_image_path: thumbnailImagePath,
-      content: content,
-      date: date instanceof Date ? date : new Date(),
-      tag_ids: tagIds,
-      is_add_slide_show: isAddSlideShow
-    };
+    const articleId = article && article.uid ? article.uid : "";
     const isOK = dialogMessage('この記事を削除します。大丈夫ですか？');
     if(isOK) {
-      await deleteArticle(payload);
+      await deleteArticle(articleId);
       await history.push('/admin');
     }
   };
@@ -151,11 +142,12 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       uid: article ? article.uid : "",
       title: title,
       subTitle: subTitle,
-      thumbnail_image_path: thumbnailImagePath,
+      thumbnailImagePath: thumbnailImagePath,
       content: content,
       date: date instanceof Date ? date : new Date(),
-      tag_ids: tagIds,
-      is_add_slide_show: isAddSlideShow
+      tagIds: tagIds,
+      goodCount: 0,
+      isAddSlideShow: isAddSlideShow
     };
 
     isCreate && await createArticle(payload);

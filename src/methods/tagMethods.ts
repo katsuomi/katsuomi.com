@@ -50,7 +50,7 @@ export const getArticleCountByTag = async (tagId: string): Promise<number> => {
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        if (doc.data().tag_ids.indexOf(tagId) >= 0) {
+        if(doc.data().tagIds.indexOf(tagId) >= 0) {
           count += 1;
         }
       });

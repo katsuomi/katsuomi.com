@@ -21,6 +21,7 @@ import * as articleModel from "models/articleModel";
 
 interface DefaultProps {
   article?: articleModel.Article;
+  isEdit?: boolean;
 }
 
 const ArticleWrapper = styled.div`
@@ -107,19 +108,23 @@ const Date = styled.p`
   margin-top: 0px;
 `;
 
-const ArticleSummary: FC<DefaultProps> = ({ article }) => {
-
+const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
   if(!article) return null;
+
+  let path = `/articles/${article.uid}`;
+  if(isEdit) {
+    path = `/articles/${article.uid}/edit`;
+  }
 
   return (
     <ArticleWrapper key={article.uid}>
-      <LinkAnchor src={`/articles/${article.uid}`}>
+      <LinkAnchor src={path}>
         <Linkable>
           <UpperPart>
             <Left>
               <Title>{article.title}</Title>
               <TagWrapper>
-                {article.tag_ids.map(tag => (
+                {article.tagIds.map(tag => (
                   <Tag key={tag} text={tag} isArticleCount={false} />
                 ))}
               </TagWrapper>
@@ -127,14 +132,14 @@ const ArticleSummary: FC<DefaultProps> = ({ article }) => {
             </Left>
             <Right>
               <Image
-                src={article.thumbnail_image_path}
+                src={article.thumbnailImagePath}
                 height={180}
                 width={180}
               />
             </Right>
           </UpperPart>
           <LowerPart>
-            <Good>{0}<I className="far fa-thumbs-up"></I></Good>
+            <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>
             <Date>{dateToString(article.date)}</Date>
           </LowerPart>
         </Linkable>

@@ -1,5 +1,3 @@
-import { concat } from "lodash";
-
 // import utils
 import firebase from "utils/firebase";
 // import models
@@ -43,12 +41,12 @@ export const updateAtricle = async (payload: Model.Article) => {
 };
 
 // 記事削除
-export const deleteAtricle = async (payload: Model.Article) => {
+export const deleteAtricle = async (payload: string) => {
   try {
     await firebase
       .firestore()
       .collection("articles")
-      .doc(payload.uid)
+      .doc(payload)
       .delete()
       .catch(err => {
         throw new Error(err.message);
@@ -67,7 +65,7 @@ export const getSlideShowArticles = async () => {
     await firebase
       .firestore()
       .collection("articles")
-      .where("is_add_slide_show", "==", true)
+      .where("isAddSlideShow", "==", true)
       .get()
       .then(snapshot => {
         if(snapshot.empty) {
@@ -80,8 +78,9 @@ export const getSlideShowArticles = async () => {
             title: doc.data().title,
             subTitle: doc.data().subTitle,
             date: doc.data().date,
-            tag_ids: doc.data().tag_ids,
-            thumbnail_image_path: doc.data().thumbnail_image_path
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
           });
         });
       })
@@ -115,8 +114,9 @@ export const getLatestArticles = async () => {
             subTitle: doc.data().subTitle,
             title: doc.data().title,
             date: doc.data().date,
-            tag_ids: doc.data().tag_ids,
-            thumbnail_image_path: doc.data().thumbnail_image_path
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
           });
         });
       })
@@ -149,8 +149,9 @@ export const getArticles = async () => {
             subTitle: doc.data().subTitle,
             title: doc.data().title,
             date: doc.data().date,
-            tag_ids: doc.data().tag_ids,
-            thumbnail_image_path: doc.data().thumbnail_image_path
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
           });
         });
       })
@@ -197,7 +198,7 @@ export const getArticlesByTag = async (tagId: string) => {
       .firestore()
       .collection("articles")
       .orderBy("date", "desc")
-      .where("tag_ids", "array-contains", tagId)
+      .where("tagIds", "array-contains", tagId)
       .get()
       .then(snapshot => {
         if(snapshot.empty) {
@@ -210,8 +211,9 @@ export const getArticlesByTag = async (tagId: string) => {
             subTitle: doc.data().subTitle,
             title: doc.data().title,
             date: doc.data().date,
-            tag_ids: doc.data().tag_ids,
-            thumbnail_image_path: doc.data().thumbnail_image_path
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
           });
         });
       })

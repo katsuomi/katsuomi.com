@@ -90,17 +90,17 @@ const SlideContainer: FC<DefaultProps> = ({
           left={"50%"}
         />
       ) : (
-        <Slider {...settings}>
-          {slideShowArticles &&
-            slideShowArticles.map(article => (
-              <Wrapper key={article.uid}>
-                <LinkAnchor src={"/articles/" + article.uid}>
-                  <Img src={article.thumbnail_image_path} alt={article.title} />
-                </LinkAnchor>
-              </Wrapper>
-            ))}
-        </Slider>
-      )}
+          <Slider {...settings}>
+            {slideShowArticles &&
+              slideShowArticles.map(article => (
+                <Wrapper key={article.uid}>
+                  <LinkAnchor src={"/articles/" + article.uid}>
+                    <Img src={article.thumbnailImagePath} alt={article.title} />
+                  </LinkAnchor>
+                </Wrapper>
+              ))}
+          </Slider>
+        )}
     </>
   );
 };

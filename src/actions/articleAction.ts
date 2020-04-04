@@ -19,7 +19,7 @@ export const createArticle = {
 };
 
 export const updateArticle = {
-  start: (payload: Model.Article) => ({
+  start: (payload: string) => ({
     type: ActionTypes.UPDATE_ARTICLE_START as typeof ActionTypes.UPDATE_ARTICLE_START,
     payload: payload
   }),
@@ -31,6 +31,20 @@ export const updateArticle = {
     type: ActionTypes.UPDATE_ARTICLE_FAILURE as typeof ActionTypes.UPDATE_ARTICLE_FAILURE
   })
 };
+
+// export const Article = {
+//   start: (payload: Model.Article) => ({
+//     type: ActionTypes.UPDATE_ARTICLE_START as typeof ActionTypes.UPDATE_ARTICLE_START,
+//     payload: payload
+//   }),
+//   success: () => ({
+//     type: ActionTypes.UPDATE_ARTICLE_SUCCESS as typeof ActionTypes.UPDATE_ARTICLE_SUCCESS
+//   }),
+
+//   failure: () => ({
+//     type: ActionTypes.UPDATE_ARTICLE_FAILURE as typeof ActionTypes.UPDATE_ARTICLE_FAILURE
+//   })
+// };
 
 export const deleteArticle = {
   start: (payload: Model.Article) => ({

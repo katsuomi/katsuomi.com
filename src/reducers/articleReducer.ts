@@ -18,8 +18,8 @@ const initialState: Model.ArticleState = {
     title: "",
     subTitle: "",
     date: new Date(),
-    tag_ids: [],
-    thumbnail_image_path: ""
+    tagIds: [],
+    thumbnailImagePath: ""
   }
 };
 
