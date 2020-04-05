@@ -8,7 +8,7 @@
 import * as ActionTypes from "constants/actionTypes";
 
 export interface FlashMessageType {
-  id: number;
+  id: string;
   type: string;
   message: string;
 }
@@ -19,7 +19,7 @@ export interface FlashMessagePayloadType {
 }
 
 export interface FlashMessageState {
-  flashMessages: { id: number; type: string; message: string }[];
+  flashMessages: FlashMessageType[];
 }
 
 export interface AddFlashMessageAction {
@@ -29,7 +29,7 @@ export interface AddFlashMessageAction {
 
 export interface RemoveFlashMessageAction {
   type: typeof ActionTypes.REMOVE_FLASH_MESSAGE;
-  payload: number;
+  payload: string;
 }
 
 export type FlashMessagesAction =

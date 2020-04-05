@@ -17,7 +17,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  removeFlashMessage: (payload: number) => void;
+  removeFlashMessage: (payload: string) => void;
 }
 
 type DefaultProps = StateProps & DispatchProps;

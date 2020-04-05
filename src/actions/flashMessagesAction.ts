@@ -12,8 +12,8 @@ export const addFlashMessage = (
 });
 
 export const removeFlashMessage = (
-  id: number
+  payload: string
 ): Model.RemoveFlashMessageAction => ({
   type: ActionTypes.REMOVE_FLASH_MESSAGE,
-  payload: id
+  payload: payload
 });

@@ -36,6 +36,7 @@ export const BLACK = "#2D323C";
 export const BORDER_GRAY = "#EDF0F2";
 export const BORDER_LIGHT_GRAY = "#ccc";
 export const BORDER_LIGHT_DARK = "#737373";
+export const BORDER_LIGHTEST_GRAY = "#bbbbbb";
 export const BACKGROUND_LIGHT_GRAY = "#fafafa";
 export const DARK_GRAY = "#4D657C";
 export const SUB_GRAY = "#717171";

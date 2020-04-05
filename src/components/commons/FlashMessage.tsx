@@ -13,9 +13,9 @@ import * as colors from "utils/color";
 export interface FlashMessageProps {
   message: string;
   index: number;
-  id: number;
+  id: string;
   type: string;
-  removeFlashMessage: (payload: number) => void;
+  removeFlashMessage: (payload: string) => void;
 }
 
 export interface FlashMessageWrapperProps {
@@ -42,13 +42,13 @@ const FlashMessageWrapper = styled.div<FlashMessageWrapperProps>`
   transition: all 300ms 0s ease;
   &:hover {
     ${props =>
-      props.type === "failure" && { "border-color": colors.LIGHTER_RED }}
+    props.type === "failure" && { "border-color": colors.LIGHTER_RED }}
     ${props =>
-      props.type === "failure" && { "background-color": colors.LIGHTER_RED }}
+    props.type === "failure" && { "background-color": colors.LIGHTER_RED }}
     ${props =>
-      props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
+    props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
     ${props =>
-      props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
+    props.type === "success" && { "background-color": colors.LIGHTER_GREEN }}
   }
 `;
 
@@ -71,8 +71,8 @@ const FlashMessage: FC<FlashMessageProps> = ({
       {message}
     </FlashMessageWrapper>
   ) : (
-    <></>
-  );
+      <></>
+    );
 };
 
 export default FlashMessage;

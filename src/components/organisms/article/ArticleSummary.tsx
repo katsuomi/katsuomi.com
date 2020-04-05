@@ -27,12 +27,12 @@ interface DefaultProps {
 const ArticleWrapper = styled.div`
   width: 100%;
   height: 275px;
-  background-color: #${colors.WHITE};
+  background-color: ${colors.WHITE};
   margin: 20px auto;
   max-width: 800px;
   border-radius: 10px;
   cursor: pointer;
-  border: 1px solid ${colors.BORDER_LIGHT_DARK};
+  border: 1px solid ${colors.BORDER_LIGHTEST_GRAY};
   padding: 2px 10px;
   &:hover {
     background-color: ${colors.HOVER};
