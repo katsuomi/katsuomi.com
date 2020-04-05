@@ -66,9 +66,10 @@ function* runUpdateArticle(action: Model.UpdateArticleStartAction) {
 }
 
 function* runChangeArticleGoodCount(action: Model.ChangeArticleGoodCountStartAction) {
-  const data = action.payload;
+  const articleId = action.payload.articleId;
+  const isDone = action.payload.isDone;
   const handler = API.changeArticleGoodCount;
-  const { success, error } = yield call(handler, data);
+  const { success, error } = yield call(handler, articleId, isDone);
   if(success && !error) {
     const payload = {
       type: "success",
@@ -87,9 +88,9 @@ function* runChangeArticleGoodCount(action: Model.ChangeArticleGoodCountStartAct
 }
 
 function* runDeleteArticle(action: Model.DeleteArticleStartAction) {
-  const data = action.payload;
+  const articleId = action.payload;
   const handler = API.deleteAtricle;
-  const { success, error } = yield call(handler, data);
+  const { success, error } = yield call(handler, articleId);
   if(success && !error) {
     const payload = {
       type: "success",

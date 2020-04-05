@@ -26,6 +26,8 @@ export interface ArticleState {
   articles: Article[];
   articlesByTag: Article[];
   article: Article;
+  // prevArticle: Article;
+  // nextArticle: Article;
 }
 
 export interface ArticleGoodCountPayLoad {

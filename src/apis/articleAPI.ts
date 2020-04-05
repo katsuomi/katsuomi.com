@@ -5,13 +5,13 @@ import * as Model from "models/articleModel";
 
 
 // 記事作成
-export const createAtricle = async (payload: Model.Article) => {
+export const createAtricle = async (data: Model.Article) => {
   try {
     await firebase
       .firestore()
       .collection("articles")
       .doc()
-      .set(payload)
+      .set(data)
       .catch(err => {
         throw new Error(err.message);
       });
@@ -23,13 +23,13 @@ export const createAtricle = async (payload: Model.Article) => {
 };
 
 // 記事更新
-export const updateAtricle = async (payload: Model.Article) => {
+export const updateAtricle = async (data: Model.Article) => {
   try {
     await firebase
       .firestore()
       .collection("articles")
-      .doc(payload.uid)
-      .update(payload)
+      .doc(data.uid)
+      .update(data)
       .catch(err => {
         throw new Error(err.message);
       });
@@ -41,14 +41,14 @@ export const updateAtricle = async (payload: Model.Article) => {
 };
 
 // 記事いいね更新
-export const changeArticleGoodCount = async (payload: Model.ArticleGoodCountPayLoad) => {
+export const changeArticleGoodCount = async (articleId: string, isDone: boolean) => {
   try {
     let currentGoodCount = 0;
     // 現在のいいね数取得
     await firebase
       .firestore()
       .collection("articles")
-      .doc(payload.articleId)
+      .doc(articleId)
       .get()
       .then(doc => {
         if(!doc.exists) {
@@ -64,9 +64,9 @@ export const changeArticleGoodCount = async (payload: Model.ArticleGoodCountPayL
     await firebase
       .firestore()
       .collection("articles")
-      .doc(payload.articleId)
+      .doc(articleId)
       .update({
-        goodCount: payload.isDone ? currentGoodCount - 1 : currentGoodCount + 1
+        goodCount: isDone ? currentGoodCount - 1 : currentGoodCount + 1
       })
       .catch(err => {
         throw new Error(err.message);
@@ -79,12 +79,12 @@ export const changeArticleGoodCount = async (payload: Model.ArticleGoodCountPayL
 };
 
 // 記事削除
-export const deleteAtricle = async (payload: string) => {
+export const deleteAtricle = async (articleId: string) => {
   try {
     await firebase
       .firestore()
       .collection("articles")
-      .doc(payload)
+      .doc(articleId)
       .delete()
       .catch(err => {
         throw new Error(err.message);
