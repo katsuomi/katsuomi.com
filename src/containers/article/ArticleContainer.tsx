@@ -126,23 +126,29 @@ const ArticleContainer: FC<DefaultProps> = ({
   getNextArticle,
   changeArticleGoodCount
 }) => {
-  console.log({ nextArticle });
-  console.log({ prevArticle });
   const [currentCount, setCurrentCount] = useState<number>(-1);
   const [isDone, setIsDone] = useState<boolean>(false);
   useEffect(() => {
     getArticle(getUrlId());
-  }, []);
+  }, [article]);
+
+  if(getUrlId() !== article.uid) {
+    return <Spinner
+      top={breakPoints.isSmartPhone() ? "10%" : "25%"}
+      left={"50%"}
+    />;
+  }
+
   const dateTime = timeStampToDate(article.date);
-  console.log({ dateTime });
-  if(!isDone && dateToString(getCurrentDate()) !== dateToString(dateTime)) {
+  if(getUrlId() === article.uid && !isDone && dateToString(getCurrentDate()) !== dateToString(dateTime)) {
     getPrevArticle(dateTime);
     getNextArticle(dateTime);
     setIsDone(true);
   }
 
 
-  const isDoneGoodCount = localStorage.getItem("isDoneGoodCount") === 'true';
+
+  const isDoneGoodCount = localStorage.getItem(`isDoneGoodCount/${article.uid}`) === 'true';
   let goodCountClassNameForFontAweSome = 'far fa-thumbs-up';
   if(isDoneGoodCount) {
     goodCountClassNameForFontAweSome = 'fas fa-thumbs-up';
@@ -156,10 +162,10 @@ const ArticleContainer: FC<DefaultProps> = ({
     await changeArticleGoodCount(payload);
 
     if(isDoneGoodCount) {
-      localStorage.removeItem("isDoneGoodCount");
+      localStorage.removeItem(`isDoneGoodCount/${article.uid}`);
       setCurrentCount(currentCount - 1);
     } else {
-      localStorage.setItem('isDoneGoodCount', 'true');
+      localStorage.setItem(`isDoneGoodCount/${article.uid}`, 'true');
       setCurrentCount(currentCount + 1);
     }
   };
@@ -224,5 +230,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer);
-
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ArticleContainer, (p, n) => p.article.uid === n.article.uid));

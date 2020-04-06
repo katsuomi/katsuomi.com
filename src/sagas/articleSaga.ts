@@ -185,7 +185,8 @@ function* runGetPrevArticle(action: Model.GetPrevArticleStartAction) {
       type: "failure",
       message: error.message
     };
-    yield put(addFlashMessage(payload));
+    // ユーザーには表示させないため
+    // yield put(addFlashMessage(payload));
     yield put(getPrevArticle.failure());
   }
 }

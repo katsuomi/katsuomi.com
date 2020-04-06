@@ -185,6 +185,15 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_PREV_ARTICLE_FAILURE:
       return {
         ...state,
+        prevArticle: {
+          uid: "",
+          content: "",
+          title: "",
+          subTitle: "",
+          date: new Date(),
+          tagIds: [],
+          thumbnailImagePath: ""
+        },
         isLoading: false
       };
     case ActionTypes.GET_NEXT_ARTICLE_START:
@@ -195,7 +204,15 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_NEXT_ARTICLE_SUCCESS:
       return {
         ...state,
-        nextArticle: action.payload,
+        nextArticle: {
+          uid: "",
+          content: "",
+          title: "",
+          subTitle: "",
+          date: new Date(),
+          tagIds: [],
+          thumbnailImagePath: ""
+        },
         isLoading: false
       };
     case ActionTypes.GET_NEXT_ARTICLE_FAILURE:

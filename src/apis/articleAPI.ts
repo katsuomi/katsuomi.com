@@ -261,7 +261,6 @@ export const getPrevArticle = async (date: Date) => {
       });
 
     article = prevArticles[0];
-
     return { article };
   } catch(error) {
     return { error };
