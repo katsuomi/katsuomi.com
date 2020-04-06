@@ -204,6 +204,12 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_NEXT_ARTICLE_SUCCESS:
       return {
         ...state,
+        nextArticle: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_NEXT_ARTICLE_FAILURE:
+      return {
+        ...state,
         nextArticle: {
           uid: "",
           content: "",
@@ -213,11 +219,6 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
           tagIds: [],
           thumbnailImagePath: ""
         },
-        isLoading: false
-      };
-    case ActionTypes.GET_NEXT_ARTICLE_FAILURE:
-      return {
-        ...state,
         isLoading: false
       };
     case ActionTypes.GET_ARTICLES_BY_TAG_START:

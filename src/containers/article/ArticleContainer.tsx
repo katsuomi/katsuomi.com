@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 import Image from "react-image-resizer";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 // import molecules
 import MarkDownContent from "components/molecules/MarkDownContent";
@@ -42,6 +43,8 @@ interface DispatchProps {
   getArticle: (id: string) => void;
   getPrevArticle: (payload: Date) => void;
   getNextArticle: (payload: Date) => void;
+  getPrevArticleReset: () => void;
+  getNextArticleReset: () => void;
   changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => void;
 }
 
@@ -127,26 +130,27 @@ const ArticleContainer: FC<DefaultProps> = ({
   getArticle,
   getPrevArticle,
   getNextArticle,
+  getPrevArticleReset,
+  getNextArticleReset,
   changeArticleGoodCount
 }) => {
   const [currentCount, setCurrentCount] = useState<number>(-1);
   const [isDone, setIsDone] = useState<boolean>(false);
+
   useEffect(() => {
     getArticle(getUrlId());
-    const dateTime = timeStampToDate(article.date);
-    if(dateToString(getCurrentDate()) !== dateToString(dateTime)) {
-      console.log('yeah');
-      getPrevArticle(dateTime);
-      getNextArticle(dateTime);
-      // setIsDone(true);
-    }
-  }, [article]);
+    return () => {
+      window.removeEventListener('mousemove', () => { });
+      console.log('今だ！！');
+      getPrevArticleReset();
+      getNextArticleReset();
+    };
+  }, []);
 
-  if(getUrlId() !== article.uid) {
-    return <Spinner
-      top={breakPoints.isSmartPhone() ? "10%" : "25%"}
-      left={"50%"}
-    />;
+  if(!isDone && dateToString(getCurrentDate()) !== dateToString(article.date)) {
+    getNextArticle(article.date);
+    getPrevArticle(article.date);
+    setIsDone(true);
   }
 
   const isDoneGoodCount = localStorage.getItem(`isDoneGoodCount/${article.uid}`) === 'true';
@@ -174,6 +178,10 @@ const ArticleContainer: FC<DefaultProps> = ({
   if(article && article.goodCount !== undefined && currentCount === -1) {
     setCurrentCount(article.goodCount);
   }
+
+  console.log({ article });
+  console.log({ prevArticle });
+  console.log({ nextArticle });
 
   return (
     <>
@@ -228,9 +236,14 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
       getArticle: (id: string) => getArticle.start(id),
       getPrevArticle: (payload: Date) => getPrevArticle.start(payload),
       getNextArticle: (payload: Date) => getNextArticle.start(payload),
+      getPrevArticleReset: () => getPrevArticle.failure(),
+      getNextArticleReset: () => getNextArticle.failure(),
       changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => changeArticleGoodCount.start(payload),
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ArticleContainer, (p, n) => p.article.uid === n.article.uid));
+export default withRouter<any, any>(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ArticleContainer));

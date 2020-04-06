@@ -115,7 +115,7 @@ export const getSlideShowArticles = async () => {
             content: doc.data().content,
             title: doc.data().title,
             subTitle: doc.data().subTitle,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath
@@ -151,7 +151,7 @@ export const getLatestArticles = async () => {
             content: doc.data().content,
             subTitle: doc.data().subTitle,
             title: doc.data().title,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath
@@ -186,7 +186,7 @@ export const getArticles = async () => {
             content: doc.data().content,
             subTitle: doc.data().subTitle,
             title: doc.data().title,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath
@@ -217,6 +217,8 @@ export const getArticle = async (id: string) => {
         }
         const data = Object.assign({}, doc.data());
         data.uid = doc.id;
+        // firestoreからDate型を取得する際、暗黙的にTimeStamp型になってしまうため
+        data.date = data.date.toDate();
         article = data;
       })
       .catch(err => {
@@ -249,7 +251,7 @@ export const getPrevArticle = async (date: Date) => {
             content: doc.data().content,
             subTitle: doc.data().subTitle,
             title: doc.data().title,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath
@@ -267,7 +269,7 @@ export const getPrevArticle = async (date: Date) => {
   }
 };
 
-// idに一致した記事の前の記事を取得
+// idに一致した記事の次の記事を取得
 export const getNextArticle = async (date: Date) => {
   try {
     let article = null;
@@ -288,7 +290,7 @@ export const getNextArticle = async (date: Date) => {
             content: doc.data().content,
             subTitle: doc.data().subTitle,
             title: doc.data().title,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath
@@ -326,7 +328,7 @@ export const getArticlesByTag = async (tagId: string) => {
             content: doc.data().content,
             subTitle: doc.data().subTitle,
             title: doc.data().title,
-            date: doc.data().date,
+            date: doc.data().date.toDate(),
             tagIds: doc.data().tagIds,
             goodCount: doc.data().goodCount,
             thumbnailImagePath: doc.data().thumbnailImagePath

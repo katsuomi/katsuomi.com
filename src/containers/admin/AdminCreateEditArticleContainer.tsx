@@ -96,10 +96,9 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>(article ? article.thumbnailImagePath : "");
   const [content, setContent] = useState<string>(article ? article.content : "");
   const [tagIds, setTagIds] = useState<string[]>(article ? article.tagIds : []);
-  const [date, setDate] = useState<Date | articleModel.TimeStamp>(article ? article.date : new Date());
+  const [date, setDate] = useState<Date>(article ? article.date : new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.isAddSlideShow ? article.isAddSlideShow : false);
 
-  const defaultDate = date instanceof Date ? date : new Date(date.seconds * 1000);
   const defaultTags: tagModel.Tag[] = [];
   if(article) {
     article.tagIds.forEach((tagId) => {
@@ -109,10 +108,6 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       });
     });
   }
-
-  useEffect(() => {
-    setDate(defaultDate);
-  }, [defaultDate]);
 
   const isDisabled =
     title && subTitle && content && thumbnailImagePath && date ? false : true;

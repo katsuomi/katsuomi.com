@@ -25,7 +25,6 @@ import * as fontSize from "utils/fontSize";
 
 // import methods
 import { getUrlId } from "methods/utilsMethods";
-import { dateToString } from "methods/articleMethods";
 
 // import models
 import { AppState } from "models/index";

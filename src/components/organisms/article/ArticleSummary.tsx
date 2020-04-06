@@ -116,6 +116,10 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
     path = `/articles/${article.uid}/edit`;
   }
 
+  if(!article.date) {
+    return null;
+  }
+
   return (
     <ArticleWrapper key={article.uid}>
       <LinkAnchor src={path}>
