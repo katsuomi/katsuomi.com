@@ -54,6 +54,7 @@ interface DispatchProps {
   updateArticle: (payload: articleModel.Article) => void;
   deleteArticle: (payload: string) => void;
 }
+
 interface Props extends RouteComponentProps<{}>, React.Props<{}> {
   isEdit?: boolean;
   isCreate?: boolean;

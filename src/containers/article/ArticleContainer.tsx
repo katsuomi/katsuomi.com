@@ -26,7 +26,7 @@ import * as fontSize from "utils/fontSize";
 
 // import methods
 import { getUrlId, getCurrentDate } from "methods/utilsMethods";
-import { dateToString, timeStampToDate } from "methods/articleMethods";
+import { dateToString } from "methods/articleMethods";
 
 // import models
 import { AppState } from "models/index";
@@ -151,15 +151,15 @@ const ArticleContainer: FC<DefaultProps> = ({
     };
   }, []);
 
-  if(currentUrlPath !== getUrlId()) {
-    setCurrentUrlPath(getUrlId());
-    getArticleReset();
-    getPrevArticleReset();
-    getNextArticleReset();
-    getArticle(getUrlId());
-    getNextArticle(article.date);
-    getPrevArticle(article.date);
-  }
+  // if(currentUrlPath !== getUrlId()) {
+  //   setCurrentUrlPath(getUrlId());
+  //   getArticleReset();
+  //   getPrevArticleReset();
+  //   getNextArticleReset();
+  //   getArticle(getUrlId());
+  //   getNextArticle(article.date);
+  //   getPrevArticle(article.date);
+  // }
 
   if(!isDone && dateToString(getCurrentDate()) !== dateToString(article.date)) {
     getNextArticle(article.date);
@@ -225,8 +225,8 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
-                <ArticleSummary article={nextArticle} />
-                <ArticleSummary article={prevArticle} />
+                <ArticleSummary article={nextArticle} isPageReload={true} />
+                <ArticleSummary article={prevArticle} isPageReload={true} />
                 <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
               <RightSide></RightSide>

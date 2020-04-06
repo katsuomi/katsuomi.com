@@ -22,6 +22,7 @@ import * as articleModel from "models/articleModel";
 interface DefaultProps {
   article?: articleModel.Article;
   isEdit?: boolean;
+  isPageReload?: boolean;
 }
 
 const ArticleWrapper = styled.div`
@@ -108,7 +109,11 @@ const Date = styled.p`
   margin-top: 0px;
 `;
 
-const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
+const A = styled.a`
+  text-decoration: none;
+`;
+
+const ArticleSummary: FC<DefaultProps> = ({ article, isEdit, isPageReload }) => {
   if(!article) return null;
 
   let path = `/articles/${article.uid}`;
@@ -122,34 +127,48 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
 
   return (
     <ArticleWrapper key={article.uid}>
-      <LinkAnchor src={path}>
-        <Linkable>
-          <UpperPart>
-            <Left>
-              <Title>{article.title}</Title>
-              <TagWrapper>
-                {article.tagIds.map(tag => (
-                  <Tag key={tag} text={tag} isArticleCount={false} />
-                ))}
-              </TagWrapper>
-              <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
-            </Left>
-            <Right>
-              <Image
-                src={article.thumbnailImagePath}
-                height={180}
-                width={180}
-              />
-            </Right>
-          </UpperPart>
-          <LowerPart>
-            <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>
-            <Date>{dateToString(article.date)}</Date>
-          </LowerPart>
-        </Linkable>
-      </LinkAnchor>
+      {isPageReload ?
+        <A href={path}>
+          <LinkableRender article={article} />
+        </A>
+        :
+        <LinkAnchor src={path}>
+          <LinkableRender article={article} />
+        </LinkAnchor>
+      }
     </ArticleWrapper>
   );
 };
 
 export default ArticleSummary;
+
+
+const LinkableRender: FC<DefaultProps> = ({ article }) => {
+  if(!article) return null;
+  return (
+    <Linkable>
+      <UpperPart>
+        <Left>
+          <Title>{article.title}</Title>
+          <TagWrapper>
+            {article.tagIds.map(tag => (
+              <Tag key={tag} text={tag} isArticleCount={false} />
+            ))}
+          </TagWrapper>
+          <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
+        </Left>
+        <Right>
+          <Image
+            src={article.thumbnailImagePath}
+            height={180}
+            width={180}
+          />
+        </Right>
+      </UpperPart>
+      <LowerPart>
+        <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>
+        <Date>{dateToString(article.date)}</Date>
+      </LowerPart>
+    </Linkable>
+  );
+};
