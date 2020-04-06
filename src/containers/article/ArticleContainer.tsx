@@ -9,6 +9,9 @@ import Image from "react-image-resizer";
 import MarkDownContent from "components/molecules/MarkDownContent";
 import Tag from "components/molecules/Tag";
 
+// import oraganisms
+import ArticleSummary from "components/organisms/article/ArticleSummary";
+
 // import commons
 import Spinner from "components/commons/Spinner";
 
@@ -130,6 +133,13 @@ const ArticleContainer: FC<DefaultProps> = ({
   const [isDone, setIsDone] = useState<boolean>(false);
   useEffect(() => {
     getArticle(getUrlId());
+    const dateTime = timeStampToDate(article.date);
+    if(dateToString(getCurrentDate()) !== dateToString(dateTime)) {
+      console.log('yeah');
+      getPrevArticle(dateTime);
+      getNextArticle(dateTime);
+      // setIsDone(true);
+    }
   }, [article]);
 
   if(getUrlId() !== article.uid) {
@@ -138,15 +148,6 @@ const ArticleContainer: FC<DefaultProps> = ({
       left={"50%"}
     />;
   }
-
-  const dateTime = timeStampToDate(article.date);
-  if(getUrlId() === article.uid && !isDone && dateToString(getCurrentDate()) !== dateToString(dateTime)) {
-    getPrevArticle(dateTime);
-    getNextArticle(dateTime);
-    setIsDone(true);
-  }
-
-
 
   const isDoneGoodCount = localStorage.getItem(`isDoneGoodCount/${article.uid}`) === 'true';
   let goodCountClassNameForFontAweSome = 'far fa-thumbs-up';
@@ -202,6 +203,8 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
+                <ArticleSummary article={nextArticle} />
+                <ArticleSummary article={prevArticle} />
                 <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
               <RightSide></RightSide>
