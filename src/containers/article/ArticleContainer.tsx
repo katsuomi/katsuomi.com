@@ -41,6 +41,7 @@ interface StateProps {
 
 interface DispatchProps {
   getArticle: (id: string) => void;
+  getArticleReset: () => void;
   getPrevArticle: (payload: Date) => void;
   getNextArticle: (payload: Date) => void;
   getPrevArticleReset: () => void;
@@ -128,6 +129,7 @@ const ArticleContainer: FC<DefaultProps> = ({
   nextArticle,
   isLoading,
   getArticle,
+  getArticleReset,
   getPrevArticle,
   getNextArticle,
   getPrevArticleReset,
@@ -136,16 +138,28 @@ const ArticleContainer: FC<DefaultProps> = ({
 }) => {
   const [currentCount, setCurrentCount] = useState<number>(-1);
   const [isDone, setIsDone] = useState<boolean>(false);
+  // 遷移しない問題への対応
+  const [currentUrlPath, setCurrentUrlPath] = useState<string>(getUrlId());
 
   useEffect(() => {
     getArticle(getUrlId());
     return () => {
       window.removeEventListener('mousemove', () => { });
-      console.log('今だ！！');
       getPrevArticleReset();
       getNextArticleReset();
+      getArticleReset();
     };
   }, []);
+
+  if(currentUrlPath !== getUrlId()) {
+    setCurrentUrlPath(getUrlId());
+    getArticleReset();
+    getPrevArticleReset();
+    getNextArticleReset();
+    getArticle(getUrlId());
+    getNextArticle(article.date);
+    getPrevArticle(article.date);
+  }
 
   if(!isDone && dateToString(getCurrentDate()) !== dateToString(article.date)) {
     getNextArticle(article.date);
@@ -234,6 +248,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       getArticle: (id: string) => getArticle.start(id),
+      getArticleReset: () => getArticle.failure(),
       getPrevArticle: (payload: Date) => getPrevArticle.start(payload),
       getNextArticle: (payload: Date) => getNextArticle.start(payload),
       getPrevArticleReset: () => getPrevArticle.failure(),

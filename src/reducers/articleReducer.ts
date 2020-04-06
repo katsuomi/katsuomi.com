@@ -169,6 +169,15 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_ARTICLE_FAILURE:
       return {
         ...state,
+        article: {
+          uid: "",
+          content: "",
+          title: "",
+          subTitle: "",
+          date: new Date(),
+          tagIds: [],
+          thumbnailImagePath: ""
+        },
         isLoading: false
       };
     case ActionTypes.GET_PREV_ARTICLE_START:
