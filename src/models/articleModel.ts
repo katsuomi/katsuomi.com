@@ -26,8 +26,13 @@ export interface ArticleState {
   articles: Article[];
   articlesByTag: Article[];
   article: Article;
-  // prevArticle: Article;
-  // nextArticle: Article;
+  prevArticle: Article;
+  nextArticle: Article;
+}
+
+export class TimeStamp {
+  seconds!: number;
+  nanoseconds!: number;
 }
 
 export interface ArticleGoodCountPayLoad {
@@ -65,6 +70,7 @@ export interface ChangeArticleGoodCountStartAction {
   type: typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START;
   payload: ArticleGoodCountPayLoad;
 }
+
 export interface ChangeArticleGoodCountSuccessAction {
   type: typeof ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS;
 }
@@ -77,6 +83,7 @@ export interface DeleteArticleStartAction {
   type: typeof ActionTypes.DELETE_ARTICLE_START;
   payload: string;
 }
+
 export interface DeleteArticleSuccessAction {
   type: typeof ActionTypes.DELETE_ARTICLE_SUCCESS;
 }
@@ -138,6 +145,34 @@ export interface GetArticleFilureAction {
   type: typeof ActionTypes.GET_ARTICLE_FAILURE;
 }
 
+export interface GetPrevArticleStartAction {
+  type: typeof ActionTypes.GET_PREV_ARTICLE_START;
+  payload: Date;
+}
+
+export interface GetPrevArticleSuccessAction {
+  type: typeof ActionTypes.GET_PREV_ARTICLE_SUCCESS;
+  payload: Article;
+}
+
+export interface GetPrevArticleFilureAction {
+  type: typeof ActionTypes.GET_PREV_ARTICLE_FAILURE;
+}
+
+export interface GetNextArticleStartAction {
+  type: typeof ActionTypes.GET_NEXT_ARTICLE_START;
+  payload: Date;
+}
+
+export interface GetNextArticleSuccessAction {
+  type: typeof ActionTypes.GET_NEXT_ARTICLE_SUCCESS;
+  payload: Article;
+}
+
+export interface GetNextArticleFilureAction {
+  type: typeof ActionTypes.GET_NEXT_ARTICLE_FAILURE;
+}
+
 export interface GetArticlesByTagStartAction {
   type: typeof ActionTypes.GET_ARTICLES_BY_TAG_START;
   payload: string;
@@ -176,6 +211,12 @@ export type ArticleAction =
   | GetArticlesFilureAction
   | GetArticleStartAction
   | GetArticleSuccessAction
+  | GetPrevArticleStartAction
+  | GetPrevArticleFilureAction
+  | GetPrevArticleSuccessAction
+  | GetNextArticleStartAction
+  | GetNextArticleFilureAction
+  | GetNextArticleSuccessAction
   | GetArticleFilureAction
   | GetArticlesByTagStartAction
   | GetArticlesByTagSuccessAction

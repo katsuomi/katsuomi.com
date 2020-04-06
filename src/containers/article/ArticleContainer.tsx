@@ -13,7 +13,7 @@ import Tag from "components/molecules/Tag";
 import Spinner from "components/commons/Spinner";
 
 // import actions
-import { getArticle, changeArticleGoodCount } from "actions/articleAction";
+import { getArticle, getPrevArticle, getNextArticle, changeArticleGoodCount } from "actions/articleAction";
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
@@ -21,8 +21,8 @@ import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
 
 // import methods
-import { getUrlId } from "methods/utilsMethods";
-import { dateToString } from "methods/articleMethods";
+import { getUrlId, getCurrentDate } from "methods/utilsMethods";
+import { dateToString, timeStampToDate } from "methods/articleMethods";
 
 // import models
 import { AppState } from "models/index";
@@ -30,11 +30,15 @@ import * as articleModel from "models/articleModel";
 
 interface StateProps {
   article: articleModel.Article;
+  prevArticle: articleModel.Article;
+  nextArticle: articleModel.Article;
   isLoading: boolean;
 }
 
 interface DispatchProps {
   getArticle: (id: string) => void;
+  getPrevArticle: (payload: Date) => void;
+  getNextArticle: (payload: Date) => void;
   changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => void;
 }
 
@@ -114,14 +118,29 @@ const ContentWrapper = styled.div`
 
 const ArticleContainer: FC<DefaultProps> = ({
   article,
+  prevArticle,
+  nextArticle,
   isLoading,
   getArticle,
+  getPrevArticle,
+  getNextArticle,
   changeArticleGoodCount
 }) => {
+  console.log({ nextArticle });
+  console.log({ prevArticle });
   const [currentCount, setCurrentCount] = useState<number>(-1);
+  const [isDone, setIsDone] = useState<boolean>(false);
   useEffect(() => {
     getArticle(getUrlId());
   }, []);
+  const dateTime = timeStampToDate(article.date);
+  console.log({ dateTime });
+  if(!isDone && dateToString(getCurrentDate()) !== dateToString(dateTime)) {
+    getPrevArticle(dateTime);
+    getNextArticle(dateTime);
+    setIsDone(true);
+  }
+
 
   const isDoneGoodCount = localStorage.getItem("isDoneGoodCount") === 'true';
   let goodCountClassNameForFontAweSome = 'far fa-thumbs-up';
@@ -189,6 +208,8 @@ const ArticleContainer: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   article: state.article.article,
+  prevArticle: state.article.prevArticle,
+  nextArticle: state.article.nextArticle,
   isLoading: state.article.isLoading
 });
 
@@ -196,7 +217,9 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       getArticle: (id: string) => getArticle.start(id),
-      changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => changeArticleGoodCount.start(payload)
+      getPrevArticle: (payload: Date) => getPrevArticle.start(payload),
+      getNextArticle: (payload: Date) => getNextArticle.start(payload),
+      changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => changeArticleGoodCount.start(payload),
     },
     dispatch
   );

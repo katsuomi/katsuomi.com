@@ -12,6 +12,8 @@ import {
   getSlideShowArticles,
   getLatestArticles,
   getArticle,
+  getPrevArticle,
+  getNextArticle,
   getArticlesByTag,
   getArticles,
 } from "actions/articleAction";
@@ -172,6 +174,39 @@ function* runGetArticle(action: Model.GetArticleStartAction) {
   }
 }
 
+function* runGetPrevArticle(action: Model.GetPrevArticleStartAction) {
+  const date = action.payload;
+  const handler = API.getPrevArticle;
+  const { article, error } = yield call(handler, date);
+  if(article && !error) {
+    yield put(getPrevArticle.success(article));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getPrevArticle.failure());
+  }
+}
+
+function* runGetNextArticle(action: Model.GetNextArticleStartAction) {
+  const date = action.payload;
+  const handler = API.getNextArticle;
+  const { article, error } = yield call(handler, date);
+  if(article && !error) {
+    yield put(getNextArticle.success(article));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    // ユーザーには表示させないため
+    // yield put(addFlashMessage(payload));
+    yield put(getNextArticle.failure());
+  }
+}
+
 function* runGetArticlesByTag(action: Model.GetArticlesByTagStartAction) {
   const handler = API.getArticlesByTag;
   const tagId = action.payload;
@@ -200,6 +235,8 @@ export function* watchArticle() {
   yield takeLatest(ActionTypes.GET_LATEST_ARTICLES_START, runGetLatestArticles);
   yield takeLatest(ActionTypes.GET_ARTICLES_START, runGetArticles);
   yield takeLatest(ActionTypes.GET_ARTICLE_START, runGetArticle);
+  yield takeLatest(ActionTypes.GET_PREV_ARTICLE_START, runGetPrevArticle);
+  yield takeLatest(ActionTypes.GET_NEXT_ARTICLE_START, runGetNextArticle);
   yield takeLatest(ActionTypes.GET_ARTICLES_BY_TAG_START, runGetArticlesByTag);
 }
 

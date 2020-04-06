@@ -228,6 +228,85 @@ export const getArticle = async (id: string) => {
   }
 };
 
+// idに一致した記事の前の記事を取得
+export const getPrevArticle = async (date: Date) => {
+  try {
+    let article = null;
+    const prevArticles: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("date", "desc")
+      .where("date", "<", date)
+      .get()
+      .then(snapshot => {
+        if(snapshot.empty) {
+          throw new Error();
+        }
+        snapshot.forEach(doc => {
+          prevArticles.push({
+            uid: doc.id,
+            content: doc.data().content,
+            subTitle: doc.data().subTitle,
+            title: doc.data().title,
+            date: doc.data().date,
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+
+    article = prevArticles[0];
+
+    return { article };
+  } catch(error) {
+    return { error };
+  }
+};
+
+// idに一致した記事の前の記事を取得
+export const getNextArticle = async (date: Date) => {
+  try {
+    let article = null;
+    const nextArticles: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("date", "desc")
+      .where("date", ">", date)
+      .get()
+      .then(snapshot => {
+        if(snapshot.empty) {
+          throw new Error();
+        }
+        snapshot.forEach(doc => {
+          nextArticles.push({
+            uid: doc.id,
+            content: doc.data().content,
+            subTitle: doc.data().subTitle,
+            title: doc.data().title,
+            date: doc.data().date,
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+
+    article = nextArticles[nextArticles.length - 1];
+    return { article };
+  } catch(error) {
+    return { error };
+  }
+};
+
 // タグ名に紐ずく記事の取得
 export const getArticlesByTag = async (tagId: string) => {
   try {

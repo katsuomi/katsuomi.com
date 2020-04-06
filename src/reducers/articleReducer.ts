@@ -20,6 +20,24 @@ const initialState: Model.ArticleState = {
     date: new Date(),
     tagIds: [],
     thumbnailImagePath: ""
+  },
+  prevArticle: {
+    uid: "",
+    content: "",
+    title: "",
+    subTitle: "",
+    date: new Date(),
+    tagIds: [],
+    thumbnailImagePath: ""
+  },
+  nextArticle: {
+    uid: "",
+    content: "",
+    title: "",
+    subTitle: "",
+    date: new Date(),
+    tagIds: [],
+    thumbnailImagePath: ""
   }
 };
 
@@ -149,6 +167,38 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_PREV_ARTICLE_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_PREV_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        prevArticle: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_PREV_ARTICLE_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_NEXT_ARTICLE_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_NEXT_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        nextArticle: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_NEXT_ARTICLE_FAILURE:
       return {
         ...state,
         isLoading: false

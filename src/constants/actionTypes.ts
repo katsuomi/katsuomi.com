@@ -92,6 +92,22 @@ export const GET_ARTICLE_SUCCESS = "GET_ARTICLE_SUCCESS";
 export const GET_ARTICLE_FAILURE = "GET_ARTICLE_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Get Prev Article
+// -----------------------------------------------------------------------------
+
+export const GET_PREV_ARTICLE_START = "GET_PREV_ARTICLE_START";
+export const GET_PREV_ARTICLE_SUCCESS = "GET_PREV_ARTICLE_SUCCESS";
+export const GET_PREV_ARTICLE_FAILURE = "GET_PREV_ARTICLE_FAILURE";
+
+// -----------------------------------------------------------------------------
+// Get Next Article
+// -----------------------------------------------------------------------------
+
+export const GET_NEXT_ARTICLE_START = "GET_NEXT_ARTICLE_START";
+export const GET_NEXT_ARTICLE_SUCCESS = "GET_NEXT_ARTICLE_SUCCESS";
+export const GET_NEXT_ARTICLE_FAILURE = "GET_NEXT_ARTICLE_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Tags
 // -----------------------------------------------------------------------------
 
