@@ -9,6 +9,7 @@ export const adminLogin = {
     type: ActionTypes.ADMIN_LOGIN_START as typeof ActionTypes.ADMIN_LOGIN_START,
     payload: password
   }),
+
   success: (user: Model.User) => ({
     type: ActionTypes.ADMIN_LOGIN_SUCCESS as typeof ActionTypes.ADMIN_LOGIN_SUCCESS,
     payload: user
@@ -23,6 +24,7 @@ export const adminLoginCache = {
   start: () => ({
     type: ActionTypes.ADMIN_LOGIN_CACHE_START as typeof ActionTypes.ADMIN_LOGIN_CACHE_START
   }),
+
   success: (user: Model.User) => ({
     type: ActionTypes.ADMIN_LOGIN_CACHE_SUCCESS as typeof ActionTypes.ADMIN_LOGIN_CACHE_SUCCESS,
     payload: user

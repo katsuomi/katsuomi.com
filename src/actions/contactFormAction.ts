@@ -9,6 +9,7 @@ export const submitContactForm = {
     type: ActionTypes.SUBMIT_CONTACT_FORM_START as typeof ActionTypes.SUBMIT_CONTACT_FORM_START,
     payload: data
   }),
+
   success: () => ({
     type: ActionTypes.SUBMIT_CONTACT_FORM_SUCCESS as typeof ActionTypes.SUBMIT_CONTACT_FORM_SUCCESS
   }),

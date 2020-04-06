@@ -8,6 +8,7 @@ export const getTags = {
   start: () => ({
     type: ActionTypes.GET_TAGS_START as typeof ActionTypes.GET_TAGS_START
   }),
+
   success: (tags: Model.Tag[]) => ({
     type: ActionTypes.GET_TAGS_SUCCESS as typeof ActionTypes.GET_TAGS_SUCCESS,
     payload: tags

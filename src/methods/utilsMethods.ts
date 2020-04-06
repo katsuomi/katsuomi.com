@@ -25,3 +25,15 @@ export const decodeToString = (value: string): string => {
 export const dialogMessage = (value: string): boolean => {
   return window.confirm(value);
 };
+
+// 現在日時の取得
+export const getCurrentDate = (): Date => {
+  return new Date();
+};
+
+// 翌日の日時の取得
+export const getTommorowDate = (): Date => {
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  return date;
+};

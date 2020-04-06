@@ -80,11 +80,6 @@ const Left = styled.div`
   margin-left: 14%;
 `;
 
-class TimeStamp {
-  seconds!: number;
-  nanoseconds!: number;
-}
-
 const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   user,
   isLoading,
@@ -101,7 +96,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>(article ? article.thumbnailImagePath : "");
   const [content, setContent] = useState<string>(article ? article.content : "");
   const [tagIds, setTagIds] = useState<string[]>(article ? article.tagIds : []);
-  const [date, setDate] = useState<Date | TimeStamp>(article ? article.date : new Date());
+  const [date, setDate] = useState<Date | articleModel.TimeStamp>(article ? article.date : new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.isAddSlideShow ? article.isAddSlideShow : false);
 
   const defaultDate = date instanceof Date ? date : new Date(date.seconds * 1000);
