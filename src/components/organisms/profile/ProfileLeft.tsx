@@ -13,8 +13,15 @@ const Img = styled.img`
   align-self: center;
 `;
 
+const P = styled.p`
+
+`;
+
 const ProfileLeft: FC = () => (
-  <Img src={katsuomi} />
+  <>
+    <Img src={katsuomi} />
+    <P>Aoki katsuomi, Nagoya Univ B4,<br /> Software Engineer</P>
+  </>
 );
 
 export default ProfileLeft;

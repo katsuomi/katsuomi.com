@@ -14,7 +14,7 @@ import HomeRightSide from "components/organisms/home/HomeRightSide";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${breakPoints.isSmartPhone() ? 'column' : 'row'};
   max-width: 1600px;
   margin: 0 auto;
 `;
@@ -26,9 +26,9 @@ const Home: FC = () => (
     </Helmet>
     <SlideContainer />
     <Wrapper>
-      {!breakPoints.isSmartPhone() && <HomeLeftSide />}
+      <HomeLeftSide />
       <HomeCenterSide />
-      {!breakPoints.isSmartPhone() && <HomeRightSide />}
+      <HomeRightSide />
     </Wrapper>
   </>
 );

@@ -51,9 +51,15 @@ const PageTitle = styled.h3`
   font-feature-settings: "palt" 1;
   font-size: ${fontSize.H3};
   color: ${colors.BLACK};
-  width: 900px;
+  width: ${breakPoints.isSmartPhone() ? '100%' : '900px'};
   margin: 10px auto;
   margin-top: 25px;
+`;
+
+const ArticlesWrapper = styled.div`
+  & > div {
+    width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
+  }
 `;
 
 const TagContainer: FC<DefaultProps> = ({
@@ -71,19 +77,21 @@ const TagContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "10%" : "25%"}
+          top={breakPoints.isSmartPhone() ? "30%" : "25%"}
           left={"50%"}
         />
       ) : (
           <Wrapper>
             <PageTitle>
               {decodeToString(getUrlId())}の記事({String(articlesCount)})
-          </PageTitle>
-            {articlesByTag?.map(article => {
-              return (
-                <ArticleSummary article={article} key={article.uid} />
-              );
-            })}
+            </PageTitle>
+            <ArticlesWrapper>
+              {articlesByTag?.map(article => {
+                return (
+                  <ArticleSummary article={article} key={article.uid} />
+                );
+              })}
+            </ArticlesWrapper>
           </Wrapper>
         )}
     </>

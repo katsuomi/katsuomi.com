@@ -57,11 +57,11 @@ const Wrapper = styled.div`
 `;
 
 const LeftSide = styled.div`
-  width: 15%;
+  width: ${breakPoints.isSmartPhone() ? '0%' : '15%'};
 `;
 
 const CenterSide = styled.div`
-  width: 70%;
+  width: ${breakPoints.isSmartPhone() ? '90%' : '70%'};
   word-break: break-all;
   max-width: 900px;
   margin: 0px auto;
@@ -69,12 +69,13 @@ const CenterSide = styled.div`
 `;
 
 const RightSide = styled.div`
-  width: 15%;
+  width: ${breakPoints.isSmartPhone() ? '0%' : '15%'};
 `;
 
 const ImageWrapper = styled.div`
   & > div {
     margin: 0 auto;
+    text-align: center;
   }
 `;
 
@@ -98,8 +99,8 @@ const Good = styled.p`
 
 const GoodFix = styled.button`
   position: fixed;
-  right: 22%;
-  bottom: 5px;
+  right: ${breakPoints.isSmartPhone() ? '3%' : '22%'};
+  bottom: 1%;
   background-color: ${colors.BG_GRAY};
   width: 70px;
   height: 70px;
@@ -121,12 +122,23 @@ const Date = styled.p`
 
 const ContentWrapper = styled.div`
   margin-top: 20px;
+  border-bottom: 1px solid ${colors.DARK_BORDER_GRAY};
+  padding-bottom: ${breakPoints.isSmartPhone() ? '30px' : '80px'};
+  & > span > img {
+    width: 80%;
+  }
 `;
 
 const P = styled.p`
   margin-top: 10px;
   font-size: ${fontSize.BODY};
   font-weight: bold;
+`;
+
+const NextPrevWrapper = styled.div`
+  & > div {
+    width: ${breakPoints.isSmartPhone() ? '93%' : '100%'};
+  }
 `;
 
 const ArticleContainer: FC<DefaultProps> = ({
@@ -204,7 +216,7 @@ const ArticleContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "10%" : "25%"}
+          top={breakPoints.isSmartPhone() ? "30%" : "25%"}
           left={"50%"}
         />
       ) : (
@@ -215,8 +227,8 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ImageWrapper>
                   <Image
                     src={article.thumbnailImagePath}
-                    height={300}
-                    width={700}
+                    height={breakPoints.isSmartPhone() ? 100 : 300}
+                    width={breakPoints.isSmartPhone() ? 300 : 700}
                   />
                 </ImageWrapper>
                 <Title>{article.title}</Title>
@@ -228,10 +240,16 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
-                <P>次の記事はこちら</P>
-                <ArticleSummary article={nextArticle} />
-                <P>前の記事はこちら</P>
-                <ArticleSummary article={prevArticle} />
+                <NextPrevWrapper>
+                  {nextArticle.uid && <>
+                    <P>次の記事はこちら</P>
+                    <ArticleSummary article={nextArticle} />
+                  </>}
+                  {prevArticle.uid && <>
+                    <P>前の記事はこちら</P>
+                    <ArticleSummary article={prevArticle} />
+                  </>}
+                </NextPrevWrapper>
                 <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
               <RightSide></RightSide>

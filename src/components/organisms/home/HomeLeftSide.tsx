@@ -20,18 +20,15 @@ import github from "images/github.png";
 import twitter from "images/twitter.png";
 import facebook from "images/facebook.png";
 
-interface AnchorProps {
-  href?: string;
-  target?: string;
-}
-
 const Wrapper = styled.div`
-  width: 20%;
+  width: ${breakPoints.isSmartPhone() ? '100%' : '20%'};
+  order: ${breakPoints.isSmartPhone() ? 1 : 0};
 `;
 
 const TimeLineWrapper = styled.div`
   height: 1000px;
   overflow: scroll;
+  display: ${breakPoints.isSmartPhone() && 'none'}
 `;
 
 const TimeLineEmbedded = styled.a.attrs({
@@ -89,10 +86,12 @@ const HomeLeftSide: FC = () => (
       </ProfileWrapper>
       <TimeLineWrapper>
         <TimeLineEmbedded className="twitter-timeline">
-          <Spinner
-            top={breakPoints.isSmartPhone() ? "60%" : "85%"}
-            left={breakPoints.isSmartPhone() ? "" : "10%"}
-          />
+          {!breakPoints.isSmartPhone() &&
+            <Spinner
+              top={breakPoints.isSmartPhone() ? "60%" : "85%"}
+              left={breakPoints.isSmartPhone() ? "" : "10%"}
+            />
+          }
         </TimeLineEmbedded>
       </TimeLineWrapper>
     </Wrapper>

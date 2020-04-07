@@ -50,6 +50,12 @@ const Title = styled.h3`
   color: ${colors.BLACK};
 `;
 
+const ArticlesWrapper = styled.div`
+  & > div {
+    width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
+  }
+`;
+
 const HomeCenterContainer: FC<DefaultProps> = ({
   latestArticles,
   isLoading,
@@ -62,17 +68,19 @@ const HomeCenterContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "65%" : "55%"}
+          top={breakPoints.isSmartPhone() ? "85%" : "55%"}
           left={"50%"}
         />
       ) : (
           <Wrapper>
             <Title>最新の記事</Title>
-            {latestArticles?.map(article => {
-              return (
-                <ArticleSummary article={article} key={article.uid} />
-              );
-            })}
+            <ArticlesWrapper>
+              {latestArticles?.map(article => {
+                return (
+                  <ArticleSummary article={article} key={article.uid} />
+                );
+              })}
+            </ArticlesWrapper>
           </Wrapper>
         )}
     </>

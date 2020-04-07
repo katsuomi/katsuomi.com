@@ -58,6 +58,7 @@ const HomeRightContainer: FC<DefaultProps> = ({ tags, isLoading, getTags }) => {
   return (
     <>
       {isLoading ? (
+        !breakPoints.isSmartPhone() &&
         <Spinner
           top={breakPoints.isSmartPhone() ? "30%" : "55%"}
           right={"10%"}
