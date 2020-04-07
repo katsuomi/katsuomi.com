@@ -138,8 +138,9 @@ const ArticleContainer: FC<DefaultProps> = ({
 }) => {
   const [currentCount, setCurrentCount] = useState<number>(-1);
   const [isDone, setIsDone] = useState<boolean>(false);
-  // 遷移しない問題への対応
+  // 下記,遷移しない問題への対応
   const [currentUrlPath, setCurrentUrlPath] = useState<string>(getUrlId());
+  const [defaultDate, setDefaultDate] = useState<Date>(getCurrentDate());
 
   useEffect(() => {
     getArticle(getUrlId());
@@ -151,20 +152,20 @@ const ArticleContainer: FC<DefaultProps> = ({
     };
   }, []);
 
-  // if(currentUrlPath !== getUrlId()) {
-  //   setCurrentUrlPath(getUrlId());
-  //   getArticleReset();
-  //   getPrevArticleReset();
-  //   getNextArticleReset();
-  //   getArticle(getUrlId());
-  //   getNextArticle(article.date);
-  //   getPrevArticle(article.date);
-  // }
+  if(currentUrlPath !== getUrlId()) {
+    getArticleReset();
+    getPrevArticleReset();
+    getNextArticleReset();
+    getArticle(getUrlId());
+    setCurrentUrlPath(getUrlId());
+    setIsDone(false);
+  }
 
-  if(!isDone && dateToString(getCurrentDate()) !== dateToString(article.date)) {
+  if(!isDone && dateToString(article.date) !== dateToString(getCurrentDate()) && dateToString(article.date) !== dateToString(defaultDate)) {
     getNextArticle(article.date);
     getPrevArticle(article.date);
     setIsDone(true);
+    setDefaultDate(article.date);
   }
 
   const isDoneGoodCount = localStorage.getItem(`isDoneGoodCount/${article.uid}`) === 'true';
@@ -192,10 +193,6 @@ const ArticleContainer: FC<DefaultProps> = ({
   if(article && article.goodCount !== undefined && currentCount === -1) {
     setCurrentCount(article.goodCount);
   }
-
-  console.log({ article });
-  console.log({ prevArticle });
-  console.log({ nextArticle });
 
   return (
     <>
@@ -225,8 +222,8 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
-                <ArticleSummary article={nextArticle} isPageReload={true} />
-                <ArticleSummary article={prevArticle} isPageReload={true} />
+                <ArticleSummary article={nextArticle} />
+                <ArticleSummary article={prevArticle} />
                 <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
               <RightSide></RightSide>
