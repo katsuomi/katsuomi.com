@@ -123,6 +123,12 @@ const ContentWrapper = styled.div`
   margin-top: 20px;
 `;
 
+const P = styled.p`
+  margin-top: 10px;
+  font-size: ${fontSize.BODY};
+  font-weight: bold;
+`;
+
 const ArticleContainer: FC<DefaultProps> = ({
   article,
   prevArticle,
@@ -222,7 +228,9 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
                 </ContentWrapper>
+                <P>次の記事はこちら</P>
                 <ArticleSummary article={nextArticle} />
+                <P>前の記事はこちら</P>
                 <ArticleSummary article={prevArticle} />
                 <GoodFix onClick={(e) => handleOnSubmitGoodCount(e)}>{currentCount}<I className={goodCountClassNameForFontAweSome}></I></GoodFix>
               </CenterSide>
