@@ -62,7 +62,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "30%" : "55%"}
+          top={breakPoints.isSmartPhone() ? "65%" : "55%"}
           left={"50%"}
         />
       ) : (

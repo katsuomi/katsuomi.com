@@ -16,34 +16,32 @@ const Wrapper = styled.div`
 `;
 
 const App: FC = () => (
-  <>
-    <Wrapper>
-      <Header />
-      <Switch>
-        <Route path={pages.home.path} component={routes.Home} exact />
-        <Route path={pages.admin.path} component={routes.Admin} exact />
-        <Route
-          path={pages.adminCreateArticle.path}
-          component={routes.AdminCreateArticle}
-          exact
-        />
-        <Route
-          path={pages.adminArticles.path}
-          component={routes.AdminArticles}
-          exact
-        />
-        <Route path={pages.article.path} component={routes.Article} exact />
-        <Route path={pages.articleEdit.path} component={routes.ArticleEdit} exact />
-        <Route path={pages.tag.path} component={routes.Tag} exact />
-        <Route path={pages.contact.path} component={routes.Contact} exact />
-        <Route path={pages.profile.path} component={routes.Profile} exact />
-        <Route path={pages.news.path} component={routes.News} exact />
-        <Route path={pages.awards.path} component={routes.Awards} exact />
-        <Route path={pages.products.path} component={routes.Products} exact />
-        <Redirect to="/" />
-      </Switch>
-    </Wrapper>
-  </>
+  <Wrapper>
+    <Header />
+    <Switch>
+      <Route path={pages.home.path} component={routes.Home} exact />
+      <Route path={pages.admin.path} component={routes.Admin} exact />
+      <Route
+        path={pages.adminCreateArticle.path}
+        component={routes.AdminCreateArticle}
+        exact
+      />
+      <Route
+        path={pages.adminArticles.path}
+        component={routes.AdminArticles}
+        exact
+      />
+      <Route path={pages.article.path} component={routes.Article} exact />
+      <Route path={pages.articleEdit.path} component={routes.ArticleEdit} exact />
+      <Route path={pages.tag.path} component={routes.Tag} exact />
+      <Route path={pages.contact.path} component={routes.Contact} exact />
+      <Route path={pages.profile.path} component={routes.Profile} exact />
+      <Route path={pages.news.path} component={routes.News} exact />
+      <Route path={pages.awards.path} component={routes.Awards} exact />
+      <Route path={pages.products.path} component={routes.Products} exact />
+      <Redirect to="/" />
+    </Switch>
+  </Wrapper>
 );
 
 export default App;

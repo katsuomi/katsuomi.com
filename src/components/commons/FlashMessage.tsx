@@ -62,7 +62,10 @@ const FlashMessage: FC<FlashMessageProps> = ({
   useEffect(() => {
     setTimeout(() => removeFlashMessage(id), 3000);
   }, [id, removeFlashMessage]);
-  return message ? (
+  if(!message) {
+    return null;
+  }
+  return (
     <FlashMessageWrapper
       onClick={() => removeFlashMessage(id)}
       index={index}
@@ -70,9 +73,7 @@ const FlashMessage: FC<FlashMessageProps> = ({
     >
       {message}
     </FlashMessageWrapper>
-  ) : (
-      <></>
-    );
+  );
 };
 
 export default FlashMessage;

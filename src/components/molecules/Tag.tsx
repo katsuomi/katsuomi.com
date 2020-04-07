@@ -13,6 +13,7 @@ import LinkAnchor from "components/atoms/LinkAnchor";
 // import utils
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
+import * as breakPoints from "utils/breakPoints";
 
 // import methods
 import { getArticleCountByTag } from "methods/tagMethods";
@@ -28,9 +29,10 @@ const TagWrapper = styled.span`
     color: ${colors.WHITE};
   }
   background-color: ${colors.BG_TAG};
-  padding: 6px 15px;
   border-radius: 20px;
-  margin: 10px 5px;
+  padding: ${breakPoints.isSmartPhone() ? '6px 10px' : '6px 15px'};
+  margin: ${breakPoints.isSmartPhone() ? '5px 2px' : '10px 5px'};
+  font-size: ${breakPoints.isSmartPhone() ? '5px' : 'auto'};
 `;
 
 const ArticleCountWrapper = styled.span`

@@ -14,9 +14,7 @@ const Img = styled.img`
 `;
 
 const ProfileLeft: FC = () => (
-  <>
-    <Img src={katsuomi} />
-  </>
+  <Img src={katsuomi} />
 );
 
 export default ProfileLeft;

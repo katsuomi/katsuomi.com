@@ -16,7 +16,6 @@ const Products: FC = () => (
     <Helmet htmlAttributes={{ lang: "ja" }}>
       <title>{pages.products.title}</title>
     </Helmet>
-
     <Wrapper>
       <Title>KATSUOMI AOKI</Title>
     </Wrapper>

@@ -23,9 +23,7 @@ const AdminContainer: FC<DefaultProps> = ({ user }) => {
     return <AdminLogin />;
   }
   return (
-    <>
-      <AdminMenu />
-    </>
+    <AdminMenu />
   );
 };
 

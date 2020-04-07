@@ -15,6 +15,7 @@ import { dateToString } from "methods/articleMethods";
 // import utils
 import * as colors from "utils/color";
 import * as fontSize from "utils/fontSize";
+import * as breakPoints from "utils/breakPoints";
 
 // import models
 import * as articleModel from "models/articleModel";
@@ -26,7 +27,7 @@ interface DefaultProps {
 
 const ArticleWrapper = styled.div`
   width: 100%;
-  height: 275px;
+  height: ${breakPoints.isSmartPhone() ? '350px' : '275px'};
   background-color: ${colors.WHITE};
   margin: 20px auto;
   max-width: 800px;
@@ -45,7 +46,7 @@ const Linkable = styled.div`
 
 const UpperPart = styled.div`
   display: flex;
-  height: 202px;
+  height: ${breakPoints.isSmartPhone() ? '285px' : '202px'};
   overflow: hidden;
   text-overflow: ellipsis;
 `;
@@ -108,6 +109,10 @@ const Date = styled.p`
   margin-top: 0px;
 `;
 
+const DIV = styled.div`
+  width: 100%;
+`;
+
 const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
   if(!article) return null;
 
@@ -125,22 +130,36 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
       <LinkAnchor src={path}>
         <Linkable>
           <UpperPart>
-            <Left>
-              <Title>{article.title}</Title>
-              <TagWrapper>
-                {article.tagIds.map(tag => (
-                  <Tag key={tag} text={tag} isArticleCount={false} />
-                ))}
-              </TagWrapper>
-              <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
-            </Left>
-            <Right>
-              <Image
-                src={article.thumbnailImagePath}
-                height={180}
-                width={180}
-              />
-            </Right>
+            {breakPoints.isSmartPhone() ?
+              <DIV>
+                <Title>{article.title}</Title>
+                <TagWrapper>
+                  {article.tagIds.map(tag => (
+                    <Tag key={tag} text={tag} isArticleCount={false} />
+                  ))}
+                </TagWrapper>
+                <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
+              </DIV>
+              :
+              <>
+                <Left>
+                  <Title>{article.title}</Title>
+                  <TagWrapper>
+                    {article.tagIds.map(tag => (
+                      <Tag key={tag} text={tag} isArticleCount={false} />
+                    ))}
+                  </TagWrapper>
+                  <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
+                </Left>
+                <Right>
+                  <Image
+                    src={article.thumbnailImagePath}
+                    height={180}
+                    width={180}
+                  />
+                </Right>
+              </>
+            }
           </UpperPart>
           <LowerPart>
             <Good>{article.goodCount}<I className="far fa-thumbs-up"></I></Good>

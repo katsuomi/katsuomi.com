@@ -28,13 +28,11 @@ const SubTitle = styled.p`
 `;
 
 const ContactForm: FC = () => (
-  <>
-    <Wrapper>
-      <Title>お問い合わせ</Title>
-      <SubTitle>開発の依頼やご質問等、まずはお気軽にご連絡ください。</SubTitle>
-      <ContactFormContainer />
-    </Wrapper>
-  </>
+  <Wrapper>
+    <Title>お問い合わせ</Title>
+    <SubTitle>開発の依頼やご質問等、まずはお気軽にご連絡ください。</SubTitle>
+    <ContactFormContainer />
+  </Wrapper>
 );
 
 export default ContactForm;

@@ -86,7 +86,7 @@ const SlideContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "30%" : "25%"}
+          top={breakPoints.isSmartPhone() ? "35%" : "25%"}
           left={"50%"}
         />
       ) : (

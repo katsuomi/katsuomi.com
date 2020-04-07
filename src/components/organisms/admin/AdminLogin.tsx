@@ -4,9 +4,7 @@ import React, { FC } from "react";
 import AdminLoginContainer from "containers/admin/AdminLoginContainer";
 
 const AdminLogin: FC = () => (
-  <>
-    <AdminLoginContainer />
-  </>
+  <AdminLoginContainer />
 );
 
 export default AdminLogin;

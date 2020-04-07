@@ -38,7 +38,6 @@ const Profile: FC = () => (
     <Helmet htmlAttributes={{ lang: "ja" }}>
       <title>{pages.profile.title}</title>
     </Helmet>
-
     <Wrapper>
       <Title>プロフィール</Title>
       <ProfileWrapper>

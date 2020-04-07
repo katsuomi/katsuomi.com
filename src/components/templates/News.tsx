@@ -16,7 +16,6 @@ const News: FC = () => (
     <Helmet htmlAttributes={{ lang: "ja" }}>
       <title>{pages.news.title}</title>
     </Helmet>
-
     <Wrapper>
       <Title>KATSUOMI AOKI</Title>
     </Wrapper>

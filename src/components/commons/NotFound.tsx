@@ -22,22 +22,20 @@ const Txt = styled.p`
 `;
 
 const NotFound: FC = () => (
-  <>
-    <Wrapper>
-      <Txt>This page is not Found.</Txt>
-      <LinkAnchor src="/" isHoverWhite={true}>
-        <Button
-          isDisabled={false}
-          borderColor={colors.BRIGHT_BLUE}
-          backgroundColor={colors.BRIGHT_BLUE}
-          color={colors.WHITE}
-          padding={["5px", "5px", "120px", "120px"]}
-        >
-          go Home
+  <Wrapper>
+    <Txt>This page is not Found.</Txt>
+    <LinkAnchor src="/" isHoverWhite={true}>
+      <Button
+        isDisabled={false}
+        borderColor={colors.BRIGHT_BLUE}
+        backgroundColor={colors.BRIGHT_BLUE}
+        color={colors.WHITE}
+        padding={["5px", "5px", "120px", "120px"]}
+      >
+        go Home
         </Button>
-      </LinkAnchor>
-    </Wrapper>
-  </>
+    </LinkAnchor>
+  </Wrapper>
 );
 
 export default NotFound;

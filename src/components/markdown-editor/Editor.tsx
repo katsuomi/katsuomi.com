@@ -6,11 +6,11 @@ import marked from "marked";
 // import atoms
 import TextArea from "components/atoms/TextArea";
 const TurndownService = require('turndown').default;
-const turndownService = new TurndownService()
+const turndownService = new TurndownService();
 
 interface DefaultProps {
   onChange: (value: string) => void;
-  defaultValue?: string
+  defaultValue?: string;
 }
 
 const Wrapper = styled.div`
@@ -51,25 +51,23 @@ const Editor: FC<DefaultProps> = ({ onChange, defaultValue }) => {
   };
 
   // 編集用にmarkdownに戻す
-  const defaultMarkdown = turndownService.turndown(defaultValue)
+  const defaultMarkdown = turndownService.turndown(defaultValue);
 
   return (
-    <>
-      <Wrapper>
-        <LeftWrapper>
-          <TextArea
-            rows={200}
-            width="100%"
-            onChange={onHandleChange}
-            fontSize="15px"
-            defaultValue={defaultMarkdown}
-          />
-        </LeftWrapper>
-        <RightWrapper>
-          <ReactMarkdown source={inputContent} escapeHtml={true} />
-        </RightWrapper>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <LeftWrapper>
+        <TextArea
+          rows={200}
+          width="100%"
+          onChange={onHandleChange}
+          fontSize="15px"
+          defaultValue={defaultMarkdown}
+        />
+      </LeftWrapper>
+      <RightWrapper>
+        <ReactMarkdown source={inputContent} escapeHtml={true} />
+      </RightWrapper>
+    </Wrapper>
   );
 };
 

@@ -9,11 +9,9 @@ const Wrapper = styled.div`
 `;
 
 const HomeRightSide: FC = () => (
-  <>
-    <Wrapper>
-      <HomeRightContainer />
-    </Wrapper>
-  </>
+  <Wrapper>
+    <HomeRightContainer />
+  </Wrapper>
 );
 
 export default HomeRightSide;
