@@ -1,9 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-// import utils
-import * as breakPoints from "utils/breakPoints";
-
 // import images
 import katsuomi from "images/katsuomi.png";
 
@@ -14,7 +11,7 @@ const Img = styled.img`
 `;
 
 const P = styled.p`
-
+  align-self: center;
 `;
 
 const ProfileLeft: FC = () => (

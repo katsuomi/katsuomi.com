@@ -49,7 +49,7 @@ interface DispatchProps {
   changeArticleGoodCount: (payload: articleModel.ArticleGoodCountPayLoad) => void;
 }
 
-type DefaultProps = StateProps & DispatchProps;
+type DefaultProps = StateProps & DispatchProps & RouteComponentProps;
 
 const Wrapper = styled.div`
   display: flex;

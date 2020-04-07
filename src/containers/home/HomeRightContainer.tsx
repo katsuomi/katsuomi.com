@@ -37,8 +37,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Title = styled.h4`
-  font-size: ${fonSize.H4};
+const Title = styled.h3`
+  font-size: ${fonSize.H3};
+  margin-left: ${breakPoints.isSmartPhone() ? '10px' : '0px'}; 
 `;
 
 const TagWrapper = styled.div`

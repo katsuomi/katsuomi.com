@@ -1,16 +1,21 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 // import atoms
 import LinkAnchor from "components/atoms/LinkAnchor";
+
+//import containers
+import FlashMessagesContainer from "containers/FlashMessagesContainer";
+import HeaderTitleContainer from "containers/HeaderTitleContainer";
+
 // import utils
 import * as colors from "utils/color";
 import * as breakPoints from "utils/breakPoints";
 import * as fontSize from "utils/fontSize";
 
-//import containers
-import FlashMessagesContainer from "containers/FlashMessagesContainer";
-import HeaderTitleContainer from "containers/HeaderTitleContainer";
+// import methods
+import { encodeToString, decodeToString, getUrlId } from "methods/utilsMethods";
 
 const HeaderWrapper = styled.div`
   display: ${breakPoints.isSmartPhone() ? "block" : "flex"};
@@ -40,7 +45,12 @@ const HeaderContents = styled.p`
   }
 `;
 
-const Header: FC = () => {
+const Span = styled.span<{ keyword: string; }>`
+  color: ${props =>
+    props.keyword === decodeToString(getUrlId()) ? colors.WHITE : undefined};
+`;
+
+const Header: FC<RouteComponentProps> = () => {
   return (
     <>
       <HeaderWrapper>
@@ -48,20 +58,30 @@ const Header: FC = () => {
           <HeaderTitleContainer />
         </HeaderTitle>
         <HeaderContents>
-          <LinkAnchor src="/news" isHoverWhite={true}>
-            News
+          <LinkAnchor isHoverWhite={true} src={`/tags/${encodeToString('News')}`}>
+            <Span keyword={'News'}>
+              News
+            </Span>
           </LinkAnchor>
-          <LinkAnchor src="/awards" isHoverWhite={true}>
-            Awards
+          <LinkAnchor isHoverWhite={true} src={`/tags/${encodeToString('Awards')}`}>
+            <Span keyword={'Awards'}>
+              Awards
+            </Span>
           </LinkAnchor>
-          <LinkAnchor src="/products" isHoverWhite={true}>
-            Products
+          <LinkAnchor isHoverWhite={true} src={`/tags/${encodeToString('Products')}`}>
+            <Span keyword={'Products'}>
+              Products
+            </Span>
           </LinkAnchor>
           <LinkAnchor src="/profile" isHoverWhite={true}>
-            Profile
+            <Span keyword={'profile'}>
+              Profile
+            </Span>
           </LinkAnchor>
           <LinkAnchor src="/contact" isHoverWhite={true}>
-            Contact
+            <Span keyword={'contact'}>
+              Contact
+            </Span>
           </LinkAnchor>
         </HeaderContents>
       </HeaderWrapper>
@@ -70,4 +90,4 @@ const Header: FC = () => {
   );
 };
 
-export default Header;
+export default withRouter<any, any>(Header);;

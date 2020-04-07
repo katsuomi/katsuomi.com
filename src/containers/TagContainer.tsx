@@ -1,8 +1,9 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+import { withRouter, RouteComponentProps } from 'react-router';
 
 // import organisms
 import ArticleSummary from "components/organisms/article/ArticleSummary";
@@ -26,15 +27,15 @@ import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
 
 interface StateProps {
-  articlesByTag?: articleModel.Article[];
-  isLoading?: boolean;
+  articlesByTag: articleModel.Article[];
+  isLoading: boolean;
 }
 
 interface DispatchProps {
   getArticlesByTag: (tagId: string) => void;
 }
 
-type DefaultProps = StateProps & DispatchProps;
+type DefaultProps = StateProps & DispatchProps & RouteComponentProps;
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,6 +55,7 @@ const PageTitle = styled.h3`
   width: ${breakPoints.isSmartPhone() ? '100%' : '900px'};
   margin: 10px auto;
   margin-top: 25px;
+  margin-left: ${breakPoints.isSmartPhone() ? '10px' : 'auto'}; 
 `;
 
 const ArticlesWrapper = styled.div`
@@ -67,9 +69,17 @@ const TagContainer: FC<DefaultProps> = ({
   isLoading,
   getArticlesByTag
 }) => {
+  // 下記,遷移しない問題への対応
+  const [currentUrlPath, setCurrentUrlPath] = useState<string>(getUrlId());
+
   useEffect(() => {
     getArticlesByTag(decodeToString(getUrlId()));
-  }, [getArticlesByTag]);
+  }, []);
+
+  if(currentUrlPath !== getUrlId()) {
+    getArticlesByTag(decodeToString(getUrlId()));
+    setCurrentUrlPath(getUrlId());
+  }
 
   const articlesCount: number = articlesByTag ? articlesByTag.length : 0;
 
@@ -86,7 +96,7 @@ const TagContainer: FC<DefaultProps> = ({
               {decodeToString(getUrlId())}の記事({String(articlesCount)})
             </PageTitle>
             <ArticlesWrapper>
-              {articlesByTag?.map(article => {
+              {articlesByTag && articlesByTag.map(article => {
                 return (
                   <ArticleSummary article={article} key={article.uid} />
                 );
@@ -111,4 +121,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagContainer);
+export default withRouter<any, any>(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TagContainer));

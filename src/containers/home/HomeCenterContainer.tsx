@@ -48,6 +48,7 @@ const Title = styled.h3`
   font-feature-settings: "palt" 1;
   font-size: ${fontSize.H3};
   color: ${colors.BLACK};
+  margin-left: ${breakPoints.isSmartPhone() ? '10px' : '0px'}; 
 `;
 
 const ArticlesWrapper = styled.div`

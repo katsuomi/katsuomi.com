@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from 'connected-react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
-import createSagaMiddleware from "redux-saga";
 
 import App from "App";
 import * as serviceWorker from "serviceWorker";
