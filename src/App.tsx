@@ -36,9 +36,6 @@ const App: FC = () => (
       <Route path={pages.tag.path} component={routes.Tag} exact />
       <Route path={pages.contact.path} component={routes.Contact} exact />
       <Route path={pages.profile.path} component={routes.Profile} exact />
-      <Route path={pages.news.path} component={routes.News} exact />
-      <Route path={pages.awards.path} component={routes.Awards} exact />
-      <Route path={pages.products.path} component={routes.Products} exact />
       <Redirect to="/" />
     </Switch>
   </Wrapper>

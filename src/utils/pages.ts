@@ -41,18 +41,6 @@ const pages = {
     path: "/profile",
     title: "プロフィール -Katsuomi.com-"
   },
-  news: {
-    path: "/news",
-    title: "お知らせ -Katsuomi.com-"
-  },
-  awards: {
-    path: "/awards",
-    title: "受賞歴 -Katsuomi.com-"
-  },
-  products: {
-    path: "/products",
-    title: "製作物 -Katsuomi.com-"
-  }
 };
 
 export default pages;
