@@ -8,7 +8,11 @@
 export const getUrlId = (): string => {
   const currentPath = window.location.pathname;
   const result = currentPath.split("/");
-  return result[result.length - 1];
+  if(result.length > 3) {
+    return result[2];
+  } else {
+    return result[result.length - 1];
+  }
 };
 
 // 文字列をencode

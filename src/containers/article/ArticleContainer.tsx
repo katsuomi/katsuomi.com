@@ -125,7 +125,10 @@ const ContentWrapper = styled.div`
   border-bottom: 1px solid ${colors.DARK_BORDER_GRAY};
   padding-bottom: ${breakPoints.isSmartPhone() ? '30px' : '80px'};
   & > span > img {
-    width: 80%;
+    width: ${breakPoints.isSmartPhone() ? '80%' : '50%'};
+  }
+  & > span > p > img {
+    width: ${breakPoints.isSmartPhone() ? '80%' : '50%'};
   }
 `;
 
