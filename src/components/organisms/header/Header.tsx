@@ -68,8 +68,8 @@ const Header: FC<RouteComponentProps> = () => {
               Awards
             </Span>
           </LinkAnchor>
-          <LinkAnchor isHoverWhite={true} src={`/tags/${encodeToString('Products')}`}>
-            <Span keyword={'Products'}>
+          <LinkAnchor isHoverWhite={true} src={`/tags/${encodeToString('Product')}`}>
+            <Span keyword={'Product'}>
               Products
             </Span>
           </LinkAnchor>
