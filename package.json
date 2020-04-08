@@ -34,6 +34,7 @@
     "add": "^2.0.6",
     "connected-react-router": "^6.8.0",
     "firebase": "^7.8.1",
+    "firebase-tools": "^8.0.2",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "marked": "^0.8.0",
