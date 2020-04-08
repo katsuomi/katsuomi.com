@@ -94,6 +94,21 @@ export const getLatestArticles = {
   })
 };
 
+export const getArticlesByGoodCount = {
+  start: () => ({
+    type: ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_START as typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_START
+  }),
+
+  success: (articles: Model.Article[]) => ({
+    type: ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_SUCCESS as typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_SUCCESS,
+    payload: articles
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_FAILURE as typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_FAILURE
+  })
+};
+
 export const getArticles = {
   start: () => ({
     type: ActionTypes.GET_ARTICLES_START as typeof ActionTypes.GET_ARTICLES_START

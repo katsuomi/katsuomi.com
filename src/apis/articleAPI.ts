@@ -167,6 +167,42 @@ export const getLatestArticles = async () => {
   }
 };
 
+// いいねの多い記事を5件取得
+export const getArticlesByGoodCount = async () => {
+  try {
+    const articles: Model.Article[] = [];
+    await firebase
+      .firestore()
+      .collection("articles")
+      .orderBy("goodCount", "desc")
+      .limit(5)
+      .get()
+      .then(snapshot => {
+        if(snapshot.empty) {
+          return;
+        }
+        snapshot.forEach(doc => {
+          articles.push({
+            uid: doc.id,
+            content: doc.data().content,
+            subTitle: doc.data().subTitle,
+            title: doc.data().title,
+            date: doc.data().date.toDate(),
+            tagIds: doc.data().tagIds,
+            goodCount: doc.data().goodCount,
+            thumbnailImagePath: doc.data().thumbnailImagePath
+          });
+        });
+      })
+      .catch(err => {
+        throw new Error(err.message);
+      });
+    return { articles };
+  } catch(error) {
+    return { error };
+  }
+};
+
 // 記事を全て取得
 export const getArticles = async () => {
   try {

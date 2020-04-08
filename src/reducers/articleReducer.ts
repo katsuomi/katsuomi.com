@@ -11,6 +11,7 @@ const initialState: Model.ArticleState = {
   slideShowArticles: [],
   latestArticles: [],
   articles: [],
+  articlesByGoodCount: [],
   articlesByTag: [],
   article: {
     uid: "",
@@ -135,6 +136,22 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_LATEST_ARTICLES_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_START:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_SUCCESS:
+      return {
+        ...state,
+        articlesByGoodCount: action.payload,
+        isLoading: false
+      };
+    case ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_FAILURE:
       return {
         ...state,
         isLoading: false

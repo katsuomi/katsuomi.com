@@ -11,6 +11,7 @@ import {
   deleteArticle,
   getSlideShowArticles,
   getLatestArticles,
+  getArticlesByGoodCount,
   getArticle,
   getPrevArticle,
   getNextArticle,
@@ -142,6 +143,21 @@ function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
   }
 }
 
+function* runGetArticlesByGoodCount(action: Model.GetArticlesByGoodCountStartAction) {
+  const handler = API.getArticlesByGoodCount;
+  const { articles, error } = yield call(handler);
+  if(articles && !error) {
+    yield put(getArticlesByGoodCount.success(articles));
+  } else {
+    const payload = {
+      type: "failure",
+      message: error.message
+    };
+    yield put(addFlashMessage(payload));
+    yield put(getArticlesByGoodCount.failure());
+  }
+}
+
 function* runGetArticles(action: Model.GetArticlesStartAction) {
   const handler = API.getArticles;
   const { articles, error } = yield call(handler);
@@ -234,6 +250,7 @@ export function* watchArticle() {
     runGetSlideShowArticles
   );
   yield takeLatest(ActionTypes.GET_LATEST_ARTICLES_START, runGetLatestArticles);
+  yield takeLatest(ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_START, runGetArticlesByGoodCount);
   yield takeLatest(ActionTypes.GET_ARTICLES_START, runGetArticles);
   yield takeLatest(ActionTypes.GET_ARTICLE_START, runGetArticle);
   yield takeLatest(ActionTypes.GET_PREV_ARTICLE_START, runGetPrevArticle);

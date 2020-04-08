@@ -25,6 +25,7 @@ export interface ArticleState {
   latestArticles: Article[];
   articles: Article[];
   articlesByTag: Article[];
+  articlesByGoodCount: Article[];
   article: Article;
   prevArticle: Article;
   nextArticle: Article;
@@ -118,6 +119,19 @@ export interface GetLatestArticlesFilureAction {
   type: typeof ActionTypes.GET_LATEST_ARTICLES_FAILURE;
 }
 
+export interface GetArticlesByGoodCountStartAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_START;
+}
+
+export interface GetArticlesByGoodCountSuccessAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_SUCCESS;
+  payload: Article[];
+}
+
+export interface GetArticlesByGoodCountFilureAction {
+  type: typeof ActionTypes.GET_ARTICLES_BY_GOOD_COUNT_FAILURE;
+}
+
 export interface GetArticlesStartAction {
   type: typeof ActionTypes.GET_ARTICLES_START;
 }
@@ -206,6 +220,9 @@ export type ArticleAction =
   | GetLatestArticlesStartAction
   | GetLatestArticlesSuccessAction
   | GetLatestArticlesFilureAction
+  | GetArticlesByGoodCountStartAction
+  | GetArticlesByGoodCountSuccessAction
+  | GetArticlesByGoodCountFilureAction
   | GetArticlesStartAction
   | GetArticlesSuccessAction
   | GetArticlesFilureAction

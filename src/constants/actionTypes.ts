@@ -76,6 +76,14 @@ export const GET_LATEST_ARTICLES_SUCCESS = "GET_LATEST_ARTICLES_SUCCESS";
 export const GET_LATEST_ARTICLES_FAILURE = "GET_LATEST_ARTICLES_FAILURE";
 
 // -----------------------------------------------------------------------------
+// Get Articles By Good Count
+// -----------------------------------------------------------------------------
+
+export const GET_ARTICLES_BY_GOOD_COUNT_START = "GET_ARTICLES_BY_GOOD_COUNT_START";
+export const GET_ARTICLES_BY_GOOD_COUNT_SUCCESS = "GET_ARTICLES_BY_GOOD_COUNT_SUCCESS";
+export const GET_ARTICLES_BY_GOOD_COUNT_FAILURE = "GET_ARTICLES_BY_GOOD_COUNT_FAILURE";
+
+// -----------------------------------------------------------------------------
 // Get Articles
 // -----------------------------------------------------------------------------
 
