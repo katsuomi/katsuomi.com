@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 
 // import components
-import Header from "components/organisms/Header";
+import Header from "components/organisms/header/Header";
 
 // import utils
 import pages from "utils/pages";

@@ -4,16 +4,16 @@ import { Helmet } from "react-helmet";
 // import utils
 import pages from "utils/pages";
 
-// import components
-import ContactForm from "components/organisms/ContactForm";
+// import containers
+import TagContainer from "containers/tag/TagContainer";
 
-const Contact: FC = () => (
+const Tag: FC = () => (
   <>
     <Helmet htmlAttributes={{ lang: "ja" }}>
-      <title>{pages.contact.title}</title>
+      <title>{pages.tag.title}</title>
     </Helmet>
-    <ContactForm />
+    <TagContainer />
   </>
 );
 
-export default Contact;
+export default Tag;

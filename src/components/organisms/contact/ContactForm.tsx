@@ -6,7 +6,7 @@ import * as fontSize from "utils/fontSize";
 import * as colors from "utils/color";
 
 // import containers
-import ContactFormContainer from "containers/ContactFormContainer";
+import ContactFormContainer from "containers/contact/ContactFormContainer";
 
 const Wrapper = styled.div`
   display: flex;

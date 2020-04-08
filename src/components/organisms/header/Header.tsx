@@ -6,8 +6,8 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import LinkAnchor from "components/atoms/LinkAnchor";
 
 //import containers
-import FlashMessagesContainer from "containers/FlashMessagesContainer";
-import HeaderTitleContainer from "containers/HeaderTitleContainer";
+import FlashMessagesContainer from "containers/flashMessage/FlashMessagesContainer";
+import HeaderTitleContainer from "containers/header/HeaderTitleContainer";
 
 // import utils
 import * as colors from "utils/color";
