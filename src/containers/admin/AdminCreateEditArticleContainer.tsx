@@ -137,7 +137,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       content: content,
       date: date instanceof Date ? date : new Date(),
       tagIds: tagIds,
-      goodCount: 0,
+      goodCount: article ? article.goodCount : 0,
       isAddSlideShow: isAddSlideShow
     };
 

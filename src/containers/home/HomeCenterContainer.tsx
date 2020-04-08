@@ -1,8 +1,11 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+
+// imoport molecules
+import Selector from 'components/molecules/Selector';
 
 // import organisms
 import ArticleSummary from "components/organisms/article/ArticleSummary";
@@ -11,7 +14,7 @@ import ArticleSummary from "components/organisms/article/ArticleSummary";
 import Spinner from "components/commons/Spinner";
 
 // import actions
-import { getLatestArticles } from "actions/articleAction";
+import { getLatestArticles, getArticlesByGoodCount } from "actions/articleAction";
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
@@ -23,12 +26,14 @@ import { AppState } from "models/index";
 import * as articleModel from "models/articleModel";
 
 interface StateProps {
-  latestArticles?: articleModel.Article[];
-  isLoading?: boolean;
+  latestArticles: articleModel.Article[];
+  articlesByGoodCount: articleModel.Article[];
+  isLoading: boolean;
 }
 
 interface DispatchProps {
   getLatestArticles: () => void;
+  getArticlesByGoodCount: () => void;
 }
 
 type DefaultProps = StateProps & DispatchProps;
@@ -36,19 +41,6 @@ type DefaultProps = StateProps & DispatchProps;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Title = styled.h3`
-  margin-bottom: 8px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  word-break: break-all;
-  -webkit-font-feature-settings: "palt" 1;
-  font-feature-settings: "palt" 1;
-  font-size: ${fontSize.H3};
-  color: ${colors.BLACK};
-  margin-left: ${breakPoints.isSmartPhone() ? '10px' : '0px'}; 
 `;
 
 const ArticlesWrapper = styled.div`
@@ -59,12 +51,31 @@ const ArticlesWrapper = styled.div`
 
 const HomeCenterContainer: FC<DefaultProps> = ({
   latestArticles,
+  articlesByGoodCount,
   isLoading,
-  getLatestArticles
+  getLatestArticles,
+  getArticlesByGoodCount
 }) => {
+  const [currentTitle, setCurrentTitile] = useState<string>('latestArticles');
   useEffect(() => {
     getLatestArticles();
-  }, [getLatestArticles]);
+    getArticlesByGoodCount();
+  }, []);
+
+  const selectorOptions = [
+    { value: 'latestArticles', label: '最新の記事' },
+    { value: 'articlesByGoodCount', label: 'いいねの多い記事' },
+  ];
+
+  const handleOnChangeSelector = (object: { value: string, label: string; }): void => {
+    setCurrentTitile(object.value);
+  };
+
+  let articles = latestArticles;
+  if(currentTitle === 'articlesByGoodCount') {
+    articles = articlesByGoodCount;
+  }
+
   return (
     <>
       {isLoading ? (
@@ -74,9 +85,9 @@ const HomeCenterContainer: FC<DefaultProps> = ({
         />
       ) : (
           <Wrapper>
-            <Title>最新の記事</Title>
+            <Selector options={selectorOptions} isTitle={true} width={230} onChange={handleOnChangeSelector} />
             <ArticlesWrapper>
-              {latestArticles?.map(article => {
+              {articles?.map(article => {
                 return (
                   <ArticleSummary article={article} key={article.uid} />
                 );
@@ -90,13 +101,15 @@ const HomeCenterContainer: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   latestArticles: state.article.latestArticles,
+  articlesByGoodCount: state.article.articlesByGoodCount,
   isLoading: state.article.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      getLatestArticles: () => getLatestArticles.start()
+      getLatestArticles: () => getLatestArticles.start(),
+      getArticlesByGoodCount: () => getArticlesByGoodCount.start()
     },
     dispatch
   );

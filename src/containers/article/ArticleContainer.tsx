@@ -157,7 +157,7 @@ const ArticleContainer: FC<DefaultProps> = ({
   getNextArticleReset,
   changeArticleGoodCount
 }) => {
-  const [currentCount, setCurrentCount] = useState<number>(-1);
+  const [currentCount, setCurrentCount] = useState<number>(-2);
   const [isDone, setIsDone] = useState<boolean>(false);
   // 下記,遷移しない問題への対応
   const [currentUrlPath, setCurrentUrlPath] = useState<string>(getUrlId());
@@ -211,7 +211,7 @@ const ArticleContainer: FC<DefaultProps> = ({
     }
   };
 
-  if(article && article.goodCount !== undefined && currentCount === -1) {
+  if(article && article.goodCount !== undefined && currentCount === -2) {
     setCurrentCount(article.goodCount);
   }
 

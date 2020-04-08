@@ -125,6 +125,8 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
     return null;
   }
 
+  const maxSubTitleLength = breakPoints.isSmartPhone() ? 50 : 70;
+
   return (
     <ArticleWrapper key={article.uid}>
       <LinkAnchor src={path}>
@@ -138,7 +140,7 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
                     <Tag key={tag} text={tag} isArticleCount={false} />
                   ))}
                 </TagWrapper>
-                <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
+                <ContentWrapper>{article.subTitle.slice(0, maxSubTitleLength)} ...</ContentWrapper>
               </DIV>
               :
               <>
@@ -149,7 +151,7 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
                       <Tag key={tag} text={tag} isArticleCount={false} />
                     ))}
                   </TagWrapper>
-                  <ContentWrapper>{article.subTitle.slice(0, 70)} ...</ContentWrapper>
+                  <ContentWrapper>{article.subTitle.slice(0, maxSubTitleLength)} ...</ContentWrapper>
                 </Left>
                 <Right>
                   <Image
