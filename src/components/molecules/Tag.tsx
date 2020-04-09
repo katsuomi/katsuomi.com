@@ -32,7 +32,7 @@ const TagWrapper = styled.span`
   border-radius: 20px;
   padding: ${breakPoints.isSmartPhone() ? '6px 10px' : '6px 15px'};
   margin: ${breakPoints.isSmartPhone() ? '5px 2px' : '10px 5px'};
-  font-size: ${breakPoints.isSmartPhone() ? '5px' : 'auto'};
+  font-size: ${breakPoints.isSmartPhone() ? '15px' : 'auto'};
 `;
 
 const ArticleCountWrapper = styled.span`
