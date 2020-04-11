@@ -1,9 +1,29 @@
 {
+  "functions": {
+    "predeploy": [
+      "npm run build"
+    ],
+    "source": "functions"
+  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "rewrites": [
+      {
+        "source": "/articles/*",
+        "function": "returnOgp2"
+      },
+      {
+        "source": "/_articles/*",
+        "destination": "/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "public": "build",
     "ignore": [
       "firebase.json",
