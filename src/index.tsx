@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from 'connected-react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -11,13 +11,19 @@ import configureStore from './store';
 export const history = createBrowserHistory();
 export const store = configureStore(history);
 
-ReactDOM.render(
-  <Provider store={store}>
+const rootElement: HTMLElement | null = document.getElementById("root");
+
+if(rootElement && rootElement.hasChildNodes()) {
+  hydrate(<Provider store={store}>
     <ConnectedRouter history={history}>
       <App />
     </ConnectedRouter>
-  </Provider>,
-  document.getElementById("root") as HTMLElement
-);
-
+  </Provider>, rootElement);
+} else {
+  render(<Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>, rootElement);
+}
 serviceWorker.unregister();

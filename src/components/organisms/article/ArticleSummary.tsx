@@ -27,7 +27,7 @@ interface DefaultProps {
 
 const ArticleWrapper = styled.div`
   width: 100%;
-  height: ${breakPoints.isSmartPhone() ? '350px' : '275px'};
+  height: ${breakPoints.isSmartPhone() ? '488px' : '275px'};
   background-color: ${colors.WHITE};
   margin: 20px auto;
   max-width: 800px;
@@ -46,7 +46,7 @@ const Linkable = styled.div`
 
 const UpperPart = styled.div`
   display: flex;
-  height: ${breakPoints.isSmartPhone() ? '285px' : '202px'};
+  height: ${breakPoints.isSmartPhone() ? '440px' : '202px'};
   overflow: hidden;
   text-overflow: ellipsis;
 `;
@@ -109,8 +109,13 @@ const Date = styled.p`
   margin-top: 0px;
 `;
 
-const DIV = styled.div`
+const SpWrapper = styled.div`
   width: 100%;
+`;
+
+const ImageWrapper = styled.p`
+  text-align: -webkit-center;
+  margin: -10px;
 `;
 
 const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
@@ -133,7 +138,14 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
         <Linkable>
           <UpperPart>
             {breakPoints.isSmartPhone() ?
-              <DIV>
+              <SpWrapper>
+                <ImageWrapper>
+                  <Image
+                    src={article.thumbnailImagePath}
+                    height={180}
+                    width={180}
+                  />
+                </ImageWrapper>
                 <Title>{article.title}</Title>
                 <TagWrapper>
                   {article.tagIds.map(tag => (
@@ -141,7 +153,7 @@ const ArticleSummary: FC<DefaultProps> = ({ article, isEdit }) => {
                   ))}
                 </TagWrapper>
                 <ContentWrapper>{article.subTitle.slice(0, maxSubTitleLength)} ...</ContentWrapper>
-              </DIV>
+              </SpWrapper>
               :
               <>
                 <Left>

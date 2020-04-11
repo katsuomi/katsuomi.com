@@ -87,7 +87,7 @@ const TagContainer: FC<DefaultProps> = ({
     <>
       {isLoading ? (
         <Spinner
-          top={breakPoints.isSmartPhone() ? "30%" : "25%"}
+          top={breakPoints.isSmartPhone() ? "50%" : "25%"}
           left={"50%"}
         />
       ) : (

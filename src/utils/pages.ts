@@ -41,6 +41,10 @@ const pages = {
     path: "/profile",
     title: "プロフィール -Katsuomi.com-"
   },
+  articleOgp: {
+    path: "/_articles/:id",
+    title: "記事詳細-- -Katsuomi.com-"
+  },
 };
 
 export default pages;

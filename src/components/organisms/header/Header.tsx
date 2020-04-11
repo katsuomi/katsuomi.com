@@ -39,6 +39,7 @@ const HeaderTitle = styled.h1`
 
 const HeaderContents = styled.p`
   ${breakPoints.isSmartPhone() && "text-align: center"};
+  ${breakPoints.isSmartPhone() && "margin: 0"};
   > span {
     font-size: ${breakPoints.isSmartPhone() ? fontSize.BODY : fontSize.MINI};
     padding: 0 ${breakPoints.isSmartPhone() ? "5px" : "20px"};

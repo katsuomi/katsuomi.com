@@ -18,8 +18,6 @@ import { getLatestArticles, getArticlesByGoodCount } from "actions/articleAction
 
 // import utils
 import * as breakPoints from "utils/breakPoints";
-import * as colors from "utils/color";
-import * as fontSize from "utils/fontSize";
 
 // import models
 import { AppState } from "models/index";
@@ -79,8 +77,8 @@ const HomeCenterContainer: FC<DefaultProps> = ({
   return (
     <>
       {isLoading ? (
-        <Spinner
-          top={breakPoints.isSmartPhone() ? "85%" : "55%"}
+        !breakPoints.isSmartPhone() && <Spinner
+          top={"55%"}
           left={"50%"}
         />
       ) : (

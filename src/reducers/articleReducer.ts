@@ -200,7 +200,8 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_PREV_ARTICLE_START:
       return {
         ...state,
-        isLoading: true
+        // ArticleContainerで読み込んでいるが、初期表示が遅れてしまうためfalseにする
+        isLoading: false
       };
     case ActionTypes.GET_PREV_ARTICLE_SUCCESS:
       return {
@@ -225,7 +226,8 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.GET_NEXT_ARTICLE_START:
       return {
         ...state,
-        isLoading: true
+        // ArticleContainerで読み込んでいるが、初期表示が遅れてしまうためfalseにする
+        isLoading: false
       };
     case ActionTypes.GET_NEXT_ARTICLE_SUCCESS:
       return {
