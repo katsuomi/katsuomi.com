@@ -25,8 +25,6 @@ interface DispatchProps {
 const ContentWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin-right: auto;
-  margin-left: ${breakPoints.isSmartPhone() ? "5%" : "15%"};
 `;
 
 const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
@@ -56,7 +54,7 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
         placeholder=""
         isRequired={true}
         value={name}
-        width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+        width={breakPoints.isSmartPhone() ? "300px" : "800px"}
         borderColor={colors.BORDER_LIGHT_GRAY}
         backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
         margin={["10px", "10px", "0px", "0px"]}
@@ -69,7 +67,7 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
         type="email"
         isRequired={true}
         value={email}
-        width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+        width={breakPoints.isSmartPhone() ? "300px" : "800px"}
         borderColor={colors.BORDER_LIGHT_GRAY}
         backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
         margin={["10px", "10px", "0px", "0px"]}
@@ -83,7 +81,7 @@ const ContactFormContainer: FC<DispatchProps> = ({ submitContactForm }) => {
         value={content}
         fontSize={"15px"}
         isRequired={true}
-        width={breakPoints.isSmartPhone() ? "300px" : "70vw"}
+        width={breakPoints.isSmartPhone() ? "300px" : "800px"}
         borderColor={colors.BORDER_LIGHT_GRAY}
         backgroundColor={colors.BACKGROUND_LIGHT_GRAY}
         margin={["10px", "10px", "0px", "0px"]}

@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent, useEffect } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -164,10 +164,13 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   };
 
   const handleOnBlurTagIds = (tags: tagModel.Tag[]) => {
+    setTagIds([]);
     tags.forEach(tag => setTagIds(tagIds => _.uniq([...tagIds, tag.id])));
   };
 
   const submitMessage = isCreate ? '作成' : '更新';
+
+  console.log({ tagIds });
 
   return (
     <>
