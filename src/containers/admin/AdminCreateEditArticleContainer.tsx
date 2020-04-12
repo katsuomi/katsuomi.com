@@ -170,8 +170,6 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
 
   const submitMessage = isCreate ? '作成' : '更新';
 
-  console.log({ tagIds });
-
   return (
     <>
       {isLoading ? (
