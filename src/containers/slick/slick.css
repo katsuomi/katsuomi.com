@@ -162,3 +162,16 @@
     right: 30px;
   }
 }
+
+.slick-slide:not(.slick-center) {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+  -webkit-filter: blur(5px);
+  -moz-filter:blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}

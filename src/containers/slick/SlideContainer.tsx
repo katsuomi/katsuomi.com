@@ -41,7 +41,7 @@ const Img = styled.img`
   width: 98%;
   height: ${breakPoints.hasWidth800() ? "30vw" : "40vw"};
   max-height: 390px;
-  object-fit: scale-down;
+  object-fit: cover;
 `;
 
 const SlideContainer: FC<DefaultProps> = ({
