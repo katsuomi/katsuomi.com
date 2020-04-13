@@ -59,6 +59,7 @@
     "redux-saga": "^1.1.3",
     "resize-image": "^0.1.0",
     "semantic-ui-react": "^0.88.2",
+    "source-map-explorer": "^2.4.2",
     "styled-components": "^5.0.1",
     "turndown": "^6.0.0",
     "typescript": "^3.8.3",
@@ -66,6 +67,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -87,5 +89,10 @@
   },
   "devDependencies": {
     "typescript-loadable-components-plugin": "^1.0.0"
-  }
+  },
+  "description": "katsuomi.com",
+  "main": "index.js",
+  "repository": "https://github.com/katsuomi/katsuomi.com",
+  "author": "青木克臣 <mugichak1227@gmail.com>",
+  "license": "MIT"
 }
