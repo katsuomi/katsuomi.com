@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `;
 
 const TimeLineWrapper = styled.div`
-  height: 1000px;
+  height: 720px;
   overflow: scroll;
   display: ${breakPoints.isSmartPhone() && 'none'}
 `;
