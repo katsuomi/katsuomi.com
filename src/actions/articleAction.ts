@@ -80,8 +80,9 @@ export const getSlideShowArticles = {
 };
 
 export const getLatestArticles = {
-  start: () => ({
-    type: ActionTypes.GET_LATEST_ARTICLES_START as typeof ActionTypes.GET_LATEST_ARTICLES_START
+  start: (date?: Date) => ({
+    type: ActionTypes.GET_LATEST_ARTICLES_START as typeof ActionTypes.GET_LATEST_ARTICLES_START,
+    payload: date
   }),
 
   success: (articles: Model.Article[]) => ({

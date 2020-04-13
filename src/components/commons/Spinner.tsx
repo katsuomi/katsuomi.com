@@ -17,6 +17,7 @@ export interface SpinnerProps {
   left?: string;
   right?: string;
   position?: "abslute" | "relative";
+  display?: 'block';
 }
 
 export interface SpinnerStyleProps {
@@ -24,15 +25,17 @@ export interface SpinnerStyleProps {
   left?: string;
   right?: string;
   position?: "abslute" | "relative";
+  display?: 'block';
 }
 
 const SegmentWrapper = styled.div<SpinnerStyleProps>`
+  width: ${props => (props.display === 'block' ? '100%' : undefined)};
   position: ${props => (props.position ? props.position : "absolute")};
-  top: ${props => (props.top ? props.top : "50%")};
+  top: ${props => (props.top ? props.top : undefined)};
   left: ${props => (props.left ? props.left : undefined)};
   right: ${props => (props.right ? props.right : undefined)};
-  margin-right: ${props => (props.right ? undefined : "-50%")};
-  transform: translate(-50%, -50%);
+  margin-right: ${props => (props.right || props.display === 'block' ? undefined : "-50%")};
+  transform: ${props => (props.display === 'block' ? undefined : 'translate(-50%, -50%)')};
   > * > * {
     justify-content: center;
   }
@@ -42,12 +45,13 @@ const LoadWrapper = styled.p`
   color: ${colors.BLACK};
 `;
 
-const Spinner: FC<SpinnerProps> = ({ top, left, right, position }) => (
+const Spinner: FC<SpinnerProps> = ({ top, left, right, position, display }) => (
   <SegmentWrapper
     top={top ? top : ""}
     left={left ? left : ""}
     right={right ? right : ""}
     position={position}
+    display={display}
   >
     <Segment className="spinner">
       <Dimmer active inverted>

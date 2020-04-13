@@ -129,8 +129,12 @@ function* runGetSlideShowArticles(
 }
 
 function* runGetLatestArticles(action: Model.GetLatestArticlesStartAction) {
+  let date = new Date('2100-12-24');
+  if(action.payload) {
+    date = action.payload;
+  }
   const handler = API.getLatestArticles;
-  const { articles, error } = yield call(handler);
+  const { articles, error } = yield call(handler, date);
   if(articles && !error) {
     yield put(getLatestArticles.success(articles));
   } else {

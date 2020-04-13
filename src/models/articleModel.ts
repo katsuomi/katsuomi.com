@@ -108,6 +108,7 @@ export interface GetSlideShowArticlesFilureAction {
 
 export interface GetLatestArticlesStartAction {
   type: typeof ActionTypes.GET_LATEST_ARTICLES_START;
+  payload?: Date;
 }
 
 export interface GetLatestArticlesSuccessAction {

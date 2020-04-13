@@ -131,14 +131,15 @@ export const getSlideShowArticles = async () => {
   }
 };
 
-// 最新の記事を5件取得
-export const getLatestArticles = async () => {
+// 最新の記事を5件取得(dateを渡して,ページングに対応させている)
+export const getLatestArticles = async (date: Date) => {
   try {
     const articles: Model.Article[] = [];
     await firebase
       .firestore()
       .collection("articles")
       .orderBy("date", "desc")
+      .startAfter(date)
       .limit(5)
       .get()
       .then(snapshot => {
@@ -167,7 +168,7 @@ export const getLatestArticles = async () => {
   }
 };
 
-// いいねの多い記事を5件取得
+// いいねの多い記事順にソート
 export const getArticlesByGoodCount = async () => {
   try {
     const articles: Model.Article[] = [];
@@ -175,7 +176,6 @@ export const getArticlesByGoodCount = async () => {
       .firestore()
       .collection("articles")
       .orderBy("goodCount", "desc")
-      .limit(5)
       .get()
       .then(snapshot => {
         if(snapshot.empty) {

@@ -125,14 +125,15 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
         isLoading: false
       };
     case ActionTypes.GET_LATEST_ARTICLES_START:
+      const isLoading = action.payload ? false : true;
       return {
         ...state,
-        isLoading: true
+        isLoading: isLoading
       };
     case ActionTypes.GET_LATEST_ARTICLES_SUCCESS:
       return {
         ...state,
-        latestArticles: action.payload,
+        latestArticles: [...state.latestArticles, ...action.payload],
         isLoading: false
       };
     case ActionTypes.GET_LATEST_ARTICLES_FAILURE:

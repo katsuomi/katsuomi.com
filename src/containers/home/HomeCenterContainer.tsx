@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
+import { Waypoint } from 'react-waypoint';
 
 // imoport molecules
 import Selector from 'components/molecules/Selector';
@@ -30,7 +31,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  getLatestArticles: () => void;
+  getLatestArticles: (date?: Date) => void;
   getArticlesByGoodCount: () => void;
 }
 
@@ -41,9 +42,26 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const ScrollWrapper = styled.div`
+  height: 1100px;
+  overflow: scroll;
+`;
+
 const ArticlesWrapper = styled.div`
   & > div {
     width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
+  }
+`;
+
+// 初期表示でway-pointが実行されないように、少し高さを出す
+const WayPointWrapper = styled.div`
+  display: block;
+  height: 2px;
+`;
+
+const SpinnerWrapper = styled.div`
+  & > div {
+    margin-top: -30px;
   }
 `;
 
@@ -55,6 +73,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
   getArticlesByGoodCount
 }) => {
   const [currentTitle, setCurrentTitile] = useState<string>('latestArticles');
+  const [isPagingLoading, setIsPagingLoading] = useState<boolean>(false);
   useEffect(() => {
     getLatestArticles();
     getArticlesByGoodCount();
@@ -67,6 +86,20 @@ const HomeCenterContainer: FC<DefaultProps> = ({
 
   const handleOnChangeSelector = (object: { value: string, label: string; }): void => {
     setCurrentTitile(object.value);
+  };
+
+  const getMoreArticles = async () => {
+    if(currentTitle === 'latestArticles') {
+      if(latestArticles[latestArticles.length - 1] === undefined) {
+        return;
+      }
+      setIsPagingLoading(true);
+      const lastArticleDate = latestArticles[latestArticles.length - 1].date;
+      await getLatestArticles(lastArticleDate);
+      await setIsPagingLoading(false);
+    } else if(currentTitle === 'articlesByGoodCount') {
+      return;
+    }
   };
 
   let articles = latestArticles;
@@ -84,13 +117,19 @@ const HomeCenterContainer: FC<DefaultProps> = ({
       ) : (
           <Wrapper>
             <Selector options={selectorOptions} isTitle={true} width={230} onChange={handleOnChangeSelector} />
-            <ArticlesWrapper>
-              {articles?.map(article => {
-                return (
-                  <ArticleSummary article={article} key={article.uid} />
-                );
-              })}
-            </ArticlesWrapper>
+            <ScrollWrapper>
+              <ArticlesWrapper>
+                {articles?.map(article => {
+                  return (
+                    <ArticleSummary article={article} key={article.uid} />
+                  );
+                })}
+              </ArticlesWrapper>
+              {isPagingLoading && <SpinnerWrapper><Spinner display="block" position='relative' /></SpinnerWrapper>}
+              <WayPointWrapper>
+                <Waypoint onEnter={() => getMoreArticles()} />
+              </WayPointWrapper>
+            </ScrollWrapper>
           </Wrapper>
         )}
     </>
@@ -106,7 +145,7 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      getLatestArticles: () => getLatestArticles.start(),
+      getLatestArticles: (date?: Date) => getLatestArticles.start(date),
       getArticlesByGoodCount: () => getArticlesByGoodCount.start()
     },
     dispatch
