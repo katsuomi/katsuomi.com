@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from "react";
+import React, { FC, useState, FormEvent, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -63,6 +63,8 @@ interface Props extends RouteComponentProps<{}>, React.Props<{}> {
 
 type DefaultProps = StateProps & DispatchProps & Props;
 
+const localStorage = window.localStorage;
+
 const ContentWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -95,10 +97,14 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const [title, setTitle] = useState<string>(article ? article.title : "");
   const [subTitle, setSubTitle] = useState<string>(article ? article.subTitle : "");
   const [thumbnailImagePath, setThumbnailImagePath] = useState<string>(article ? article.thumbnailImagePath : "");
-  const [content, setContent] = useState<string>(article ? article.content : "");
+  const [content, setContent] = useState<string>(article ? article.content : '');
   const [tagIds, setTagIds] = useState<string[]>(article ? article.tagIds : []);
   const [date, setDate] = useState<Date>(article ? article.date : new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.isAddSlideShow ? article.isAddSlideShow : false);
+
+  if(isCreate && content !== localStorage.draftContent) {
+    setContent(localStorage.draftContent);
+  }
 
   const defaultTags: tagModel.Tag[] = [];
   if(article) {
@@ -152,11 +158,19 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
       setTagIds([]);
       setDate(new Date());
       setIsAddSlideShow(false);
+      localStorage.draftContent = '';
     }
 
     if(isEdit) {
       await history.push('/admin');
     }
+  };
+
+  const handleOnChangeContent = (value: string) => {
+    if(isCreate) {
+      localStorage.draftContent = value;
+    }
+    setContent(value);
   };
 
   const handleOnChangeIsAddSlideShow = () => {
@@ -247,7 +261,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
               <Left>
                 <InputLabel isRequired={true}>内容</InputLabel>
               </Left>
-              <Editor onChange={setContent} defaultValue={content} />
+              <Editor onChange={handleOnChangeContent} defaultValue={content} />
 
               <Button
                 isDisabled={isDisabled}
