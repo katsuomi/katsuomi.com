@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 // import images
-import katsuomi from "images/katsuomi.png";
+import katsuomi from "images/katsuomi.jpg";
 
 const Img = styled.img`
   width: 200px;

@@ -11,10 +11,10 @@ import * as breakPoints from "utils/breakPoints";
 import * as fontSize from "utils/fontSize";
 
 // import images
-import qiita from "images/qiita.png";
-import github from "images/github.png";
-import twitter from "images/twitter.png";
-import facebook from "images/facebook.png";
+import qiita from "images/qiita.jpg";
+import github from "images/github.jpg";
+import twitter from "images/twitter.jpg";
+import facebook from "images/facebook.jpg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,9 +23,8 @@ const Wrapper = styled.div`
   margin-bottom: ${breakPoints.isSmartPhone() ? "10px" : "60px"};
 `;
 
-const Img = styled.img<{ src: string; }>`
-  width: ${props =>
-    props.src === "/static/media/qiita.c6c37228.png" ? "100px" : "50px"};
+const Img = styled.img<{ isWide?: boolean; }>`
+  width: ${props => props.isWide ? "100px" : "50px"};
   height: 50px;
   align-self: center;
 `;
@@ -40,7 +39,7 @@ const ProfileBottom: FC = () => (
   <>
     <Wrapper>
       <Anchor href="https://qiita.com/katsuomi">
-        <Img src={qiita} />
+        <Img src={qiita} isWide={true} />
       </Anchor>
       <Anchor href="https://github.com/katsuomi">
         <Img src={github} />
