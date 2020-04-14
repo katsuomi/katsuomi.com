@@ -70,16 +70,16 @@ const HomeLeftSide: FC = () => (
         <ProfileLeft />
         <SNSWrapper>
           <Anchor href="https://qiita.com/katsuomi">
-            <Img src={qiita} isWide={true} />
+            <Img src={qiita} isWide={true} decoding='async' />
           </Anchor>
           <Anchor href="https://github.com/katsuomi">
-            <Img src={github} />
+            <Img src={github} decoding='async' />
           </Anchor>
           <Anchor href="https://twitter.com/aoki_eng">
-            <Img src={twitter} />
+            <Img src={twitter} decoding='async' />
           </Anchor>
           <Anchor href="https://www.facebook.com/aoki.katsuomi">
-            <Img src={facebook} />
+            <Img src={facebook} decoding='async' />
           </Anchor>
         </SNSWrapper>
       </ProfileWrapper>
