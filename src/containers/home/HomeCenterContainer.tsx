@@ -75,7 +75,10 @@ const HomeCenterContainer: FC<DefaultProps> = ({
   const [currentTitle, setCurrentTitile] = useState<string>('latestArticles');
   const [isPagingLoading, setIsPagingLoading] = useState<boolean>(false);
   useEffect(() => {
-    getLatestArticles();
+    // 再読み込みで,配列に同じ要素がpushされないようにするため
+    if(!latestArticles.length) {
+      getLatestArticles();
+    }
     getArticlesByGoodCount();
   }, []);
 
@@ -121,7 +124,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
               <ArticlesWrapper>
                 {articles?.map(article => {
                   return (
-                    <ArticleSummary article={article} key={article.uid} />
+                    <ArticleSummary article={article} key={article.uid + currentTitle} />
                   );
                 })}
               </ArticlesWrapper>
