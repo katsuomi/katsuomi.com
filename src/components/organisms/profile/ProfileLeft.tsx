@@ -14,11 +14,14 @@ const P = styled.p`
   align-self: center;
 `;
 
+const Wrapper = styled.div`
+`;
+
 const ProfileLeft: FC = () => (
-  <>
+  <Wrapper>
     <Img src={katsuomi} />
     <P>Aoki katsuomi, Nagoya Univ B4,<br /> Software Engineer</P>
-  </>
+  </Wrapper>
 );
 
 export default ProfileLeft;

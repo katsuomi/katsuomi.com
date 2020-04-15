@@ -22,25 +22,23 @@ const Bold = styled.span`
 `;
 
 const ProfileRight: FC = () => (
-  <>
-    <Wrapper>
-      <P>
-        名前: <Bold>青木克臣</Bold>
-      </P>
-      <P>
-        所属: <Bold>名古屋大学情報学部4回生</Bold>
-      </P>
-      <P>
-        趣味: <Bold>競馬,筋トレ,ドライブ,フットサル,Jリーグ</Bold>
-      </P>
-      <P>スキルセット:</P>
-      <P>
-        <Bold>
-          TypeScript, JavaScript, React, Ruby, Ruby on Rails, Go, AWS, Firebase
+  <Wrapper>
+    <P>
+      名前: <Bold>青木克臣</Bold>
+    </P>
+    <P>
+      所属: <Bold>名古屋大学情報学部4回生</Bold>
+    </P>
+    <P>
+      趣味: <Bold>競馬,筋トレ,ドライブ,フットサル,Jリーグ</Bold>
+    </P>
+    <P>スキルセット:</P>
+    <P>
+      <Bold>
+        TypeScript, JavaScript, React, Ruby, Ruby on Rails, Go, AWS, Firebase
         </Bold>
-      </P>
-    </Wrapper>
-  </>
+    </P>
+  </Wrapper>
 );
 
 export default ProfileRight;
