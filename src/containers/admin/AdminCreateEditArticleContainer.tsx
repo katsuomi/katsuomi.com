@@ -102,7 +102,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
   const [date, setDate] = useState<Date>(article ? article.date : new Date());
   const [isAddSlideShow, setIsAddSlideShow] = useState<boolean>(article && article.isAddSlideShow ? article.isAddSlideShow : false);
 
-  if(isCreate && content !== localStorage.draftContent) {
+  if(isCreate && localStorage.draftContent && content !== localStorage.draftContent) {
     setContent(localStorage.draftContent);
   }
 
