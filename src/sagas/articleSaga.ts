@@ -74,9 +74,10 @@ function* runChangeArticleGoodCount(action: Model.ChangeArticleGoodCountStartAct
   const handler = API.changeArticleGoodCount;
   const { success, error } = yield call(handler, articleId, isDone);
   if(success && !error) {
+    const message = isDone ? "記事のイイネを解除しました" : "記事にイイネしました"
     const payload = {
       type: "success",
-      message: "記事にイイネしました"
+      message: message
     };
     yield put(changeArticleGoodCount.success());
     yield put(addFlashMessage(payload));

@@ -25,7 +25,8 @@ interface DefaultProps {
   isEdit?: boolean;
 }
 
-const ArticleWrapper = styled.div`
+const ArticleWrapper = styled.li`
+  list-style: none;
   width: 100%;
   height: ${breakPoints.isSmartPhone() ? '488px' : '275px'};
   background-color: ${colors.WHITE};

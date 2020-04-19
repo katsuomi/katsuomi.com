@@ -96,7 +96,8 @@ const article: Reducer<Model.ArticleState, Model.ArticleAction> = (
     case ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_START:
       return {
         ...state,
-        isLoading: true
+        // ArticleContainerで読み込んでいるが、表示が遅れてしまうためfalseにする
+        isLoading: false
       };
     case ActionTypes.CHANGE_ARTICLE_GOOD_COUNT_SUCCESS:
       return {

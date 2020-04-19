@@ -58,7 +58,7 @@ const PageTitle = styled.h3`
   margin-left: ${breakPoints.isSmartPhone() ? '10px' : 'auto'}; 
 `;
 
-const ArticlesWrapper = styled.div`
+const ArticlesWrapper = styled.ul`
   & > div {
     width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   }

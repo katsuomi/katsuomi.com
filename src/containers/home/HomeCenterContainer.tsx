@@ -40,6 +40,7 @@ type DefaultProps = StateProps & DispatchProps;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 200px;
 `;
 
 const ScrollWrapper = styled.div`
@@ -47,7 +48,7 @@ const ScrollWrapper = styled.div`
   overflow: scroll;
 `;
 
-const ArticlesWrapper = styled.div`
+const ArticlesWrapper = styled.ul`
   & > div {
     width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   }
