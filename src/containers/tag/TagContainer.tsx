@@ -59,6 +59,7 @@ const PageTitle = styled.h3`
 `;
 
 const ArticlesWrapper = styled.ul`
+  width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   & > div {
     width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   }

@@ -27,7 +27,7 @@ interface DefaultProps {
 
 const ArticleWrapper = styled.li`
   list-style: none;
-  width: 100%;
+  width: ${breakPoints.isSmartPhone() ? '95%' : '100%'};
   height: ${breakPoints.isSmartPhone() ? '488px' : '275px'};
   background-color: ${colors.WHITE};
   margin: 20px auto;

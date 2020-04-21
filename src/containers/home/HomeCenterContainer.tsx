@@ -46,9 +46,11 @@ const Wrapper = styled.div`
 const ScrollWrapper = styled.div`
   height: 1100px;
   overflow: scroll;
+  ${breakPoints.isSmartPhone() && "width: 95%"};
 `;
 
 const ArticlesWrapper = styled.ul`
+  width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   & > div {
     width: ${breakPoints.isSmartPhone() ? '85%' : '85%'}; 
   }
