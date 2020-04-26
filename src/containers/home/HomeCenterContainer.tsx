@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 import { Waypoint } from 'react-waypoint';
 

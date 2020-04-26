@@ -1,7 +1,7 @@
 import React, { FC, useState, FormEvent, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import _ from "lodash";
+import uniq from "lodash/uniq";
 import { bindActionCreators, Dispatch } from "redux";
 import { withRouter, RouteComponentProps } from 'react-router';
 
@@ -179,7 +179,7 @@ const AdminCreateEditArticleContainer: FC<DefaultProps> = ({
 
   const handleOnBlurTagIds = (tags: tagModel.Tag[]) => {
     setTagIds([]);
-    tags.forEach(tag => setTagIds(tagIds => _.uniq([...tagIds, tag.id])));
+    tags.forEach(tag => setTagIds(tagIds => uniq([...tagIds, tag.id])));
   };
 
   const submitMessage = isCreate ? '作成' : '更新';

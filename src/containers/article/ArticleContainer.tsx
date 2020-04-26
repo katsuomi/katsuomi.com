@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState, FormEvent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 import Image from "react-image-resizer";
 import { withRouter, RouteComponentProps } from 'react-router';

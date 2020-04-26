@@ -1,16 +1,7 @@
 import React, { FC, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
-import Image from "react-image-resizer";
-
-// import atoms
-import LinkAnchor from "components/atoms/LinkAnchor";
-
-// import molecules
-import MarkDownContent from "components/molecules/MarkDownContent";
-import Tag from "components/molecules/Tag";
 
 // import commons
 import Spinner from "components/commons/Spinner";

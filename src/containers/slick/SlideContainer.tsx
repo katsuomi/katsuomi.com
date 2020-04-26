@@ -2,7 +2,6 @@ import React, { FC, useEffect } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import _ from "lodash";
 import { bindActionCreators, Dispatch } from "redux";
 
 // import css

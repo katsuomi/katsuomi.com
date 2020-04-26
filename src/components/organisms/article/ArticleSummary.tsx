@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import _ from "lodash";
 import Image from "react-image-resizer";
 
 // import atoms
