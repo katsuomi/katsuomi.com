@@ -57,8 +57,8 @@ const ImgWrapper = styled.div``;
 const LoadingWrapper = styled.div``;
 
 const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
-  const [img, setImg] = useState("");
-  const [imgDownLoaded, setImgDownLoaded] = useState(true);
+  const [img, setImg] = useState<string>("");
+  const [imgDownLoaded, setImgDownLoaded] = useState<boolean>(true);
   const inputEl = useRef<HTMLInputElement | null>(null);
 
   const ImgB64Resize = (
@@ -74,7 +74,7 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
     const img = new Image();
     let newFile;
     // img.src = url; // local image url
-    img.onload = function() {
+    img.onload = function () {
       // New Canvas
       const canvas = document.createElement("canvas");
 
@@ -90,7 +90,7 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
       const bin = atob(imgB64_dst.replace(/^.*,/, ""));
       // バイナリデータ化
       const buffer = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) {
+      for(let i = 0; i < bin.length; i++) {
         buffer[i] = bin.charCodeAt(i);
       }
       // ファイルオブジェクト生成(この例ではjpegファイル)
@@ -139,16 +139,16 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
     const fr = new FileReader();
 
     const image = new Image();
-    image.onload = function() {
+    image.onload = function () {
       naturalWidth = image.naturalWidth;
       naturalHeight = image.naturalHeight;
       const width =
         naturalWidth !== 0 && naturalHeight !== 0
-          ? (300 * naturalWidth) / naturalHeight
+          ? (150 * naturalWidth) / naturalHeight
           : 0;
 
       fr.onload = (e: any) => {
-        ImgB64Resize(e.target.result, Math.round(width), 300, goFirebase, 90);
+        ImgB64Resize(e.target.result, Math.round(width), 150, goFirebase, 90);
       };
 
       file && fr.readAsDataURL(file);
