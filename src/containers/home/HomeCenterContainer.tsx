@@ -129,11 +129,11 @@ const HomeCenterContainer: FC<DefaultProps> = ({
                     <ArticleSummary article={article} key={article.uid + currentTitle} />
                   );
                 })}
+                {isPagingLoading && <SpinnerWrapper><Spinner display="block" position='relative' /></SpinnerWrapper>}
+                <WayPointWrapper>
+                  <Waypoint onEnter={() => getMoreArticles()} />
+                </WayPointWrapper>
               </ArticlesWrapper>
-              {isPagingLoading && <SpinnerWrapper><Spinner display="block" position='relative' /></SpinnerWrapper>}
-              <WayPointWrapper>
-                <Waypoint onEnter={() => getMoreArticles()} />
-              </WayPointWrapper>
             </ScrollWrapper>
           </Wrapper>
         )}
