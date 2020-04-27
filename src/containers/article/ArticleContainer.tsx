@@ -126,6 +126,11 @@ const ContentWrapper = styled.div`
   & > * img {
     width: ${breakPoints.isSmartPhone() ? '80%' : '50%'};
   }
+  & > * pre {
+    background: ${colors.BLACK};
+    color: ${colors.EDITOR_COLOR};
+    padding: 20px;
+  } 
 `;
 
 const P = styled.p`

@@ -52,3 +52,4 @@ export const HOVER_WHITE = "#FFF";
 export const HOVER = "whitesmoke";
 export const INACTIVE_INK = "#FFF";
 export const BG_TAG = "#2d9ff9";
+export const EDITOR_COLOR = "#ffe5b5;";
