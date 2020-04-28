@@ -3,7 +3,7 @@ import React from "react";
 import { hydrate, render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from 'connected-react-router';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 
 import App from "App";
