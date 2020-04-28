@@ -144,11 +144,11 @@ const ImageUploader: FC<DefaultProps> = ({ onChange, value }) => {
       naturalHeight = image.naturalHeight;
       const width =
         naturalWidth !== 0 && naturalHeight !== 0
-          ? (150 * naturalWidth) / naturalHeight
+          ? (300 * naturalWidth) / naturalHeight
           : 0;
 
       fr.onload = (e: any) => {
-        ImgB64Resize(e.target.result, Math.round(width), 150, goFirebase, 90);
+        ImgB64Resize(e.target.result, Math.round(width), 300, goFirebase, 90);
       };
 
       file && fr.readAsDataURL(file);
