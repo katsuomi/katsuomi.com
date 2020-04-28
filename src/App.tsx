@@ -24,7 +24,7 @@ const App: FC<RouteComponentProps> = ({ location }) => {
   }, []);
   return (
     <Wrapper>
-      <Header />
+      {!breakPoints.isSmartPhone() && <Header />}
       <Switch>
         <Route path={pages.home.path} component={routes.Home} exact />
         <Route path={pages.admin.path} component={routes.Admin} exact />
