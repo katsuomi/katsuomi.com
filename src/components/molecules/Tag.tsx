@@ -22,6 +22,7 @@ import { encodeToString } from "methods/utilsMethods";
 interface DefaultProps {
   text: string;
   isArticleCount: boolean;
+  isLinkable?: boolean;
 }
 
 const TagWrapper = styled.span`
@@ -51,7 +52,11 @@ const Linkable = styled.span`
   }
 `;
 
-const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
+const Span = styled.span`
+  color: ${colors.WHITE};
+`;
+
+const Tag: FC<DefaultProps> = ({ text, isArticleCount, isLinkable }) => {
   const [articleCount, setArticleCount] = useState<number>(0);
 
   const getData = useCallback(async () => {
@@ -63,18 +68,33 @@ const Tag: FC<DefaultProps> = ({ text, isArticleCount }) => {
     getData();
   }, [getData]);
 
+
+  const contentRender = () => {
+    return (
+      <>
+        {text}
+        {isArticleCount && (
+          <ArticleCountWrapper>
+            (<ArticleCount>{articleCount}</ArticleCount>)
+          </ArticleCountWrapper>
+        )}
+      </>
+    );
+  };
+
   return (
     <TagWrapper>
-      <LinkAnchor src={`/tags/${encodeToString(text)}`}>
-        <Linkable>
-          {text}
-          {isArticleCount && (
-            <ArticleCountWrapper>
-              (<ArticleCount>{articleCount}</ArticleCount>)
-            </ArticleCountWrapper>
-          )}
-        </Linkable>
-      </LinkAnchor>
+      {isLinkable ?
+        <LinkAnchor src={`/tags/${encodeToString(text)}`}>
+          <Linkable>
+            {contentRender()}
+          </Linkable>
+        </LinkAnchor>
+        :
+        <Span>
+          {contentRender()}
+        </Span>
+      }
     </TagWrapper>
   );
 };
