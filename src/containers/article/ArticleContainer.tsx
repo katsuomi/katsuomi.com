@@ -183,11 +183,12 @@ const ArticleContainer: FC<DefaultProps> = ({
     setIsDone(false);
   }
 
-  if(!isDone && dateToString(article.date) !== dateToString(getCurrentDate()) && dateToString(article.date) !== dateToString(defaultDate)) {
+  if(!isDone && dateToString(article.date) !== dateToString(getCurrentDate()) && dateToString(article.date) !== dateToString(defaultDate) && article.goodCount) {
     getNextArticle(article.date);
     getPrevArticle(article.date);
     setIsDone(true);
     setDefaultDate(article.date);
+    setCurrentCount(article.goodCount);
   }
 
   const isDoneGoodCount = localStorage.getItem(`isDoneGoodCount/${article.uid}`) === 'true';
@@ -239,7 +240,7 @@ const ArticleContainer: FC<DefaultProps> = ({
                 <Good>{currentCount}<I className={goodCountClassNameForFontAweSome} onClick={(e) => handleOnSubmitGoodCount(e)}></I></Good>
                 <Date>{dateToString(article.date)}</Date>
                 {article.tagIds.map(tag => (
-                  <Tag key={tag} text={tag} isArticleCount={false} />
+                  <Tag key={tag} text={tag} isArticleCount={false} isLinkable={true} />
                 ))}
                 <ContentWrapper>
                   <MarkDownContent content={article.content} />
