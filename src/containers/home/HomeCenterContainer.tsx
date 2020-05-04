@@ -75,7 +75,7 @@ const HomeCenterContainer: FC<DefaultProps> = ({
   getArticlesByGoodCount
 }) => {
   const [currentTitle, setCurrentTitile] = useState<string>('latestArticles');
-  const [isPagingLoading, setIsPagingLoading] = useState<boolean>(false);
+  const [isPagingLoading, setIsPagingLoading] = useState<boolean>(true);
   useEffect(() => {
     // 再読み込みで,配列に同じ要素がpushされないようにするため
     if(!latestArticles.length) {
@@ -98,11 +98,12 @@ const HomeCenterContainer: FC<DefaultProps> = ({
       if(latestArticles[latestArticles.length - 1] === undefined) {
         return;
       }
-      setIsPagingLoading(true);
+
       const lastArticleDate = latestArticles[latestArticles.length - 1].date;
       await getLatestArticles(lastArticleDate);
       await setIsPagingLoading(false);
     } else if(currentTitle === 'articlesByGoodCount') {
+      await setIsPagingLoading(false);
       return;
     }
   };
