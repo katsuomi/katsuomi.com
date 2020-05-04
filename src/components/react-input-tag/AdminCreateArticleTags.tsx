@@ -11,8 +11,8 @@ import * as tagMethod from "methods/tagMethods";
 import * as Model from "models/tagModel";
 
 interface DefaultProps {
-  onBlur: (tags: { id: string; text: string }[]) => void;
-  defaultTags?: Model.Tag[]
+  onBlur: (tags: { id: string; text: string; }[]) => void;
+  defaultTags?: Model.Tag[];
 }
 
 const KeyCodes = {
@@ -22,7 +22,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const AdminCreateArticle: FC<DefaultProps> = ({ onBlur, defaultTags }) => {
+const AdminCreateArticleTags: FC<DefaultProps> = ({ onBlur, defaultTags }) => {
   const [tags, setTags] = useState<Model.Tag[]>(defaultTags ? defaultTags : []);
   const [suggestions, setSuggestions] = useState<Model.Tag[]>([]);
 
@@ -71,4 +71,4 @@ const AdminCreateArticle: FC<DefaultProps> = ({ onBlur, defaultTags }) => {
   );
 };
 
-export default AdminCreateArticle;
+export default AdminCreateArticleTags;
