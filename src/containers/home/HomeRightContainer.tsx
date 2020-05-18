@@ -68,7 +68,7 @@ const HomeRightContainer: FC<DefaultProps> = ({ tags, isLoading, getTags }) => {
             <Title>タグ一覧</Title>
             <TagWrapper>
               {tags?.map(tag => {
-                return <Tag key={tag.id} text={tag.text} isArticleCount={true} />;
+                return <Tag key={tag.id} text={tag.text} isArticleCount={true} isLinkable={true} />;
               })}
             </TagWrapper>
           </Wrapper>
