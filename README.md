@@ -4,7 +4,7 @@
 
 ## 💬 About
 
-Katsuomi.com is blog written by the [aoki katsuomi](https://katsuomi.com/profile).
+Katsuomi.com is a blog by the [aoki katsuomi](https://katsuomi.com/profile).
 
 Inspired by React/Redux/TypeScript/Cloud firestore/Cloud Functions/Atomic Design.
 
