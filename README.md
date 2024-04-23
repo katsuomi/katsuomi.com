@@ -1,7 +1,5 @@
 # [Katsuomi.com](https://katsuomi.com/)
 
-<img width="1967" alt="スクリーンショット 2020-04-13 17 01 35" src="https://user-images.githubusercontent.com/36298285/79103930-7a6a8380-7da8-11ea-9808-510e3073503e.png">
-
 ## 💬 About
 
 Katsuomi.com is [aoki katsuomi](https://katsuomi.com/profile)'s web-site.
